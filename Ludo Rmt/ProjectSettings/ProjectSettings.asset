@@ -586,10 +586,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 4bba6628-c907-403a-8f71-e6c8fd6c9274
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: Ludo Rmt
-  organizationId: jokicn97
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
