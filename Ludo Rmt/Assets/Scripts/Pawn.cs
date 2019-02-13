@@ -15,7 +15,7 @@ public class Pawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6");
+        dice = GameObject.Find("Side6 (3)");
     }
 
     // Update is called once per frame
@@ -46,9 +46,11 @@ public class Pawn : MonoBehaviour
 
     private IEnumerator Move()
     {
-       //click = dice.GetComponent<Dice>().click;
+        //click = dice.GetComponent<Dice>().click;
 
-        if(Dice.click)
+        Dice dc = dice.GetComponent<Dice>();
+
+        if (dc.click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
         } else
@@ -62,7 +64,7 @@ public class Pawn : MonoBehaviour
             check = GameObject.Find("Waypoint (2)");
             transform.position = check.transform.position;
             out_ = true;
-            Dice.click = false;
+            dc.click = false;
         }
         else
         {
@@ -75,7 +77,7 @@ public class Pawn : MonoBehaviour
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                Dice.click = false;
+                dc.click = false;
             }
         }
         

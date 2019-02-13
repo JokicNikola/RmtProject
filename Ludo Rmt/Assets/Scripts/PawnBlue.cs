@@ -45,12 +45,12 @@ public class PawnBlue : MonoBehaviour
 
     private IEnumerator Move()
     {
-        //click = dice.GetComponent<Dice>().click;
-        
-        
-        
+       
 
-        if (Dice.click)
+        Dice dc = dice.GetComponent<Dice>();
+
+
+        if (dc.click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
             
@@ -69,23 +69,12 @@ public class PawnBlue : MonoBehaviour
             check = GameObject.Find("Waypoint (15)");
             transform.position = check.transform.position;
             out_ = true;
-            Dice.click = false;
+            dc.click = false;
         }
         else
         {
 
-            /*if ((index + randomDiceSide1 + 1) < 53 && out_)
-            {
-                for (int i = 0; i < randomDiceSide1 + 1; i++)
-                {
-                    index++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
-            }
-            if(index == 52)
-            {
-                index = 0;
-            }*/
+            
             if ((index + randomDiceSide1 + 1) < 76 && out_)
             {
                 
@@ -102,7 +91,7 @@ public class PawnBlue : MonoBehaviour
                         index = 69;
                     }
                 }
-                Dice.click = false;
+                dc.click = false;
             }
             
             

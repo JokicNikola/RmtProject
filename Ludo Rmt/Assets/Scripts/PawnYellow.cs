@@ -9,11 +9,12 @@ public class PawnYellow : MonoBehaviour
     int randomDiceSide1 = 0;
     int index = 28;
     private bool out_ = false;
+    bool click;
 
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6");
+        dice = GameObject.Find("Side6 (1)");
     }
 
     // Update is called once per frame
@@ -42,9 +43,17 @@ public class PawnYellow : MonoBehaviour
 
     private IEnumerator Move()
     {
-        //click = dice.GetComponent<Dice>().click;
+        click = dice.GetComponent<Dice>().click;
+        
+        Dice dc = dice.GetComponent<Dice>();
+        
 
-        if (Dice.click)
+
+
+
+
+
+        if (click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
         }
@@ -59,7 +68,7 @@ public class PawnYellow : MonoBehaviour
             check = GameObject.Find("Waypoint (28)");
             transform.position = check.transform.position;
             out_ = true;
-            Dice.click = false;
+            dc.click = false;
         }
         else
         {
@@ -79,7 +88,7 @@ public class PawnYellow : MonoBehaviour
                         index = 89;
                     }
                 }
-                Dice.click = false;
+                dc.click = false;
             }
         }
     }

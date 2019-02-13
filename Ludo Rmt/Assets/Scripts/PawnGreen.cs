@@ -14,7 +14,7 @@ public class PawnGreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6");
+        dice = GameObject.Find("Side6 (2)");
     }
 
     // Update is called once per frame
@@ -43,9 +43,10 @@ public class PawnGreen : MonoBehaviour
 
     private IEnumerator Move()
     {
-       // click = dice.GetComponent<Dice>().click;
+        Dice dc = dice.GetComponent<Dice>();
+        
 
-        if (Dice.click)
+        if (dc.click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
         }
@@ -60,7 +61,7 @@ public class PawnGreen : MonoBehaviour
             check = GameObject.Find("Waypoint (41)");
             transform.position = check.transform.position;
             out_ = true;
-            Dice.click = false;
+            dc.click = false;
         }
         else
         {
@@ -81,7 +82,7 @@ public class PawnGreen : MonoBehaviour
                         index = 79;
                     }
                 }
-                Dice.click = false;
+                dc.click = false;
             }
         }
 

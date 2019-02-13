@@ -10,7 +10,13 @@ public class Dice : MonoBehaviour {
     public bool out_=false;
     public int randomDiceSide;
     public int randomDiceSide1=0;
-    public static bool click;
+    public  bool click;
+
+
+    public void urad()
+    {
+
+    }
 
 
     private void Start () {
