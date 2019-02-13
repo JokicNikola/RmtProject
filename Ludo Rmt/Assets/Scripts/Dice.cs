@@ -10,8 +10,8 @@ public class Dice : MonoBehaviour {
     private Sprite[] diceSides;
     private SpriteRenderer rend;
     public bool out_=false;
-    int randomDiceSide;
-    int randomDiceSide1;
+    public int randomDiceSide;
+    public int randomDiceSide1;
 
 
     private void Start () {
@@ -31,15 +31,12 @@ public class Dice : MonoBehaviour {
         if (!out_ && (randomDiceSide1 + 1) == 6){
             check = GameObject.Find("Waypoint (2)");
             pawn.transform.position = check.transform.position;
-           
         }
         else
         {
 
             if ( out_)
             {
-               
-
                 check = GameObject.Find("Waypoint (" + index + ")");
                 pawn.transform.position = Vector3.MoveTowards(pawn.transform.position, check.transform.position, 3f * Time.deltaTime);
             }
@@ -76,19 +73,12 @@ public class Dice : MonoBehaviour {
 
             if ((index + randomDiceSide1 + 1) < 53 && out_)
             {
-                //index = index + randomDiceSide1 + 1;
                 for(int i=0;i< randomDiceSide1 + 1; i++)
                 {
                     index++;
                     yield return new WaitForSeconds(12f*Time.deltaTime);
-
-                }
-                //check = GameObject.Find("Waypoint (" + index + ")");
-                //pawn.transform.position = Vector3.MoveTowards(pawn.transform.position, check.transform.position, 1f*Time.deltaTime);
+                } 
             }
-
         }
-        Debug.Log(index+" ovo je klik");
-
     }
 }
