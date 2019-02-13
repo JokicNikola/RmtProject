@@ -36,7 +36,7 @@ public class Dice : MonoBehaviour {
             StartCoroutine("RollTheDice");
         } else
         {
-            //click = false;
+            click = false;
         }
        
 
@@ -57,7 +57,7 @@ public class Dice : MonoBehaviour {
             yield return new WaitForSeconds(0.05f);
             
         }
-        randomDiceSide1 = Random.Range(5, 6);
+        randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
         
 
