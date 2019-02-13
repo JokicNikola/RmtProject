@@ -48,7 +48,7 @@ public class Pawn : MonoBehaviour
     {
         click = dice.GetComponent<Dice>().click;
 
-        if(click == true)
+        if(click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
         } else

@@ -4,9 +4,7 @@ using UnityEngine;
 public class Dice : MonoBehaviour {
 
    
-    private GameObject pawn;
     private GameObject check;
-    //int index = 2;
     private Sprite[] diceSides;
     private SpriteRenderer rend;
     public bool out_=false;
@@ -18,18 +16,14 @@ public class Dice : MonoBehaviour {
     private void Start () {
         click = false;
         rend = GetComponent<SpriteRenderer>();
-        //pawn = GameObject.Find("pawn");
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
 	}
 
-    void Update()
-    {
-        
-    }
+    
 
     private void OnMouseDown()
     {
-        if (click == false)
+        if (!click)
         {
             click = true;
             StartCoroutine("RollTheDice");
@@ -40,24 +34,6 @@ public class Dice : MonoBehaviour {
 
     }
 
-    /* private void Update()
-     {
-
-         if (!out_ && (randomDiceSide1 + 1) == 6){
-             check = GameObject.Find("Waypoint (2)");
-             pawn.transform.position = check.transform.position;
-         }
-         else
-         {
-
-             if ( out_)
-             {
-                 check = GameObject.Find("Waypoint (" + index + ")");
-                 pawn.transform.position = Vector3.MoveTowards(pawn.transform.position, check.transform.position, 3f * Time.deltaTime);
-             }
-
-         }
-     }*/
 
     private IEnumerator RollTheDice()
     {
@@ -78,24 +54,6 @@ public class Dice : MonoBehaviour {
         
 
 
-        /*       if (!out_ && (randomDiceSide1 + 1) == 6)
-              {
-                   check = GameObject.Find("Waypoint (2)");
-                   pawn.transform.position = check.transform.position;
-                   out_ = true;
-               }
-               else
-               {
-
-                   if ((index + randomDiceSide1 + 1) < 53 && out_)
-                   {
-                       for(int i=0;i< randomDiceSide1 + 1; i++)
-                       {
-                           index++;
-                           yield return new WaitForSeconds(12f*Time.deltaTime);
-                       } 
-                   }
-               }
-               */
+        
     }
 }
