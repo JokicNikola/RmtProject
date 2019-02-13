@@ -6,43 +6,58 @@ public class Dice : MonoBehaviour {
    
     private GameObject pawn;
     private GameObject check;
-    int index = 2;
+    //int index = 2;
     private Sprite[] diceSides;
     private SpriteRenderer rend;
     public bool out_=false;
     public int randomDiceSide;
     public int randomDiceSide1=0;
+    public bool click;
 
 
     private void Start () {
+        click = false;
         rend = GetComponent<SpriteRenderer>();
         //pawn = GameObject.Find("pawn");
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
 	}
 
-    private void OnMouseDown()
+    void Update()
     {
-        StartCoroutine("RollTheDice");
+        
     }
 
-   /* private void Update()
+    private void OnMouseDown()
     {
-       
-        if (!out_ && (randomDiceSide1 + 1) == 6){
-            check = GameObject.Find("Waypoint (2)");
-            pawn.transform.position = check.transform.position;
-        }
-        else
+        if (click == false)
         {
-
-            if ( out_)
-            {
-                check = GameObject.Find("Waypoint (" + index + ")");
-                pawn.transform.position = Vector3.MoveTowards(pawn.transform.position, check.transform.position, 3f * Time.deltaTime);
-            }
-
+            click = true;
+            StartCoroutine("RollTheDice");
+        } else
+        {
+            click = false;
         }
-    }*/
+
+    }
+
+    /* private void Update()
+     {
+
+         if (!out_ && (randomDiceSide1 + 1) == 6){
+             check = GameObject.Find("Waypoint (2)");
+             pawn.transform.position = check.transform.position;
+         }
+         else
+         {
+
+             if ( out_)
+             {
+                 check = GameObject.Find("Waypoint (" + index + ")");
+                 pawn.transform.position = Vector3.MoveTowards(pawn.transform.position, check.transform.position, 3f * Time.deltaTime);
+             }
+
+         }
+     }*/
 
     private IEnumerator RollTheDice()
     {
@@ -62,24 +77,25 @@ public class Dice : MonoBehaviour {
         rend.sprite = diceSides[randomDiceSide1];
         
 
- /*       if (!out_ && (randomDiceSide1 + 1) == 6)
-       {
-            check = GameObject.Find("Waypoint (2)");
-            pawn.transform.position = check.transform.position;
-            out_ = true;
-        }
-        else
-        {
 
-            if ((index + randomDiceSide1 + 1) < 53 && out_)
-            {
-                for(int i=0;i< randomDiceSide1 + 1; i++)
-                {
-                    index++;
-                    yield return new WaitForSeconds(12f*Time.deltaTime);
-                } 
-            }
-        }
-        */
+        /*       if (!out_ && (randomDiceSide1 + 1) == 6)
+              {
+                   check = GameObject.Find("Waypoint (2)");
+                   pawn.transform.position = check.transform.position;
+                   out_ = true;
+               }
+               else
+               {
+
+                   if ((index + randomDiceSide1 + 1) < 53 && out_)
+                   {
+                       for(int i=0;i< randomDiceSide1 + 1; i++)
+                       {
+                           index++;
+                           yield return new WaitForSeconds(12f*Time.deltaTime);
+                       } 
+                   }
+               }
+               */
     }
 }
