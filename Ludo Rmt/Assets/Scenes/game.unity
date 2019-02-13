@@ -566,6 +566,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960865a8daa69824686a4538be92f349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  out_: 0
+  randomDiceSide: 0
+  randomDiceSide1: 0
 --- !u!61 &276589176
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2114,6 +2117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1124907405}
   - component: {fileID: 1124907406}
+  - component: {fileID: 1124907407}
   m_Layer: 0
   m_Name: pawn
   m_TagString: Untagged
@@ -2183,6 +2187,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1124907407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124907404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b7c9f12d59e4b43a2732940e81531e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1159665446
 GameObject:
   m_ObjectHideFlags: 0

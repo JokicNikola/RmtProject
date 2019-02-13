@@ -11,12 +11,12 @@ public class Dice : MonoBehaviour {
     private SpriteRenderer rend;
     public bool out_=false;
     public int randomDiceSide;
-    public int randomDiceSide1;
+    public int randomDiceSide1=0;
 
 
     private void Start () {
         rend = GetComponent<SpriteRenderer>();
-        pawn = GameObject.Find("pawn");
+        //pawn = GameObject.Find("pawn");
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
 	}
 
@@ -25,7 +25,7 @@ public class Dice : MonoBehaviour {
         StartCoroutine("RollTheDice");
     }
 
-    private void Update()
+   /* private void Update()
     {
        
         if (!out_ && (randomDiceSide1 + 1) == 6){
@@ -42,7 +42,7 @@ public class Dice : MonoBehaviour {
             }
 
         }
-    }
+    }*/
 
     private IEnumerator RollTheDice()
     {
@@ -62,8 +62,8 @@ public class Dice : MonoBehaviour {
         rend.sprite = diceSides[randomDiceSide1];
         
 
-        if (!out_ && (randomDiceSide1 + 1) == 6)
-        {
+ /*       if (!out_ && (randomDiceSide1 + 1) == 6)
+       {
             check = GameObject.Find("Waypoint (2)");
             pawn.transform.position = check.transform.position;
             out_ = true;
@@ -80,5 +80,6 @@ public class Dice : MonoBehaviour {
                 } 
             }
         }
+        */
     }
 }
