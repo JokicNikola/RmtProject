@@ -13,7 +13,7 @@ public class PawnYellow : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         dice = GameObject.Find("Side6 (1)");
     }
 
