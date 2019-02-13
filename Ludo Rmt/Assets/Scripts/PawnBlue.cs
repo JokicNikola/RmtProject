@@ -6,15 +6,17 @@ public class PawnBlue : MonoBehaviour
 {
     private GameObject dice;
     private GameObject check;
+    private Component k;
     int randomDiceSide1 = 0;
     int index = 15;
     private bool out_ = false;
-    bool click;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         dice = GameObject.Find("Side6");
+        
     }
 
     // Update is called once per frame
@@ -43,11 +45,15 @@ public class PawnBlue : MonoBehaviour
 
     private IEnumerator Move()
     {
-        click = dice.GetComponent<Dice>().click;
+        //click = dice.GetComponent<Dice>().click;
+        
+        
+        
 
-        if (click == true)
+        if (Dice.click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
+            
         }
         else
         {
@@ -55,11 +61,15 @@ public class PawnBlue : MonoBehaviour
         }
 
 
+       
+
+
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
             check = GameObject.Find("Waypoint (15)");
             transform.position = check.transform.position;
             out_ = true;
+            Dice.click = false;
         }
         else
         {
@@ -78,6 +88,7 @@ public class PawnBlue : MonoBehaviour
             }*/
             if ((index + randomDiceSide1 + 1) < 76 && out_)
             {
+                
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     index++;
@@ -91,6 +102,7 @@ public class PawnBlue : MonoBehaviour
                         index = 69;
                     }
                 }
+                Dice.click = false;
             }
             
             

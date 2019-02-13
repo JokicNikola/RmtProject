@@ -10,7 +10,7 @@ public class Pawn : MonoBehaviour
     int randomDiceSide1=0;
     int index = 2;
     private bool out_ = false;
-    bool click;
+
 
     // Start is called before the first frame update
     void Start()
@@ -46,9 +46,9 @@ public class Pawn : MonoBehaviour
 
     private IEnumerator Move()
     {
-        click = dice.GetComponent<Dice>().click;
+       //click = dice.GetComponent<Dice>().click;
 
-        if(click)
+        if(Dice.click)
         {
             randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
         } else
@@ -62,17 +62,20 @@ public class Pawn : MonoBehaviour
             check = GameObject.Find("Waypoint (2)");
             transform.position = check.transform.position;
             out_ = true;
+            Dice.click = false;
         }
         else
         {
 
             if ((index + randomDiceSide1 + 1) < 59 && out_)
             {
+                
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
+                Dice.click = false;
             }
         }
         

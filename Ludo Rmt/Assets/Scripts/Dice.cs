@@ -10,14 +10,15 @@ public class Dice : MonoBehaviour {
     public bool out_=false;
     public int randomDiceSide;
     public int randomDiceSide1=0;
-    public bool click;
+    public static bool click;
 
 
     private void Start () {
         click = false;
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
-	}
+       
+    }
 
     
 
@@ -29,8 +30,9 @@ public class Dice : MonoBehaviour {
             StartCoroutine("RollTheDice");
         } else
         {
-            click = false;
+            //click = false;
         }
+       
 
     }
 
@@ -49,11 +51,12 @@ public class Dice : MonoBehaviour {
             yield return new WaitForSeconds(0.05f);
             
         }
-        randomDiceSide1 = Random.Range(0, 6);
+        randomDiceSide1 = Random.Range(5, 6);
         rend.sprite = diceSides[randomDiceSide1];
         
 
 
-        
+
+
     }
 }
