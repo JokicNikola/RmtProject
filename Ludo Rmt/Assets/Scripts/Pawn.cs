@@ -6,7 +6,15 @@ public class Pawn : MonoBehaviour
 {
 
     private GameObject dice;
+    private GameObject nextDice;
     private GameObject check;
+    private GameObject board;
+
+    private Dice dc;
+    private Dice nextDc;
+
+    private Controller boardC;
+
     int randomDiceSide1=0;
     int index = 2;
     private bool out_ = false;
@@ -16,6 +24,13 @@ public class Pawn : MonoBehaviour
     void Start()
     {
         dice = GameObject.Find("Side6 (3)");
+        nextDice = GameObject.Find("Side6");
+
+        dc = dice.GetComponent<Dice>();
+        nextDc = nextDice.GetComponent<Dice>();
+
+        board = GameObject.Find("board");
+        boardC = board.GetComponent<Controller>();
     }
 
     // Update is called once per frame
@@ -41,24 +56,17 @@ public class Pawn : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine("Move");
+        if(dc.click && boardC.redTurn)
+            StartCoroutine("Move");
+        else Debug.Log("Nije bacena");
     }
 
     private IEnumerator Move()
     {
         //click = dice.GetComponent<Dice>().click;
-
-        Dice dc = dice.GetComponent<Dice>();
-
-        if (dc.click)
-        {
-            randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
-        } else
-        {
-            randomDiceSide1 = -1;
-        }
-             
-
+        
+        randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
+      
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
             check = GameObject.Find("Waypoint (2)");
@@ -77,7 +85,9 @@ public class Pawn : MonoBehaviour
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                dc.click = false;
+                nextDc.click = false;
+                boardC.redTurn = false;
+                boardC.blueTurn = true;
             }
         }
         

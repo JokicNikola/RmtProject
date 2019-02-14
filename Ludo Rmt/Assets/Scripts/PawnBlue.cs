@@ -5,18 +5,32 @@ using UnityEngine;
 public class PawnBlue : MonoBehaviour
 {
     private GameObject dice;
+    private GameObject nextDice;
     private GameObject check;
-    private Component k;
+    private GameObject board;
+
+    private Dice dc;
+    private Dice nextDc;
+    
+    private Controller boardC;
+
     int randomDiceSide1 = 0;
     int index = 15;
-    private bool out_ = false;
+    private bool out_ =false;
     
 
     // Start is called before the first frame update
     void Start()
     {
         dice = GameObject.Find("Side6");
-        
+        dc = dice.GetComponent<Dice>();
+
+        nextDice = GameObject.Find("Side6 (1)");
+        nextDc = nextDice.GetComponent<Dice>();
+
+        board = GameObject.Find("board");
+        boardC = board.GetComponent<Controller>();
+
     }
 
     // Update is called once per frame
@@ -40,29 +54,15 @@ public class PawnBlue : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        StartCoroutine("Move");
+        if (dc.click && boardC.blueTurn)
+            StartCoroutine("Move");
+        else Debug.Log("Nije bacena");
     }
 
     private IEnumerator Move()
     {
        
-
-        Dice dc = dice.GetComponent<Dice>();
-
-
-        if (dc.click)
-        {
-            randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
-            
-        }
-        else
-        {
-            randomDiceSide1 = -1;
-        }
-
-
-       
-
+        randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
 
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
@@ -80,8 +80,7 @@ public class PawnBlue : MonoBehaviour
                 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
-                    index++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                    
                     if (index == 52)
                     {
                         index = 0;
@@ -90,8 +89,12 @@ public class PawnBlue : MonoBehaviour
                     {
                         index = 69;
                     }
+                    index++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                dc.click = false;
+                nextDc.click = false;
+                boardC.blueTurn = false;
+                boardC.yellowTurn = true;
             }
             
             

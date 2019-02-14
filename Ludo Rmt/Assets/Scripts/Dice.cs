@@ -36,7 +36,7 @@ public class Dice : MonoBehaviour {
             StartCoroutine("RollTheDice");
         } else
         {
-            click = false;
+           // click = false;
         }
        
 

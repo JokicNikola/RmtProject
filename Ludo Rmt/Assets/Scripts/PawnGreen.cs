@@ -5,7 +5,15 @@ using UnityEngine;
 public class PawnGreen : MonoBehaviour
 {
     private GameObject dice;
+    private GameObject nextDice;
     private GameObject check;
+    private GameObject board;
+
+    private Dice dc;
+    private Dice nextDc;
+
+    private Controller boardC;
+
     int randomDiceSide1 = 0;
     int index = 41;
     private bool out_ = false;
@@ -15,6 +23,13 @@ public class PawnGreen : MonoBehaviour
     void Start()
     {
         dice = GameObject.Find("Side6 (2)");
+        nextDice = GameObject.Find("Side6 (3)");
+
+        dc = dice.GetComponent<Dice>();
+        nextDc = nextDice.GetComponent<Dice>();
+
+        board = GameObject.Find("board");
+        boardC = board.GetComponent<Controller>();
     }
 
     // Update is called once per frame
@@ -38,24 +53,16 @@ public class PawnGreen : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        StartCoroutine("Move");
+        if (dc.click && boardC.greenTurn)
+            StartCoroutine("Move");
+        else Debug.Log("Nije bacena");
     }
 
     private IEnumerator Move()
     {
-        Dice dc = dice.GetComponent<Dice>();
-        
-
-        if (dc.click)
-        {
-            randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
-        }
-        else
-        {
-            randomDiceSide1 = -1;
-        }
-
-
+       
+        randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
+      
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
             check = GameObject.Find("Waypoint (41)");
@@ -71,8 +78,7 @@ public class PawnGreen : MonoBehaviour
                 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
-                    index++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                    
                     if (index == 52)
                     {
                         index = 0;
@@ -81,8 +87,13 @@ public class PawnGreen : MonoBehaviour
                     {
                         index = 79;
                     }
+                    index++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                dc.click = false;
+                
+                nextDc.click = false;
+                boardC.greenTurn = false;
+                boardC.redTurn = true;
             }
         }
 

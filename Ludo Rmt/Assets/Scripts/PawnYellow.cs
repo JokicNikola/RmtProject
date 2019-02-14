@@ -5,16 +5,31 @@ using UnityEngine;
 public class PawnYellow : MonoBehaviour
 {
     private GameObject dice;
+    private GameObject nextDice;
     private GameObject check;
+    private GameObject board;
+
+    private Dice dc;
+    private Dice nextDc;
+
+    private Controller boardC;
+
     int randomDiceSide1 = 0;
     int index = 28;
     private bool out_ = false;
-    bool click;
+    
 
     // Start is called before the first frame update
     void Start()
     { 
         dice = GameObject.Find("Side6 (1)");
+        nextDice = GameObject.Find("Side6 (2)");
+
+        dc = dice.GetComponent<Dice>();
+        nextDc = nextDice.GetComponent<Dice>();
+
+        board = GameObject.Find("board");
+        boardC = board.GetComponent<Controller>();
     }
 
     // Update is called once per frame
@@ -38,31 +53,18 @@ public class PawnYellow : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        StartCoroutine("Move");
+        if (dc.click && boardC.yellowTurn)
+            StartCoroutine("Move");
+        else Debug.Log("Nije bacena");
     }
 
     private IEnumerator Move()
     {
-        click = dice.GetComponent<Dice>().click;
+       
+      
+        randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
         
-        Dice dc = dice.GetComponent<Dice>();
         
-
-
-
-
-
-
-        if (click)
-        {
-            randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
-        }
-        else
-        {
-            randomDiceSide1 = -1;
-        }
-
-
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
             check = GameObject.Find("Waypoint (28)");
@@ -77,8 +79,7 @@ public class PawnYellow : MonoBehaviour
             {
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
-                    index++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                    
                     if (index == 52)
                     {
                         index = 0;
@@ -87,8 +88,13 @@ public class PawnYellow : MonoBehaviour
                     {
                         index = 89;
                     }
+                    index++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                dc.click = false;
+                nextDc.click = false;
+                boardC.yellowTurn = false;
+                boardC.greenTurn = true;
+
             }
         }
     }
