@@ -35,13 +35,7 @@ public class PawnGreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!out_ && (randomDiceSide1 + 1) == 6)
-        {
-            check = GameObject.Find("Waypoint (41)");
-            transform.position = check.transform.position;
-        }
-        else
-        {
+        
 
             if (out_)
             {
@@ -49,7 +43,7 @@ public class PawnGreen : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
             }
 
-        }
+        
     }
     private void OnMouseDown()
     {
@@ -65,8 +59,7 @@ public class PawnGreen : MonoBehaviour
       
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
-            check = GameObject.Find("Waypoint (41)");
-            transform.position = check.transform.position;
+           
             out_ = true;
             dc.click = false;
         }
