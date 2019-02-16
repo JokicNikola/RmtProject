@@ -88,9 +88,17 @@ public class PawnGreen : MonoBehaviour
                 {
                     boardC.outGreen--;
                 }
-                nextDc.click = false;
-                boardC.greenTurn = false;
-                boardC.redTurn = true;
+                if ((randomDiceSide1 + 1) == 6)
+                {
+                    dc.click = false;
+
+                }
+                else
+                {
+                    nextDc.click = false;
+                    boardC.greenTurn = false;
+                    boardC.redTurn = true;
+                }
             }
         }
 
