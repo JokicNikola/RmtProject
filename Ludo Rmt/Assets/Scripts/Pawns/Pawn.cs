@@ -86,6 +86,11 @@ public class Pawn : MonoBehaviour
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
+
+                if (index == 58)
+                {
+                    boardC.outRed--;
+                }
                 nextDc.click = false;
                 boardC.redTurn = false;
                 boardC.blueTurn = true;

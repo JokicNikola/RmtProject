@@ -84,7 +84,10 @@ public class PawnGreen : MonoBehaviour
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                
+                if (index == 85)
+                {
+                    boardC.outGreen--;
+                }
                 nextDc.click = false;
                 boardC.greenTurn = false;
                 boardC.redTurn = true;
