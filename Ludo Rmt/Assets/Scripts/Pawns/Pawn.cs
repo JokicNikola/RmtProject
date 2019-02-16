@@ -92,7 +92,7 @@ public class Pawn : MonoBehaviour
                     boardC.outRed--;
                 }
 
-                if ((randomDiceSide1 + 1) == 6)
+                if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {
                     dc.click = false;
 
@@ -103,6 +103,11 @@ public class Pawn : MonoBehaviour
                     boardC.redTurn = false;
                     boardC.blueTurn = true;
                 }
+            }else
+            {
+                nextDc.click = false;
+                boardC.redTurn = false;
+                boardC.blueTurn = true;
             }
         }
         

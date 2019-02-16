@@ -84,11 +84,13 @@ public class PawnGreen : MonoBehaviour
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
+
                 if (index == 85)
                 {
                     boardC.outGreen--;
                 }
-                if ((randomDiceSide1 + 1) == 6)
+
+                if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {
                     dc.click = false;
 
@@ -99,6 +101,11 @@ public class PawnGreen : MonoBehaviour
                     boardC.greenTurn = false;
                     boardC.redTurn = true;
                 }
+            }else
+            {
+                nextDc.click = false;
+                boardC.greenTurn = false;
+                boardC.redTurn = true;
             }
         }
 

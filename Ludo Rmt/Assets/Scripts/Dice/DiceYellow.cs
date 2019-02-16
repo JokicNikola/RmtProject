@@ -48,7 +48,7 @@ public class DiceYellow : MonoBehaviour
     private IEnumerator RollTheDice()
     {
         randomDiceSide = 0;
-        randomDiceSide1 = 0;
+        randomDiceSide1 = -1;
 
         for (int i = 0; i <= 20; i++)
         {
