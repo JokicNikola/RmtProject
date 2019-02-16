@@ -55,7 +55,7 @@ public class PawnGreen : MonoBehaviour
     private IEnumerator Move()
     {
        
-        randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
+        randomDiceSide1 = dc.randomDiceSide1;
       
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {

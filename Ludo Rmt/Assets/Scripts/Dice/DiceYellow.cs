@@ -7,7 +7,7 @@ public class DiceYellow : MonoBehaviour
     private GameObject check;
     private Sprite[] diceSides;
     private SpriteRenderer rend;
-    public bool out_ = false;
+
     public int randomDiceSide;
     public int randomDiceSide1 = 0;
     public bool click;
@@ -60,7 +60,7 @@ public class DiceYellow : MonoBehaviour
         randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
-        if ((randomDiceSide1 + 1) != 6 && boardC.yellowTurn == true && boardC.outYellow == 0)
+        if ((randomDiceSide1 + 1) != 6  && boardC.outYellow == 0)
         {
             click = true;
             boardC.yellowTurn = false;

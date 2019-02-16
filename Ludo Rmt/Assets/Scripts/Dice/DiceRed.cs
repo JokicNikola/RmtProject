@@ -7,7 +7,7 @@ public class DiceRed : MonoBehaviour
     private GameObject check;
     private Sprite[] diceSides;
     private SpriteRenderer rend;
-    public bool out_ = false;
+    
     public int randomDiceSide;
     public int randomDiceSide1 = 0;
     public bool click;
@@ -60,7 +60,7 @@ public class DiceRed : MonoBehaviour
         randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
-        if ((randomDiceSide1 + 1) != 6 && boardC.redTurn == true && boardC.outRed == 0)
+        if ((randomDiceSide1 + 1) != 6 && boardC.outRed == 0)
         {
             click = true;
             boardC.redTurn = false;
