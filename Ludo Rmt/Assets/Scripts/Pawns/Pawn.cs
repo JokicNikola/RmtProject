@@ -2,30 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PawnGreen : MonoBehaviour
+public class Pawn : MonoBehaviour
 {
+
     private GameObject dice;
     private GameObject nextDice;
     private GameObject check;
     private GameObject board;
 
-    private Dice dc;
+    private DiceRed dc;
     private Dice nextDc;
 
     private Controller boardC;
 
-    int randomDiceSide1 = 0;
-    int index = 41;
+    int randomDiceSide1=0;
+    int index = 2;
     private bool out_ = false;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6 (2)");
-        nextDice = GameObject.Find("Side6 (3)");
+        dice = GameObject.Find("Side6 (3)");
+        nextDice = GameObject.Find("Side6");
 
-        dc = dice.GetComponent<Dice>();
+        dc = dice.GetComponent<DiceRed>();
         nextDc = nextDice.GetComponent<Dice>();
 
         board = GameObject.Find("board");
@@ -35,7 +36,13 @@ public class PawnGreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       // if (!out_ && (randomDiceSide1 + 1) == 6)
+       // {
+       //     check = GameObject.Find("Waypoint (2)");
+       //     transform.position = check.transform.position;
+       // }
+       // else
+        //{
 
             if (out_)
             {
@@ -43,52 +50,49 @@ public class PawnGreen : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
             }
 
-        
+        //}
+
     }
+
     private void OnMouseDown()
     {
-        if (dc.click && boardC.greenTurn)
+        if(dc.click && boardC.redTurn)
             StartCoroutine("Move");
         else Debug.Log("Nije bacena");
     }
 
     private IEnumerator Move()
     {
-       
+        //click = dice.GetComponent<Dice>().click;
+        
         randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
       
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
-           
+           // check = GameObject.Find("Waypoint (2)");
+           // transform.position = check.transform.position;
             out_ = true;
+            boardC.outRed++;
             dc.click = false;
         }
         else
         {
 
-            if ((index + randomDiceSide1 + 1) < 86 && out_)
+            if ((index + randomDiceSide1 + 1) < 59 && out_)
             {
                 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
-                    
-                    if (index == 52)
-                    {
-                        index = 0;
-                    }
-                    if (index == 39)
-                    {
-                        index = 79;
-                    }
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                
                 nextDc.click = false;
-                boardC.greenTurn = false;
-                boardC.redTurn = true;
+                boardC.redTurn = false;
+                boardC.blueTurn = true;
             }
         }
-
+        
     }
+
+
 }

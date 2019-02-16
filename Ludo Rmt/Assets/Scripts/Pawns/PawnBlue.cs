@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PawnYellow : MonoBehaviour
+public class PawnBlue : MonoBehaviour
 {
     private GameObject dice;
     private GameObject nextDice;
@@ -10,32 +10,33 @@ public class PawnYellow : MonoBehaviour
     private GameObject board;
 
     private Dice dc;
-    private Dice nextDc;
-
+    private DiceYellow nextDc;
+    
     private Controller boardC;
 
     int randomDiceSide1 = 0;
-    int index = 28;
-    private bool out_ = false;
+    int index = 15;
+    private bool out_ =false;
     
 
     // Start is called before the first frame update
     void Start()
-    { 
-        dice = GameObject.Find("Side6 (1)");
-        nextDice = GameObject.Find("Side6 (2)");
-
+    {
+        dice = GameObject.Find("Side6");
         dc = dice.GetComponent<Dice>();
-        nextDc = nextDice.GetComponent<Dice>();
+
+        nextDice = GameObject.Find("Side6 (1)");
+        nextDc = nextDice.GetComponent<DiceYellow>();
 
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+      
 
             if (out_)
             {
@@ -43,11 +44,11 @@ public class PawnYellow : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
             }
 
-        
+      
     }
     private void OnMouseDown()
     {
-        if (dc.click && boardC.yellowTurn)
+        if (dc.click && boardC.blueTurn)
             StartCoroutine("Move");
         else Debug.Log("Nije bacena");
     }
@@ -55,21 +56,22 @@ public class PawnYellow : MonoBehaviour
     private IEnumerator Move()
     {
        
-      
         randomDiceSide1 = dice.GetComponent<Dice>().randomDiceSide1;
-        
-        
+
         if (!out_ && (randomDiceSide1 + 1) == 6)
         {
-            
+           
             out_ = true;
+            boardC.outBlue++;
             dc.click = false;
         }
         else
         {
 
-            if ((index + randomDiceSide1 + 1) < 96 && out_)
+            
+            if ((index + randomDiceSide1 + 1) < 76 && out_)
             {
+                
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
@@ -77,18 +79,20 @@ public class PawnYellow : MonoBehaviour
                     {
                         index = 0;
                     }
-                    if (index == 26)
+                    if (index == 13)
                     {
-                        index = 89;
+                        index = 69;
                     }
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
                 nextDc.click = false;
-                boardC.yellowTurn = false;
-                boardC.greenTurn = true;
-
+                boardC.blueTurn = false;
+                boardC.yellowTurn = true;
             }
+            
+            
         }
+
     }
 }
