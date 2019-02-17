@@ -57,31 +57,26 @@ public class Controller : MonoBehaviour
         {
             blueTurn = true;
             blue.click = false;
-            Debug.Log("Plavi igra");
+            UnityEngine.Debug.Log("Plavi igra");
         }
         if (rand ==1)
         {
             yellowTurn = true;
             yellow.click = false;
-            Debug.Log("Zuti igra");
+            UnityEngine.Debug.Log("Zuti igra");
         }
         if (rand == 2)
         {
             redTurn = true;
             red.click = false;
-            Debug.Log("Crveni igra");
+            UnityEngine.Debug.Log("Crveni igra");
         }
         if (rand == 3)
         {
             greenTurn = true;
             green.click = false;
-            Debug.Log("Zeleni igra");
-
-        }
-        
-        
-
-        
+            UnityEngine.Debug.Log("Zeleni igra");
+        }  
         
     }
 
@@ -91,12 +86,24 @@ public class Controller : MonoBehaviour
     void Update()
     {
 
-        if (endBlue == 4) { }
+        if (endBlue == 4) {
+            UnityEngine.Debug.Log("Plavi je pobedio!");
+            
+        }
 
-        if (endGreen == 4) { }
+        if (endGreen == 4) {
+            UnityEngine.Debug.Log("Zeleni je pobedio!");
+            
+        }
 
-        if (endRed == 4) { }
+        if (endRed == 4) {
+            UnityEngine.Debug.Log("Crveni je pobedio!");
+            
+        }
 
-        if (endYellow == 4) { }
+        if (endYellow == 4) {
+            UnityEngine.Debug.Log("Žuti je pobedio!");
+            
+        }
     }
 }
