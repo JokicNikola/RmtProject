@@ -21,7 +21,7 @@ public class DiceRed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        click = true;
+       // click = true;
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
 
