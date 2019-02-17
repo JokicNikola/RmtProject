@@ -15,6 +15,10 @@ public class Controller : MonoBehaviour
     private DiceGreen green;
     private Dice blue;
 
+    public int endBlue;
+    public int endGreen;
+    public int endYellow;
+    public int endRed;
 
 
     public int outBlue;
@@ -36,6 +40,16 @@ public class Controller : MonoBehaviour
         red = GameObject.Find("Side6 (3)").GetComponent<DiceRed>();
         blue = GameObject.Find("Side6").GetComponent<Dice>();
         green = GameObject.Find("Side6 (2)").GetComponent<DiceGreen>();
+
+        endBlue=0;
+        endGreen=0;
+        endYellow=0;
+        endRed=0;
+
+        outBlue = 0;
+        outYellow = 0;
+        outRed = 0;
+        outGreen = 0;
 
 
 
@@ -62,16 +76,12 @@ public class Controller : MonoBehaviour
             greenTurn = true;
             green.click = false;
             Debug.Log("Zeleni igra");
+
         }
         
         
-     
- 
 
-        outBlue = 0;
-        outYellow = 0;
-        outRed = 0;
-        outGreen = 0;
+        
         
     }
 
@@ -80,6 +90,13 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (endBlue == 4) { }
+
+        if (endGreen == 4) { }
+
+        if (endRed == 4) { }
+
+        if (endYellow == 4) { }
     }
 }

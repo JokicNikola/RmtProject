@@ -90,6 +90,7 @@ public class PawnBlue : MonoBehaviour
                 if(index == 75)
                 {
                     boardC.outBlue--;
+                    boardC.endBlue++;
                 }
 
                 if((randomDiceSide1 + 1) == 6 || randomDiceSide1==-1)

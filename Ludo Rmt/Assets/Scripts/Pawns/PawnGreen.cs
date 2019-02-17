@@ -88,6 +88,7 @@ public class PawnGreen : MonoBehaviour
                 if (index == 85)
                 {
                     boardC.outGreen--;
+                    boardC.endGreen++;
                 }
 
                 if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
