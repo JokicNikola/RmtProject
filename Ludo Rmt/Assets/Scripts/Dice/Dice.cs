@@ -5,8 +5,8 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
     private GameObject check;
-    private Sprite[] diceSides;
-    private SpriteRenderer rend;
+    public Sprite[] diceSides;
+    public SpriteRenderer rend;
     public bool out_ = false;
     public int randomDiceSide;
     public int randomDiceSide1 = 0;

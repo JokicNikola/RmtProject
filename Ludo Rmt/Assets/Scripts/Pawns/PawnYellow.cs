@@ -103,12 +103,20 @@ public class PawnYellow : MonoBehaviour
                     boardC.greenTurn = true;
                 }
 
-            }else
+            }
+            else
             {
                 nextDc.click = false;
                 boardC.yellowTurn = false;
                 boardC.greenTurn = true;
+                dc.rend.sprite = dc.diceSides[5];
             }
         }
+        dc.rend.sprite = dc.diceSides[5];
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        UnityEngine.Debug.Log("Trigerovao se!");
     }
 }

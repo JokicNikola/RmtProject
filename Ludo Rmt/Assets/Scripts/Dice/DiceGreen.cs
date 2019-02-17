@@ -5,8 +5,8 @@ using UnityEngine;
 public class DiceGreen : MonoBehaviour
 {
     private GameObject check;
-    private Sprite[] diceSides;
-    private SpriteRenderer rend;
+    public Sprite[] diceSides;
+    public SpriteRenderer rend;
     
     public int randomDiceSide;
     public int randomDiceSide1 = 0;
@@ -57,7 +57,7 @@ public class DiceGreen : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
-        randomDiceSide1 = Random.Range(0, 5);
+        randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6  && boardC.outGreen == 0)

@@ -111,8 +111,12 @@ public class Pawn : MonoBehaviour
                 boardC.blueTurn = true;
             }
         }
-        
+        dc.rend.sprite = dc.diceSides[5];
+
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        UnityEngine.Debug.Log("Trigerovao se!");
+    }
 }
