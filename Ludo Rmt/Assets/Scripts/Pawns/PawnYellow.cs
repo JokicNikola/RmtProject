@@ -17,6 +17,9 @@ public class PawnYellow : MonoBehaviour
     int randomDiceSide1 = 0;
     int index = 28;
     private bool out_ = false;
+
+
+    
     
 
     // Start is called before the first frame update
@@ -117,6 +120,8 @@ public class PawnYellow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UnityEngine.Debug.Log("Trigerovao se!");
+        UnityEngine.Debug.Log("Trigerovao se! zuti");
     }
+
+    
 }

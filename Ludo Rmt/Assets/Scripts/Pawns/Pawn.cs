@@ -117,6 +117,7 @@ public class Pawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UnityEngine.Debug.Log("Trigerovao se!");
+        Debug.Log("Trigerovao se! crveni");
     }
+    
 }
