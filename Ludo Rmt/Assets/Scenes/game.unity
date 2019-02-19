@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 19389654}
   - component: {fileID: 19389656}
   - component: {fileID: 19389655}
+  - component: {fileID: 19389658}
   - component: {fileID: 19389657}
   m_Layer: 0
   m_Name: pawn (6)
@@ -236,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce1c04a5e76b584cb47e739db3fc0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &19389656
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &19389657
 Rigidbody2D:
@@ -283,6 +285,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &19389658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19389652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 12
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &102358192
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +908,7 @@ GameObject:
   - component: {fileID: 339584486}
   - component: {fileID: 339584487}
   - component: {fileID: 339584488}
+  - component: {fileID: 339584490}
   - component: {fileID: 339584489}
   m_Layer: 0
   m_Name: pawn (9)
@@ -972,6 +991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5506660238e15634387c4efa0a423363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
   index: 28
 --- !u!61 &339584488
 BoxCollider2D:
@@ -997,7 +1017,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &339584489
 Rigidbody2D:
@@ -1020,6 +1040,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &339584490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339584484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &364316114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &378080473
 Rigidbody2D:
@@ -1725,7 +1761,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &548552584
 Rigidbody2D:
@@ -2030,6 +2066,7 @@ GameObject:
   - component: {fileID: 762864503}
   - component: {fileID: 762864505}
   - component: {fileID: 762864504}
+  - component: {fileID: 762864507}
   - component: {fileID: 762864506}
   m_Layer: 0
   m_Name: pawn (7)
@@ -2112,6 +2149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce1c04a5e76b584cb47e739db3fc0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &762864505
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2136,7 +2174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &762864506
 Rigidbody2D:
@@ -2159,6 +2197,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &762864507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762864501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 12
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &765644851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,6 +2503,7 @@ GameObject:
   - component: {fileID: 884635492}
   - component: {fileID: 884635493}
   - component: {fileID: 884635494}
+  - component: {fileID: 884635496}
   - component: {fileID: 884635495}
   m_Layer: 0
   m_Name: pawn (12)
@@ -2531,6 +2586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5506660238e15634387c4efa0a423363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
   index: 28
 --- !u!61 &884635494
 BoxCollider2D:
@@ -2556,7 +2612,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &884635495
 Rigidbody2D:
@@ -2579,6 +2635,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &884635496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884635490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &894390428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,7 +2859,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &934436277
 Rigidbody2D:
@@ -3202,7 +3274,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1119725744
 Rigidbody2D:
@@ -3343,7 +3415,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1124907409
 Rigidbody2D:
@@ -3378,6 +3450,7 @@ GameObject:
   - component: {fileID: 1159665448}
   - component: {fileID: 1159665450}
   - component: {fileID: 1159665449}
+  - component: {fileID: 1159665452}
   - component: {fileID: 1159665451}
   m_Layer: 0
   m_Name: pawn (5)
@@ -3393,13 +3466,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159665446}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.918, y: 3.546, z: -0.036132812}
+  m_LocalRotation: {x: -0, y: -0, z: 0.010967124, w: 0.9999399}
+  m_LocalPosition: {x: 3.9180002, y: 3.546, z: -0.036132812}
   m_LocalScale: {x: 0.050645687, y: 0.05566313, z: 0.47795182}
   m_Children: []
   m_Father: {fileID: 1830733885}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.2570001}
 --- !u!212 &1159665448
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3460,6 +3533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce1c04a5e76b584cb47e739db3fc0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &1159665450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3484,7 +3558,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1159665451
 Rigidbody2D:
@@ -3507,6 +3581,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1159665452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159665446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1162492509
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,6 +4103,7 @@ GameObject:
   - component: {fileID: 1435208895}
   - component: {fileID: 1435208896}
   - component: {fileID: 1435208897}
+  - component: {fileID: 1435208899}
   - component: {fileID: 1435208898}
   m_Layer: 0
   m_Name: pawn (11)
@@ -4095,6 +4186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5506660238e15634387c4efa0a423363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
   index: 28
 --- !u!61 &1435208897
 BoxCollider2D:
@@ -4120,7 +4212,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1435208898
 Rigidbody2D:
@@ -4143,6 +4235,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1435208899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435208893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1466297364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,6 +4353,7 @@ GameObject:
   - component: {fileID: 1547081766}
   - component: {fileID: 1547081767}
   - component: {fileID: 1547081768}
+  - component: {fileID: 1547081770}
   - component: {fileID: 1547081769}
   m_Layer: 0
   m_Name: pawn (10)
@@ -4327,6 +4436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5506660238e15634387c4efa0a423363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
   index: 28
 --- !u!61 &1547081768
 BoxCollider2D:
@@ -4352,7 +4462,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1547081769
 Rigidbody2D:
@@ -4375,6 +4485,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1547081770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547081764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1576793324
 GameObject:
   m_ObjectHideFlags: 0
@@ -4632,7 +4758,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1664256304
 Rigidbody2D:
@@ -4833,7 +4959,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1732546004
 Rigidbody2D:
@@ -5312,7 +5438,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0.01
 --- !u!50 &1964862200
 Rigidbody2D:
@@ -5558,6 +5684,7 @@ GameObject:
   - component: {fileID: 2109818162}
   - component: {fileID: 2109818161}
   - component: {fileID: 2109818163}
+  - component: {fileID: 2109818164}
   m_Layer: 0
   m_Name: pawn (4)
   m_TagString: Untagged
@@ -5572,13 +5699,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109818158}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0104836635, w: 0.9999451}
   m_LocalPosition: {x: 3.33, y: 4.15, z: -0.036132812}
   m_LocalScale: {x: 0.05064569, y: 0.05566313, z: 0.47795182}
   m_Children: []
   m_Father: {fileID: 1830733885}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.2010001}
 --- !u!212 &2109818160
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5639,6 +5766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce1c04a5e76b584cb47e739db3fc0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &2109818162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5686,6 +5814,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2109818164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109818158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 12
+  index1: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &2111311924
 GameObject:
   m_ObjectHideFlags: 0

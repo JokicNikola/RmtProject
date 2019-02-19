@@ -12,6 +12,8 @@ public class PawnYellow : MonoBehaviour
     private DiceYellow dc;
     private DiceGreen nextDc;
 
+    public Position position;
+
     private Controller boardC;
 
     int randomDiceSide1 = 0;
@@ -33,26 +35,33 @@ public class PawnYellow : MonoBehaviour
 
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
+
+        position = GetComponent<Position>();
+        position.index = index;
+        position.index1 = index;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-            if (out_)
-            {
-                check = GameObject.Find("Waypoint (" + index + ")");
-                transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
-            }
 
-        
+        if (position._out)
+        {
+            check = GameObject.Find("Waypoint (" + position.index1 + ")");
+            transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
+        }
+        else position.index1 = index;
+
+
+
     }
     private void OnMouseDown()
     {
         if (dc.click && boardC.yellowTurn)
             StartCoroutine("Move");
         else Debug.Log("Nije bacena");
+        Debug.Log(position.index);
     }
 
     private IEnumerator Move()
@@ -62,33 +71,37 @@ public class PawnYellow : MonoBehaviour
         randomDiceSide1 = dc.randomDiceSide1;
         
         
-        if (!out_ && (randomDiceSide1 + 1) == 6)
+        if (!position._out && (randomDiceSide1 + 1) == 6)
         {
-            
-            out_ = true;
+
+            position._out = true;
             boardC.outYellow++;
             dc.click = false;
         }
         else
         {
 
-            if ((index + randomDiceSide1 + 1) < 96 && out_)
+            if ((position.index1 + randomDiceSide1 + 1) < 96 && position._out)
             {
+                position.index = position.index1 + randomDiceSide1 + 1;
+
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
-                    if (index == 52)
+                    if (position.index1 == 52)
                     {
-                        index = 0;
+                        position.index1 = 0;
+                        position.index = 0;
                     }
-                    if (index == 26)
+                    if (position.index1 == 26)
                     {
-                        index = 89;
+                        position.index1 = 89;
+                        position.index = 89;
                     }
-                    index++;
+                    position.index1++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (index == 95)
+                if (position.index1 == 95)
                 {
                     boardC.outYellow--;
                     boardC.endYellow++;
