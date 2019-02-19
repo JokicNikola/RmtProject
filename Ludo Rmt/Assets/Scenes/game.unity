@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 12
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &102358192
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &364316114
@@ -1099,6 +1099,7 @@ GameObject:
   - component: {fileID: 378080471}
   - component: {fileID: 378080472}
   - component: {fileID: 378080473}
+  - component: {fileID: 378080474}
   m_Layer: 0
   m_Name: pawn (8)
   m_TagString: Untagged
@@ -1180,6 +1181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57c4a2eac1a1304d88e0553de24ec82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &378080472
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1227,6 +1229,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &378080474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378080468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &415608236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1674,7 @@ GameObject:
   - component: {fileID: 548552582}
   - component: {fileID: 548552583}
   - component: {fileID: 548552584}
+  - component: {fileID: 548552585}
   m_Layer: 0
   m_Name: pawn (3)
   m_TagString: Untagged
@@ -1737,6 +1756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7c9f12d59e4b43a2732940e81531e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &548552583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1784,6 +1804,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &548552585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548552579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &553771952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 12
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &765644851
@@ -2648,7 +2684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &894390428
@@ -2754,6 +2790,7 @@ GameObject:
   - component: {fileID: 934436275}
   - component: {fileID: 934436276}
   - component: {fileID: 934436277}
+  - component: {fileID: 934436278}
   m_Layer: 0
   m_Name: pawn (2)
   m_TagString: Untagged
@@ -2835,6 +2872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7c9f12d59e4b43a2732940e81531e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &934436276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2882,6 +2920,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &934436278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934436272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &937916706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,6 +3223,7 @@ GameObject:
   - component: {fileID: 1119725742}
   - component: {fileID: 1119725743}
   - component: {fileID: 1119725744}
+  - component: {fileID: 1119725745}
   m_Layer: 0
   m_Name: pawn (13)
   m_TagString: Untagged
@@ -3250,6 +3305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57c4a2eac1a1304d88e0553de24ec82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &1119725743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3297,6 +3353,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1119725745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119725739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1124907404
 GameObject:
   m_ObjectHideFlags: 0
@@ -3310,6 +3382,7 @@ GameObject:
   - component: {fileID: 1124907407}
   - component: {fileID: 1124907408}
   - component: {fileID: 1124907409}
+  - component: {fileID: 1124907410}
   m_Layer: 0
   m_Name: pawn
   m_TagString: Untagged
@@ -3391,6 +3464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7c9f12d59e4b43a2732940e81531e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &1124907408
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3438,6 +3512,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1124907410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124907404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1159665446
 GameObject:
   m_ObjectHideFlags: 0
@@ -3594,7 +3684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &1162492509
@@ -4248,7 +4338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &1466297364
@@ -4498,7 +4588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &1576793324
@@ -4653,6 +4743,7 @@ GameObject:
   - component: {fileID: 1664256302}
   - component: {fileID: 1664256303}
   - component: {fileID: 1664256304}
+  - component: {fileID: 1664256305}
   m_Layer: 0
   m_Name: pawn (1)
   m_TagString: Untagged
@@ -4734,6 +4825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7c9f12d59e4b43a2732940e81531e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &1664256303
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4781,6 +4873,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1664256305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664256299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1694361029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4854,6 +4962,7 @@ GameObject:
   - component: {fileID: 1732546002}
   - component: {fileID: 1732546003}
   - component: {fileID: 1732546004}
+  - component: {fileID: 1732546005}
   m_Layer: 0
   m_Name: pawn (14)
   m_TagString: Untagged
@@ -4935,6 +5044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57c4a2eac1a1304d88e0553de24ec82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &1732546003
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4982,6 +5092,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1732546005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732545999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1829264420
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,6 +5459,7 @@ GameObject:
   - component: {fileID: 1964862198}
   - component: {fileID: 1964862199}
   - component: {fileID: 1964862200}
+  - component: {fileID: 1964862201}
   m_Layer: 0
   m_Name: pawn (15)
   m_TagString: Untagged
@@ -5414,6 +5541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57c4a2eac1a1304d88e0553de24ec82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {fileID: 0}
 --- !u!61 &1964862199
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5461,6 +5589,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1964862201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964862195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749008750bb040d4bb09cb2202569163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0
+  koraci: 0
+  onStart: {x: 0, y: 0, z: 0}
+  _out: 0
 --- !u!1 &1995996301
 GameObject:
   m_ObjectHideFlags: 0
@@ -5827,7 +5971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 12
-  index1: 0
+  koraci: 0
   onStart: {x: 0, y: 0, z: 0}
   _out: 0
 --- !u!1 &2111311924
