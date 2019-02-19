@@ -18,7 +18,7 @@ public class PawnYellow : MonoBehaviour
 
     int randomDiceSide1 = 0;
     public int index = 28;
-    private bool out_ = false;
+    
 
 
     
@@ -38,7 +38,7 @@ public class PawnYellow : MonoBehaviour
 
         position = GetComponent<Position>();
         position.index = index;
-        position.index1 = index;
+        position.koraci = index;
     }
 
     // Update is called once per frame
@@ -48,10 +48,10 @@ public class PawnYellow : MonoBehaviour
 
         if (position._out)
         {
-            check = GameObject.Find("Waypoint (" + position.index1 + ")");
+            check = GameObject.Find("Waypoint (" + position.koraci + ")");
             transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
         }
-        else position.index1 = index;
+        else position.koraci = index;
 
 
 
@@ -81,27 +81,27 @@ public class PawnYellow : MonoBehaviour
         else
         {
 
-            if ((position.index1 + randomDiceSide1 + 1) < 96 && position._out)
+            if ((position.koraci + randomDiceSide1 + 1) < 96 && position._out)
             {
-                position.index = position.index1 + randomDiceSide1 + 1;
+                position.index = position.koraci + randomDiceSide1 + 1;
 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
-                    if (position.index1 == 52)
+                    if (position.koraci == 52)
                     {
-                        position.index1 = 0;
+                        position.koraci = 0;
                         position.index = 0;
                     }
-                    if (position.index1 == 26)
+                    if (position.koraci == 26)
                     {
-                        position.index1 = 89;
+                        position.koraci = 89;
                         position.index = 89;
                     }
-                    position.index1++;
+                    position.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (position.index1 == 95)
+                if (position.koraci == 95)
                 {
                     boardC.outYellow--;
                     boardC.endYellow++;
@@ -134,10 +134,13 @@ public class PawnYellow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (boardC.yellowTurn)
+        if (boardC.yellowTurn && position.index == collision.GetComponent<Position>().index)
         {
             UnityEngine.Debug.Log("Trigerovao se! zuti");
-            //Destroy(collision.gameObject);
+
+
+            collision.transform.position = collision.GetComponent<Position>().onStart;
+            collision.GetComponent<Position>()._out = false;
         }
     }
 

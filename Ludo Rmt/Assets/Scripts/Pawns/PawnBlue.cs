@@ -32,7 +32,7 @@ public class PawnBlue : MonoBehaviour
 
         position = GetComponent<Position>();
         position.index = index;
-        position.index1 = index;
+        position.koraci = index;
 
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
@@ -46,10 +46,10 @@ public class PawnBlue : MonoBehaviour
 
         if (position._out)
         {
-            check = GameObject.Find("Waypoint (" + position.index1 + ")");
+            check = GameObject.Find("Waypoint (" + position.koraci + ")");
             transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
         }
-        else position.index1 = index;
+        else position.koraci = index;
 
 
 
@@ -80,29 +80,29 @@ public class PawnBlue : MonoBehaviour
         {
 
             
-            if ((position.index1 + randomDiceSide1 + 1) < 76 && position._out)
+            if ((position.koraci + randomDiceSide1 + 1) < 76 && position._out)
             {
-                position.index = position.index1 + randomDiceSide1 + 1;
+                position.index = position.koraci + randomDiceSide1 + 1;
 
 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
-                    if (position.index1 == 52)
+                    if (position.koraci == 52)
                     {
-                        position.index1 = 0;
+                        position.koraci = 0;
                         position.index = 0;
                     }
-                    if (position.index1 == 13)
+                    if (position.koraci == 13)
                     {
-                        position.index1 = 69;
+                        position.koraci = 69;
                         position.index = 69;
                     }
-                    position.index1++;
+                    position.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
 
-                if(position.index1 == 75)
+                if(position.koraci == 75)
                 {
                     boardC.outBlue--;
                     boardC.endBlue++;
