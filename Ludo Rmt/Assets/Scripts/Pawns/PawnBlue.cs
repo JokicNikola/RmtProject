@@ -135,7 +135,7 @@ public class PawnBlue : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (boardC.blueTurn && position.index==collision.GetComponent<Position>().index)
+        if (boardC.blueTurn && position.index==collision.GetComponent<Position>().index && collision.gameObject.tag != "BLUE")
         {
 
             UnityEngine.Debug.Log("Trigerovao se! plavi");

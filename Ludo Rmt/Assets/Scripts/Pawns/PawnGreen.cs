@@ -123,7 +123,7 @@ public class PawnGreen : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.greenTurn && position.index == collision.GetComponent<Position>().index)
+        if (boardC.greenTurn && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "GREEN")
         {
             UnityEngine.Debug.Log("Trigerovao se! zeleni");
 

@@ -10,6 +10,7 @@ public class Pawn : MonoBehaviour
     private GameObject check;
     private GameObject board;
 
+
     private DiceRed dc;
     private Dice nextDc;
 
@@ -109,7 +110,7 @@ public class Pawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.redTurn && position.index == collision.GetComponent<Position>().index)
+        if (boardC.redTurn && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "RED")
         {
             UnityEngine.Debug.Log("Trigerovao se! crveni");
 

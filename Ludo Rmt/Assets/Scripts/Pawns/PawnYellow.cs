@@ -134,7 +134,7 @@ public class PawnYellow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (boardC.yellowTurn && position.index == collision.GetComponent<Position>().index)
+        if (boardC.yellowTurn && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "YELLOW")
         {
             UnityEngine.Debug.Log("Trigerovao se! zuti");
 
