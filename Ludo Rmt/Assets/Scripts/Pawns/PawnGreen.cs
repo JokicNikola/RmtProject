@@ -44,7 +44,7 @@ public class PawnGreen : MonoBehaviour
 
         if (position._out)
         {
-            check = GameObject.Find("Waypoint (" + index + ")");
+            check = GameObject.Find("Waypoint (" + position.koraci + ")");
             transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
         }
         else position.koraci = index;
@@ -89,11 +89,11 @@ public class PawnGreen : MonoBehaviour
                         position.koraci = 79;
                         position.index = 79;
                     }
-                    index++;
+                    position.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
 
-                if (index == 85)
+                if (position.koraci == 85)
                 {
                     boardC.outGreen--;
                     boardC.endGreen++;
