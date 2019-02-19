@@ -134,13 +134,12 @@ public class PawnBlue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UnityEngine.Debug.Log("Trigerovao se! plavi");
+        
         if (boardC.blueTurn && position.index==collision.GetComponent<Position>().index)
         {
-            
-            //Destroy(collision.gameObject);
+
+            UnityEngine.Debug.Log("Trigerovao se! plavi");
             collision.transform.position = collision.GetComponent<Position>().onStart;
-            //collision.GetComponent<Position>().index1 = index;
             collision.GetComponent<Position>()._out = false;
         }
     }

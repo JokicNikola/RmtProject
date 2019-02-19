@@ -17,8 +17,8 @@ public class Pawn : MonoBehaviour
 
     int randomDiceSide1=0;
     int index = 2;
-    private bool out_ = false;
 
+    public Position position;
 
     // Start is called before the first frame update
     void Start()
@@ -31,27 +31,21 @@ public class Pawn : MonoBehaviour
 
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
+
+        position = GetComponent<Position>();
+        position.index = index;
+        position.koraci = index;
     }
 
     // Update is called once per frame
     void Update()
     {
-       // if (!out_ && (randomDiceSide1 + 1) == 6)
-       // {
-       //     check = GameObject.Find("Waypoint (2)");
-       //     transform.position = check.transform.position;
-       // }
-       // else
-        //{
-
-            if (out_)
+              if (position._out)
             {
-                check = GameObject.Find("Waypoint (" + index + ")");
+                check = GameObject.Find("Waypoint (" + position.koraci + ")");
                 transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
             }
-
-        //}
-
+            else position.koraci = index;
     }
 
     private void OnMouseDown()
@@ -63,31 +57,29 @@ public class Pawn : MonoBehaviour
 
     private IEnumerator Move()
     {
-        //click = dice.GetComponent<Dice>().click;
         
         randomDiceSide1 = dc.randomDiceSide1;
       
-        if (!out_ && (randomDiceSide1 + 1) == 6)
+        if (!position._out && (randomDiceSide1 + 1) == 6)
         {
-           // check = GameObject.Find("Waypoint (2)");
-           // transform.position = check.transform.position;
-            out_ = true;
+            position._out = true;
             boardC.outRed++;
             dc.click = false;
         }
         else
         {
 
-            if ((index + randomDiceSide1 + 1) < 59 && out_)
+            if ((position.koraci + randomDiceSide1 + 1) < 59 && position._out)
             {
+                position.index = position.koraci + randomDiceSide1 + 1;
                 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
-                    index++;
+                    position.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
 
-                if (index == 58)
+                if (position.koraci == 58)
                 {
                     boardC.outRed--;
                     boardC.endRed++;
@@ -117,10 +109,13 @@ public class Pawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.redTurn)
+        if (boardC.redTurn && position.index == collision.GetComponent<Position>().index)
         {
-            Debug.Log("Trigerovao se! crveni");
-            //Destroy(collision.gameObject);
+            UnityEngine.Debug.Log("Trigerovao se! crveni");
+
+
+            collision.transform.position = collision.GetComponent<Position>().onStart;
+            collision.GetComponent<Position>()._out = false;
         }
     }
     

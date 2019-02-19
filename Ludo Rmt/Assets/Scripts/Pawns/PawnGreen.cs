@@ -16,8 +16,9 @@ public class PawnGreen : MonoBehaviour
 
     int randomDiceSide1 = 0;
     int index = 41;
-    private bool out_ = false;
-    
+
+    public Position position;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,19 +31,23 @@ public class PawnGreen : MonoBehaviour
 
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
+
+        position = GetComponent<Position>();
+        position.index = index;
+        position.koraci = index;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-            if (out_)
-            {
-                check = GameObject.Find("Waypoint (" + index + ")");
-                transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
-            }
 
+        if (position._out)
+        {
+            check = GameObject.Find("Waypoint (" + index + ")");
+            transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
+        }
+        else position.koraci = index;
         
     }
     private void OnMouseDown()
@@ -57,29 +62,32 @@ public class PawnGreen : MonoBehaviour
        
         randomDiceSide1 = dc.randomDiceSide1;
       
-        if (!out_ && (randomDiceSide1 + 1) == 6)
+        if (!position._out && (randomDiceSide1 + 1) == 6)
         {
            
-            out_ = true;
+            position._out = true;
             boardC.outGreen++;
             dc.click = false;
         }
         else
         {
 
-            if ((index + randomDiceSide1 + 1) < 86 && out_)
+            if ((position.koraci + randomDiceSide1 + 1) < 86 && position._out)
             {
-                
+                position.index = position.koraci + randomDiceSide1 + 1;
+
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
-                    if (index == 52)
+                    if (position.koraci == 52)
                     {
-                        index = 0;
+                        position.koraci = 0;
+                        position.index = 0;
                     }
-                    if (index == 39)
+                    if (position.koraci == 39)
                     {
-                        index = 79;
+                        position.koraci = 79;
+                        position.index = 79;
                     }
                     index++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
@@ -115,10 +123,13 @@ public class PawnGreen : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.greenTurn)
+        if (boardC.greenTurn && position.index == collision.GetComponent<Position>().index)
         {
             UnityEngine.Debug.Log("Trigerovao se! zeleni");
-           // Destroy(collision.gameObject);
+
+
+            collision.transform.position = collision.GetComponent<Position>().onStart;
+            collision.GetComponent<Position>()._out = false;
         }
     }
 }
