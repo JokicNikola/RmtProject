@@ -15,7 +15,7 @@ public class PawnYellow : MonoBehaviour
     private Controller boardC;
 
     int randomDiceSide1 = 0;
-    int index = 28;
+    public int index = 28;
     private bool out_ = false;
 
 
@@ -120,7 +120,12 @@ public class PawnYellow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UnityEngine.Debug.Log("Trigerovao se! zuti");
+
+        if (boardC.yellowTurn)
+        {
+            UnityEngine.Debug.Log("Trigerovao se! zuti");
+            //Destroy(collision.gameObject);
+        }
     }
 
     

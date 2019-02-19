@@ -117,7 +117,11 @@ public class Pawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigerovao se! crveni");
+        if (boardC.redTurn)
+        {
+            Debug.Log("Trigerovao se! crveni");
+            //Destroy(collision.gameObject);
+        }
     }
     
 }

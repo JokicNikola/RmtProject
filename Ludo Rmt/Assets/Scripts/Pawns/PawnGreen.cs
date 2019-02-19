@@ -115,6 +115,10 @@ public class PawnGreen : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UnityEngine.Debug.Log("Trigerovao se! zeleni");
+        if (boardC.greenTurn)
+        {
+            UnityEngine.Debug.Log("Trigerovao se! zeleni");
+           // Destroy(collision.gameObject);
+        }
     }
 }
