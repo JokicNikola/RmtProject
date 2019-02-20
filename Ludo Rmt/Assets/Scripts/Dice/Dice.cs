@@ -17,6 +17,10 @@ public class Dice : MonoBehaviour
 
     private DiceYellow nextDc;
     private GameObject nextDice;
+
+    private GameObject beforeDice;
+    private DiceRed beforeDc;
+
     
 
 
@@ -30,6 +34,9 @@ public class Dice : MonoBehaviour
 
         nextDice = GameObject.Find("Side6 (1)");
         nextDc = nextDice.GetComponent<DiceYellow>();
+
+        beforeDice = GameObject.Find("Side6 (3)");
+        beforeDc = beforeDice.GetComponent<DiceRed>();
     }
 
     
@@ -40,6 +47,7 @@ public class Dice : MonoBehaviour
         {
             click = true;
             StartCoroutine("RollTheDice");
+            beforeDc.rend.sprite = beforeDc.diceSides[5];
         } else
         {
             UnityEngine.Debug.Log("TI SI PLAVI, NIJE TVOJ POTEZ!");

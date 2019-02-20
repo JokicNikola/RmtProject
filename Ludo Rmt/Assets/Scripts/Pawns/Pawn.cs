@@ -104,7 +104,7 @@ public class Pawn : MonoBehaviour
                 boardC.blueTurn = true;
             }
         }
-        dc.rend.sprite = dc.diceSides[5];
+        //dc.rend.sprite = dc.diceSides[5];
 
     }
 
@@ -117,6 +117,19 @@ public class Pawn : MonoBehaviour
 
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
+
+            if(collision.gameObject.tag == "BLUE")
+            {
+                boardC.outBlue--;
+            }
+            if (collision.gameObject.tag == "GREEN")
+            {
+                boardC.outGreen--;
+            }
+            if (collision.gameObject.tag == "YELLOW")
+            {
+                boardC.outYellow--;
+            }
         }
     }
     

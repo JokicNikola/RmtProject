@@ -18,6 +18,9 @@ public class DiceGreen : MonoBehaviour
     private DiceRed nextDc;
     private GameObject nextDice;
 
+    private GameObject beforeDice;
+    private DiceYellow beforeDc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,9 @@ public class DiceGreen : MonoBehaviour
 
         nextDice = GameObject.Find("Side6 (3)");
         nextDc = nextDice.GetComponent<DiceRed>();
+
+        beforeDice = GameObject.Find("Side6 (1)");
+        beforeDc = beforeDice.GetComponent<DiceYellow>();
     }
 
     private void OnMouseDown()
@@ -38,6 +44,7 @@ public class DiceGreen : MonoBehaviour
         {
             click = true;
             StartCoroutine("RollTheDice");
+            beforeDc.rend.sprite = beforeDc.diceSides[5];
         }
         else
         {

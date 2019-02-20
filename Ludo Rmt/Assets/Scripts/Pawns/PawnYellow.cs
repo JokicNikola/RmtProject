@@ -125,10 +125,10 @@ public class PawnYellow : MonoBehaviour
                 nextDc.click = false;
                 boardC.yellowTurn = false;
                 boardC.greenTurn = true;
-                dc.rend.sprite = dc.diceSides[5];
+                //dc.rend.sprite = dc.diceSides[5];
             }
         }
-        dc.rend.sprite = dc.diceSides[5];
+        //dc.rend.sprite = dc.diceSides[5];
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -141,6 +141,19 @@ public class PawnYellow : MonoBehaviour
 
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
+
+            if (collision.gameObject.tag == "BLUE")
+            {
+                boardC.outBlue--;
+            }
+            if (collision.gameObject.tag == "GREEN")
+            {
+                boardC.outGreen--;
+            }
+            if (collision.gameObject.tag == "RED")
+            {
+                boardC.outRed--;
+            }
         }
     }
 

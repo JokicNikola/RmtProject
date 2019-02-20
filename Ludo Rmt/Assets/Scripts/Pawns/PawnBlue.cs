@@ -125,10 +125,10 @@ public class PawnBlue : MonoBehaviour
                 nextDc.click = false;
                 boardC.blueTurn = false;
                 boardC.yellowTurn = true;
-                dc.rend.sprite = dc.diceSides[5];
+                //dc.rend.sprite = dc.diceSides[5];
             }
         }
-        dc.rend.sprite = dc.diceSides[5];
+        //dc.rend.sprite = dc.diceSides[5];
 
     }
 
@@ -141,6 +141,19 @@ public class PawnBlue : MonoBehaviour
             UnityEngine.Debug.Log("Trigerovao se! plavi");
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
+
+            if (collision.gameObject.tag == "RED")
+            {
+                boardC.outRed--;
+            }
+            if (collision.gameObject.tag == "GREEN")
+            {
+                boardC.outGreen--;
+            }
+            if (collision.gameObject.tag == "YELLOW")
+            {
+                boardC.outYellow--;
+            }
         }
     }
 }
