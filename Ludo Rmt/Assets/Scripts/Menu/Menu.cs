@@ -50,8 +50,15 @@ public class Menu : MonoBehaviour
     {
 
         try { 
+
         Client c = Instantiate(clientPrefab).GetComponent<Client>();
         c.ConnectToServer("127.0.0.1", 6321);
+
+            if (c.socketReady)
+            {
+
+            }
+
             }
         catch(Exception e)
         {

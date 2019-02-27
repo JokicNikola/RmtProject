@@ -77,6 +77,7 @@ public class Server : MonoBehaviour
     private void StartListening()
     {
         server.BeginAcceptTcpClient(AcceptTcpClient, server);
+        Debug.Log("Cekam konekciju");
     }
 
     private void AcceptTcpClient(IAsyncResult ar)
@@ -84,12 +85,12 @@ public class Server : MonoBehaviour
         TcpListener listener = (TcpListener)ar.AsyncState;
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ar));
-        Debug.Log("Cekam konekciju");
+        Debug.Log("Primio konekciju");
         clients.Add(sc);
 
         StartListening();   
 
-        UnityEngine.Debug.Log("Somebody has connected!");
+       // UnityEngine.Debug.Log("Somebody has connected!");
     }
     private bool IsConnected(TcpClient c)
     {

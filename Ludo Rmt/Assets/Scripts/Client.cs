@@ -7,7 +7,7 @@ using System;
 
 public class Client : MonoBehaviour
 {
-    private bool socketReady;
+    public bool socketReady;
     private TcpClient socket;
 
     private NetworkStream stream;
