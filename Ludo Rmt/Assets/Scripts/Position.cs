@@ -14,6 +14,6 @@ public class Position : MonoBehaviour
         
         _out = false;
        onStart = transform.position;
-        Debug.Log(onStart);
+        
     }
 }

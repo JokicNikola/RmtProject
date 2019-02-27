@@ -28,6 +28,7 @@ public class Server : MonoBehaviour
             server.Start();
 
             StartListening();
+            
 
             serverStarted = true;
         }
@@ -83,6 +84,7 @@ public class Server : MonoBehaviour
         TcpListener listener = (TcpListener)ar.AsyncState;
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ar));
+        Debug.Log("Cekam konekciju");
         clients.Add(sc);
 
         StartListening();   
@@ -143,6 +145,7 @@ public class ServerClient
 {
     public string clientName;
     public TcpClient tcp;
+    public string color;
 
     public ServerClient(TcpClient tcp)
     {

@@ -776,7 +776,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 693435646}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2062875490}
+        m_MethodName: connectBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &693435646
@@ -2150,6 +2161,10 @@ MonoBehaviour:
   connect: {fileID: 877477266}
   host: {fileID: 2126611511}
   menu: {fileID: 1186555070}
+  clientPrefab: {fileID: 6031090599608483932, guid: 426ba0e8ca7b0f145a9505800e66c74d,
+    type: 3}
+  serverPrefab: {fileID: 2651304812033744066, guid: ee559e284c3e49f40b42db9a3c3b01e1,
+    type: 3}
 --- !u!1 &2126611511
 GameObject:
   m_ObjectHideFlags: 0
