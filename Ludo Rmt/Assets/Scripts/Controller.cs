@@ -27,7 +27,7 @@ public class Controller : MonoBehaviour
     public int outGreen;
     private int rand;
 
-    private string jokic = 'SISA';
+
     // Start is called before the first frame update
     void Start()
     {

@@ -3,7 +3,14 @@ guid: 9f03814c74ade09488d4149aaa737a96
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - connect: {instanceID: 0}
+  - host: {instanceID: 0}
+  - menu: {instanceID: 0}
+  - clientPrefab: {fileID: 6031090599608483932, guid: 426ba0e8ca7b0f145a9505800e66c74d,
+      type: 3}
+  - serverPrefab: {fileID: 2651304812033744066, guid: ee559e284c3e49f40b42db9a3c3b01e1,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

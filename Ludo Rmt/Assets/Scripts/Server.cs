@@ -46,23 +46,32 @@ public class Server : MonoBehaviour
 
         foreach(ServerClient c in clients)
         {
+           
             if (!IsConnected(c.tcp))
             {
                 c.tcp.Close();
+                
                 disconnectList.Add(c);
                 continue;
             }
             else
             {
                 NetworkStream s = c.tcp.GetStream();
+ 
+
                 if (s.DataAvailable)
                 {
-                    StreamReader reader = new StreamReader(s, true);
+                    StreamReader reader = new StreamReader(s);
                     string data = reader.ReadLine();
+                    
+
+
 
                     if (data != null)
                     {
+
                         OnIncomingData(c, data);
+                        
                     }
                 }
             }
@@ -86,6 +95,7 @@ public class Server : MonoBehaviour
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ar));
         Debug.Log("Primio konekciju");
+        
         clients.Add(sc);
 
         StartListening();   
@@ -134,7 +144,7 @@ public class Server : MonoBehaviour
             }
             catch (Exception e)
             {
-
+                Debug.Log(e.Message);
             }
         }
     }
@@ -144,7 +154,7 @@ public class Server : MonoBehaviour
 
 public class ServerClient
 {
-    public string clientName;
+    public string clientName="J";
     public TcpClient tcp;
     public string color;
 

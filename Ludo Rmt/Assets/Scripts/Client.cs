@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Net.Sockets;
 using System.IO;
 using System;
@@ -46,6 +44,7 @@ public class Client : MonoBehaviour
             if (stream.DataAvailable)
             {
                 string data = reader.ReadLine();
+               
                 if (data != null)
                 {
                     OnIncomingData(data);
@@ -61,7 +60,9 @@ public class Client : MonoBehaviour
             return;
         }
 
+
         writer.WriteLine(data);
+        
         writer.Flush();
     }
     private void OnIncomingData(string data)
