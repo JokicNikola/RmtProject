@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 using System;
 
@@ -13,6 +12,8 @@ public class Menu : MonoBehaviour
     public GameObject menu;
     public GameObject clientPrefab;
     public GameObject serverPrefab;
+    public Server s;
+    public Client c;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class Menu : MonoBehaviour
         host.SetActive(true);
         menu.SetActive(false);
 
-        Server s = Instantiate(serverPrefab).GetComponent<Server>();
+        s = Instantiate(serverPrefab).GetComponent<Server>();
         s.Init();
     }
 
@@ -49,17 +50,16 @@ public class Menu : MonoBehaviour
     public void connectBtn()
     {
 
-        try { 
+        try {
 
-            Client c = Instantiate(clientPrefab).GetComponent<Client>();
-            
-           
-           
-            
+            if (c==null)
+            {
+                c = Instantiate(clientPrefab).GetComponent<Client>();
+            }
 
             if (c.ConnectToServer("127.0.0.1", 6321))
             {
-
+               // SceneManager.LoadScene("game");
             }
 
             }

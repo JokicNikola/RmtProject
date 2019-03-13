@@ -95,10 +95,26 @@ public class Server : MonoBehaviour
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ar));
         Debug.Log("Primio konekciju");
-        
-        clients.Add(sc);
 
-        StartListening();   
+        if (clients.Count < 3)
+        {
+            if (clients.Count == 0)
+            {
+                colorSet("Blue", sc);
+            }
+            if (clients.Count == 1)
+            {
+                colorSet("Green", sc);
+            }
+            if (clients.Count == 2)
+            {
+                colorSet("Yellow", sc);
+            }
+            clients.Add(sc);
+            StartListening();
+        }
+
+        //StartListening();  
 
        // UnityEngine.Debug.Log("Somebody has connected!");
     }
@@ -147,6 +163,14 @@ public class Server : MonoBehaviour
                 Debug.Log(e.Message);
             }
         }
+    }
+
+    private void colorSet(string data, ServerClient sc)
+    {
+        StreamWriter wr = new StreamWriter(sc.tcp.GetStream());
+        wr.WriteLine(data);
+        wr.Flush();
+        Debug.Log("Poslato");
     }
 
 
