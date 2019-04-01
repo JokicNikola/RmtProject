@@ -16,9 +16,9 @@ public class DiceGreen : MonoBehaviour
     private Controller boardC;
 
     private DiceRed nextDc;
-    private GameObject nextDice;
+   
 
-    private GameObject beforeDice;
+   
     private DiceYellow beforeDc;
 
     // Start is called before the first frame update
@@ -31,20 +31,20 @@ public class DiceGreen : MonoBehaviour
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
 
-        nextDice = GameObject.Find("Side6 (3)");
-        nextDc = nextDice.GetComponent<DiceRed>();
+        
+        nextDc = GameObject.Find("Green Dice").GetComponent<DiceRed>();
 
-        beforeDice = GameObject.Find("Side6 (1)");
-        beforeDc = beforeDice.GetComponent<DiceYellow>();
+        
+        beforeDc = GameObject.Find("Yellow Dice").GetComponent<DiceYellow>();
     }
 
     private void OnMouseDown()
     {
-        if (!click && boardC.greenTurn)
+        if (boardC.isMyMove && !click)
         {
             click = true;
             StartCoroutine("RollTheDice");
-            beforeDc.rend.sprite = beforeDc.diceSides[5];
+            
         }
         else
         {
@@ -64,16 +64,18 @@ public class DiceGreen : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
+
         randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6  && boardC.outGreen == 0)
         {
             click = true;
-            boardC.greenTurn = false;
-            boardC.redTurn = true;
-            nextDc.click = false;
+            
+           
         }
     }
+
+   
 
 }

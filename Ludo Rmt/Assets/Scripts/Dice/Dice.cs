@@ -32,10 +32,10 @@ public class Dice : MonoBehaviour
         board = GameObject.Find("board");
         boardC = board.GetComponent<Controller>();
 
-        nextDice = GameObject.Find("Side6 (1)");
+        nextDice = GameObject.Find("Yellow Dice");
         nextDc = nextDice.GetComponent<DiceYellow>();
 
-        beforeDice = GameObject.Find("Side6 (3)");
+        beforeDice = GameObject.Find("Red Dice");
         beforeDc = beforeDice.GetComponent<DiceRed>();
     }
 
@@ -43,11 +43,11 @@ public class Dice : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!click && boardC.blueTurn)
+        if (boardC.isMyMove && !click)
         {
             click = true;
             StartCoroutine("RollTheDice");
-            beforeDc.rend.sprite = beforeDc.diceSides[5];
+            //beforeDc.rend.sprite = beforeDc.diceSides[5];
         } else
         {
             UnityEngine.Debug.Log("TI SI PLAVI, NIJE TVOJ POTEZ!");
@@ -67,19 +67,19 @@ public class Dice : MonoBehaviour
             randomDiceSide = Random.Range(0, 6);
             rend.sprite = diceSides[randomDiceSide];
             yield return new WaitForSeconds(0.05f);
-            
+
         }
-        randomDiceSide1 = Random.Range(0, 6);
+        randomDiceSide1 = Random.Range(5, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if((randomDiceSide1 + 1)!=6 && boardC.outBlue == 0)
         {
             click = true;
-            boardC.blueTurn = false;
-            boardC.yellowTurn = true;
-            nextDc.click = false;
+            
+           
         }
 
-
     }
+
+   
 }

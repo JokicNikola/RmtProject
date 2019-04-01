@@ -24,18 +24,18 @@ public class PawnBlue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6");
+        dice = GameObject.Find("Blue Dice");
         dc = dice.GetComponent<Dice>();
 
-        nextDice = GameObject.Find("Side6 (1)");
+        nextDice = GameObject.Find("Yellow Dice");
         nextDc = nextDice.GetComponent<DiceYellow>();
 
         position = GetComponent<Position>();
         position.index = index;
         position.koraci = index;
 
-        board = GameObject.Find("board");
-        boardC = board.GetComponent<Controller>();
+
+        boardC = GameObject.Find("board").GetComponent<Controller>();
 
     }
 
@@ -58,8 +58,11 @@ public class PawnBlue : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (dc.click && boardC.blueTurn)
+        if (dc.click && boardC.isMyMove)
+        {
             StartCoroutine("Move");
+            
+        }
         else Debug.Log("Nije bacena");
         Debug.Log(position.index);
     }
@@ -75,6 +78,7 @@ public class PawnBlue : MonoBehaviour
             position._out = true;
             boardC.outBlue++;
             dc.click = false;
+            boardC.client.Send("$" + this.name + "|out");
         }
         else
         {
@@ -82,7 +86,8 @@ public class PawnBlue : MonoBehaviour
             
             if ((position.koraci + randomDiceSide1 + 1) < 76 && position._out)
             {
-                position.index = position.koraci + randomDiceSide1 + 1;
+               // position.index = position.koraci + randomDiceSide1 + 1;
+                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
 
 
                 for (int i = 0; i < randomDiceSide1 + 1; i++)
@@ -99,8 +104,9 @@ public class PawnBlue : MonoBehaviour
                         position.index = 69;
                     }
                     position.koraci++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                   yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
+                
 
                 if(position.koraci == 75)
                 {
@@ -114,17 +120,21 @@ public class PawnBlue : MonoBehaviour
 
                 }else {
 
-                    nextDc.click = false;
-                    boardC.blueTurn = false;
-                    boardC.yellowTurn = true;
+                    dc.click = false;
+                    boardC.client.Send("Played");
+                    boardC.client.isMyMove = false;
+                    boardC.isMyMove = false;
+
                 }
                
             }
             else
             {
-                nextDc.click = false;
-                boardC.blueTurn = false;
-                boardC.yellowTurn = true;
+                dc.click = false;
+                boardC.client.Send("Played");
+                boardC.client.isMyMove = false;
+                boardC.isMyMove = false;
+
                 //dc.rend.sprite = dc.diceSides[5];
             }
         }
@@ -135,7 +145,7 @@ public class PawnBlue : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (boardC.blueTurn && position.index==collision.GetComponent<Position>().index && collision.gameObject.tag != "BLUE")
+        if (boardC.isMyMove && position.index==collision.GetComponent<Position>().index && collision.gameObject.tag != "BLUE")
         {
 
             UnityEngine.Debug.Log("Trigerovao se! plavi");

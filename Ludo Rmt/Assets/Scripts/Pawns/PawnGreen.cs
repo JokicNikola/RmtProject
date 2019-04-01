@@ -7,7 +7,7 @@ public class PawnGreen : MonoBehaviour
     private GameObject dice;
     private GameObject nextDice;
     private GameObject check;
-    private GameObject board;
+    
 
     private DiceGreen dc;
     private DiceRed nextDc;
@@ -23,14 +23,13 @@ public class PawnGreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6 (2)");
-        nextDice = GameObject.Find("Side6 (3)");
+        dice = GameObject.Find("Green Dice");
+        nextDice = GameObject.Find("Red Dice");
 
         dc = dice.GetComponent<DiceGreen>();
         nextDc = nextDice.GetComponent<DiceRed>();
 
-        board = GameObject.Find("board");
-        boardC = board.GetComponent<Controller>();
+        boardC = GameObject.Find("board").GetComponent<Controller>();
 
         position = GetComponent<Position>();
         position.index = index;
@@ -52,12 +51,15 @@ public class PawnGreen : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (dc.click && boardC.greenTurn)
+        if (dc.click && boardC.isMyMove)
+        {
             StartCoroutine("Move");
+            
+        }
         else Debug.Log("Nije bacena");
     }
 
-    private IEnumerator Move()
+    private void Move()
     {
        
         randomDiceSide1 = dc.randomDiceSide1;
@@ -68,6 +70,7 @@ public class PawnGreen : MonoBehaviour
             position._out = true;
             boardC.outGreen++;
             dc.click = false;
+            boardC.client.Send("$" + this.name + "|out");
         }
         else
         {
@@ -75,8 +78,9 @@ public class PawnGreen : MonoBehaviour
             if ((position.koraci + randomDiceSide1 + 1) < 86 && position._out)
             {
                 position.index = position.koraci + randomDiceSide1 + 1;
+                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
 
-                for (int i = 0; i < randomDiceSide1 + 1; i++)
+              /*  for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
                     if (position.koraci == 52)
@@ -92,7 +96,7 @@ public class PawnGreen : MonoBehaviour
                     position.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-
+                */
                 if (position.koraci == 85)
                 {
                     boardC.outGreen--;
@@ -106,15 +110,19 @@ public class PawnGreen : MonoBehaviour
                 }
                 else
                 {
-                    nextDc.click = false;
-                    boardC.greenTurn = false;
-                    boardC.redTurn = true;
+                    dc.click = false;
+                    boardC.client.Send("Played");
+                    boardC.client.isMyMove = false;
+                    boardC.isMyMove = false;
+
                 }
             }else
             {
-                nextDc.click = false;
-                boardC.greenTurn = false;
-                boardC.redTurn = true;
+                dc.click = false;
+                boardC.client.Send("Played");
+                boardC.client.isMyMove = false;
+                boardC.isMyMove = false;
+
             }
         }
         //dc.rend.sprite = dc.diceSides[5];
@@ -123,7 +131,7 @@ public class PawnGreen : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.greenTurn && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "GREEN")
+        if (boardC.isMyMove && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "GREEN")
         {
             UnityEngine.Debug.Log("Trigerovao se! zeleni");
 

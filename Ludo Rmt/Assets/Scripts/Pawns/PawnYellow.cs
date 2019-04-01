@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PawnYellow : MonoBehaviour
 {
-    private GameObject dice;
-    private GameObject nextDice;
+    
+    
     private GameObject check;
-    private GameObject board;
-
+   
     private DiceYellow dc;
     private DiceGreen nextDc;
 
@@ -27,14 +26,11 @@ public class PawnYellow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        dice = GameObject.Find("Side6 (1)");
-        nextDice = GameObject.Find("Side6 (2)");
 
-        dc = dice.GetComponent<DiceYellow>();
-        nextDc = nextDice.GetComponent<DiceGreen>();
-
-        board = GameObject.Find("board");
-        boardC = board.GetComponent<Controller>();
+        dc = GameObject.Find("Yellow Dice").GetComponent<DiceYellow>();
+        nextDc = GameObject.Find("Green Dice").GetComponent<DiceGreen>();
+    
+        boardC = GameObject.Find("board").GetComponent<Controller>();
 
         position = GetComponent<Position>();
         position.index = index;
@@ -44,7 +40,6 @@ public class PawnYellow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
 
         if (position._out)
         {
@@ -58,25 +53,27 @@ public class PawnYellow : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (dc.click && boardC.yellowTurn)
+        if (dc.click && boardC.isMyMove)
+        {
             StartCoroutine("Move");
+            
+        }
         else Debug.Log("Nije bacena");
         Debug.Log(position.index);
     }
 
-    private IEnumerator Move()
+    private void Move()
     {
-       
-      
+  
         randomDiceSide1 = dc.randomDiceSide1;
-        
-        
+      
         if (!position._out && (randomDiceSide1 + 1) == 6)
         {
 
             position._out = true;
             boardC.outYellow++;
             dc.click = false;
+            boardC.client.Send("$" + this.name + "|out");
         }
         else
         {
@@ -84,8 +81,9 @@ public class PawnYellow : MonoBehaviour
             if ((position.koraci + randomDiceSide1 + 1) < 96 && position._out)
             {
                 position.index = position.koraci + randomDiceSide1 + 1;
+                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
 
-                for (int i = 0; i < randomDiceSide1 + 1; i++)
+               /* for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
                     if (position.koraci == 52)
@@ -101,6 +99,7 @@ public class PawnYellow : MonoBehaviour
                     position.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
+                */
                 if (position.koraci == 95)
                 {
                     boardC.outYellow--;
@@ -114,17 +113,23 @@ public class PawnYellow : MonoBehaviour
                 }
                 else
                 {
-                    nextDc.click = false;
-                    boardC.yellowTurn = false;
-                    boardC.greenTurn = true;
+                   
+                    dc.click = false;
+                    boardC.client.Send("Played");
+                    boardC.client.isMyMove = false;
+                    boardC.isMyMove = false;
+
                 }
 
             }
             else
             {
-                nextDc.click = false;
-                boardC.yellowTurn = false;
-                boardC.greenTurn = true;
+                
+                dc.click = false;
+                boardC.client.Send("Played");
+                boardC.client.isMyMove = false;
+                boardC.isMyMove = false;
+
                 //dc.rend.sprite = dc.diceSides[5];
             }
         }
@@ -134,7 +139,7 @@ public class PawnYellow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (boardC.yellowTurn && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "YELLOW")
+        if (boardC.isMyMove && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "YELLOW")
         {
             UnityEngine.Debug.Log("Trigerovao se! zuti");
 

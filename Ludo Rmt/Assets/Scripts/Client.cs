@@ -2,15 +2,27 @@
 using System.Net.Sockets;
 using System.IO;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Client : MonoBehaviour
 {
     public bool socketReady;
-    private TcpClient socket;
+    private String clientName;
+    public String clientColor;
+    public bool isMyMove;
+    public String readData;
 
-    private NetworkStream stream;
-    private StreamWriter writer;
-    private StreamReader reader;
+    private TcpClient socket;
+    public NetworkStream stream;
+    public StreamWriter writer;
+    public StreamReader reader;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+        isMyMove = false;
+        readData = "";
+    }
 
     public bool ConnectToServer(string host, int port)
     {
@@ -37,7 +49,7 @@ public class Client : MonoBehaviour
         return socketReady;
     }
 
-    private void Update()
+    public void Update()
     {
         if (socketReady)
         {
@@ -47,11 +59,14 @@ public class Client : MonoBehaviour
                
                 if (data != null)
                 {
+                    Debug.Log(data);
                     OnIncomingData(data);
                 }
+                
             }
         }
     }
+    
 
     public void Send(string data)
     {
@@ -65,10 +80,37 @@ public class Client : MonoBehaviour
         
         writer.Flush();
     }
-    private void OnIncomingData(string data)
+    public void OnIncomingData(string data)
     {
-        UnityEngine.Debug.Log(data);
+      // Debug.Log(data);
+       // Send("Radi li?");
+        if (data.Equals("Start"))
+           changeScene(data);
 
+        if (data.StartsWith("#"))
+            nameSet(data.Substring(1));
+
+        if (data.Equals("Play"))
+        {
+            isMyMove = true;
+            return;
+        }
+
+        readData = data;
+        
+
+    }
+
+    public void nameSet(string data)
+    {
+        clientColor = data;
+        return;
+    }
+
+    public void changeScene(string data)
+    {
+        SceneManager.LoadScene("game");
+        return;
     }
 
     private void OnApplicationQuit()

@@ -8,7 +8,7 @@ public class Pawn : MonoBehaviour
     private GameObject dice;
     private GameObject nextDice;
     private GameObject check;
-    private GameObject board;
+   
 
 
     private DiceRed dc;
@@ -17,25 +17,26 @@ public class Pawn : MonoBehaviour
     private Controller boardC;
 
     int randomDiceSide1=0;
-    int index = 2;
+    private int index = 2;
 
     public Position position;
 
     // Start is called before the first frame update
     void Start()
     {
-        dice = GameObject.Find("Side6 (3)");
-        nextDice = GameObject.Find("Side6");
+        //dice = GameObject.Find("Red Dice");
+        nextDice = GameObject.Find("Blue Dice");
 
-        dc = dice.GetComponent<DiceRed>();
+        dc = GameObject.Find("Red Dice").GetComponent<DiceRed>();
         nextDc = nextDice.GetComponent<Dice>();
 
-        board = GameObject.Find("board");
-        boardC = board.GetComponent<Controller>();
+        boardC = GameObject.Find("board").GetComponent<Controller>();
 
         position = GetComponent<Position>();
         position.index = index;
         position.koraci = index;
+        
+        
     }
 
     // Update is called once per frame
@@ -51,12 +52,15 @@ public class Pawn : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(dc.click && boardC.redTurn)
+        if (dc.click && boardC.isMyMove)
+        {
             StartCoroutine("Move");
+            
+        }
         else Debug.Log("Nije bacena");
     }
 
-    private IEnumerator Move()
+    private void Move()
     {
         
         randomDiceSide1 = dc.randomDiceSide1;
@@ -66,6 +70,7 @@ public class Pawn : MonoBehaviour
             position._out = true;
             boardC.outRed++;
             dc.click = false;
+            boardC.client.Send("$" + this.name + "|out");
         }
         else
         {
@@ -73,18 +78,13 @@ public class Pawn : MonoBehaviour
             if ((position.koraci + randomDiceSide1 + 1) < 59 && position._out)
             {
                 position.index = position.koraci + randomDiceSide1 + 1;
-                
-                for (int i = 0; i < randomDiceSide1 + 1; i++)
-                {
-                    position.koraci++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
+                boardC.client.Send("$" + this.name + "|"+ (randomDiceSide1+1));
 
-                if (position.koraci == 58)
-                {
-                    boardC.outRed--;
-                    boardC.endRed++;
-                }
+                //for (int i = 0; i < randomDiceSide1 + 1; i++)
+               // {
+                //    position.koraci++;
+               //     yield return new WaitForSeconds(12f * Time.deltaTime);
+               // }
 
                 if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {
@@ -93,15 +93,19 @@ public class Pawn : MonoBehaviour
                 }
                 else
                 {
-                    nextDc.click = false;
-                    boardC.redTurn = false;
-                    boardC.blueTurn = true;
+                    dc.click = false;
+                    boardC.client.Send("Played");
+                    boardC.client.isMyMove = false;
+                    boardC.isMyMove = false;
+
                 }
             }else
             {
-                nextDc.click = false;
-                boardC.redTurn = false;
-                boardC.blueTurn = true;
+                dc.click = false;
+                boardC.client.Send("Played");
+                boardC.client.isMyMove = false;
+                boardC.isMyMove = false;
+
             }
         }
         //dc.rend.sprite = dc.diceSides[5];
@@ -110,7 +114,7 @@ public class Pawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.redTurn && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "RED")
+        if (boardC.isMyMove && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "RED")
         {
             UnityEngine.Debug.Log("Trigerovao se! crveni");
 

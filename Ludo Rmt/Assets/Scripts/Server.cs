@@ -5,13 +5,17 @@ using System.Net.Sockets;
 using System.Net;
 using System;
 using System.IO;
+using System.Linq;
 
 public class Server : MonoBehaviour
 {
     public int port = 6321;
+    
 
-    private List<ServerClient> clients;
+    private List<ServerClient> clientsList;
     private List<ServerClient> disconnectList;
+
+    int move;
 
     private TcpListener server;
     private bool serverStarted;
@@ -19,8 +23,9 @@ public class Server : MonoBehaviour
     public void Init()
     {
         DontDestroyOnLoad(gameObject);
-        clients = new List<ServerClient>();
+        clientsList = new List<ServerClient>();
         disconnectList = new List<ServerClient>();
+        move = 0;
 
         try
         {
@@ -43,10 +48,11 @@ public class Server : MonoBehaviour
         {
             return;
         }
+    
 
-        foreach(ServerClient c in clients)
+        foreach(ServerClient c in clientsList)
         {
-           
+
             if (!IsConnected(c.tcp))
             {
                 c.tcp.Close();
@@ -58,29 +64,31 @@ public class Server : MonoBehaviour
             {
                 NetworkStream s = c.tcp.GetStream();
  
-
                 if (s.DataAvailable)
                 {
-                    StreamReader reader = new StreamReader(s);
+                    StreamReader reader = new StreamReader(s, true);
                     string data = reader.ReadLine();
                     
-
-
-
+                    
                     if (data != null)
                     {
-
+                        Debug.Log(data);
                         OnIncomingData(c, data);
                         
                     }
+                   
+                    
                 }
+
             }
         }
 
-        for(int i=0; i < disconnectList.Count - 1; i++)
+        for(int i=0; i < disconnectList.Count; i++)
         {
-            clients.Remove(disconnectList[i]);
+            clientsList.Remove(disconnectList[i]);
+            Debug.Log("izbacio sam" + disconnectList.ElementAt(i).color);
             disconnectList.RemoveAt(i);
+            
         }
     }
     private void StartListening()
@@ -96,27 +104,37 @@ public class Server : MonoBehaviour
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ar));
         Debug.Log("Primio konekciju");
 
-        if (clients.Count < 3)
+        switch (clientsList.Count)
         {
-            if (clients.Count == 0)
-            {
-                colorSet("Blue", sc);
-            }
-            if (clients.Count == 1)
-            {
-                colorSet("Green", sc);
-            }
-            if (clients.Count == 2)
-            {
-                colorSet("Yellow", sc);
-            }
-            clients.Add(sc);
-            StartListening();
+            case 0:
+                sc.color = "Red";
+                Send("#Red", sc);
+                break;
+            case 1:
+                sc.color = "Blue";
+                Send("#Blue", sc);
+                break;
+            case 2:
+                sc.color = "Yellow";
+                Send("#Yellow", sc);
+                break;
+            case 3:
+                sc.color = "Green";
+                Send("#Green", sc);
+                break;
         }
 
-        //StartListening();  
+        clientsList.Add(sc);
 
-       // UnityEngine.Debug.Log("Somebody has connected!");
+        if (clientsList.Count == 2)
+        {
+            System.Threading.Thread.Sleep(1000);
+            BroadCast("Start", clientsList);
+        }else
+            StartListening();
+
+ 
+       
     }
     private bool IsConnected(TcpClient c)
     {
@@ -124,8 +142,10 @@ public class Server : MonoBehaviour
         {
             if(c!=null && c.Client!=null && c.Client.Connected)
             {
-                if (c.Client.Poll(0, SelectMode.SelectRead))
+
+                if (c.Client.Poll(0, SelectMode.SelectRead)){
                     return !(c.Client.Receive(new byte[1], SocketFlags.Peek) == 0);
+                }
 
                 return true;
             }
@@ -142,21 +162,31 @@ public class Server : MonoBehaviour
 
     private void OnIncomingData(ServerClient c, string data)
     {
-        UnityEngine.Debug.Log(c.clientName + " : " + data);     
-    }
+        if (data.Equals("Played"))
+        {
+            Debug.Log("Treba da posalje " + (++move % 4));
+            Send("Play", clientsList.ElementAt(move%4));
+        }
 
-    private void BroadCast(string data, List<ServerClient> sc)
-    {
-        foreach(ServerClient s in sc)
+        if (data.StartsWith("$"))
         {
 
-            
+            BroadCast(data, clientsList);
 
+        }
+    }
+
+    private void BroadCast(string data, List<ServerClient> scl)
+    {
+        
+        foreach (ServerClient sc in scl)
+        {
+            
             try {
-                StreamWriter wr = new StreamWriter(s.tcp.GetStream());
+                StreamWriter wr = new StreamWriter(sc.tcp.GetStream());
                 wr.WriteLine(data);
                 wr.Flush();
-
+                
             }
             catch (Exception e)
             {
@@ -165,12 +195,13 @@ public class Server : MonoBehaviour
         }
     }
 
-    private void colorSet(string data, ServerClient sc)
+    private void Send(string data, ServerClient sc)
     {
         StreamWriter wr = new StreamWriter(sc.tcp.GetStream());
         wr.WriteLine(data);
         wr.Flush();
-        Debug.Log("Poslato");
+       
+        //Debug.Log("Poslato");
     }
 
 
@@ -178,7 +209,7 @@ public class Server : MonoBehaviour
 
 public class ServerClient
 {
-    public string clientName="J";
+    public string clientName;
     public TcpClient tcp;
     public string color;
 

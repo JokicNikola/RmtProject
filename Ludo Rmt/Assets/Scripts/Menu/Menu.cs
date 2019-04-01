@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public GameObject serverPrefab;
     public Server s;
     public Client c;
+    int port = 6321;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,10 @@ public class Menu : MonoBehaviour
 
         s = Instantiate(serverPrefab).GetComponent<Server>();
         s.Init();
+        if (c == null)
+           c = Instantiate(clientPrefab).GetComponent<Client>();
+
+        c.ConnectToServer("127.0.0.1", port);
     }
 
     public void BackBtn()
@@ -45,7 +50,10 @@ public class Menu : MonoBehaviour
         connect.SetActive(false);
         host.SetActive(false);
         menu.SetActive(true);
+        
     }
+
+   
 
     public void connectBtn()
     {
@@ -55,7 +63,10 @@ public class Menu : MonoBehaviour
             if (c==null)
             {
                 c = Instantiate(clientPrefab).GetComponent<Client>();
+                
             }
+
+            
 
             if (c.ConnectToServer("127.0.0.1", 6321))
             {
