@@ -126,9 +126,9 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 2)
+        if (clientsList.Count == 4)
         {
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(500);
             BroadCast("Start", clientsList);
         }else
             StartListening();
