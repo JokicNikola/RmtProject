@@ -41,9 +41,6 @@ public class Controller : MonoBehaviour
         client = FindObjectOfType<Client>();
         //client.Send(client.clientColor+" ovo je iz table!!!");
 
-        
-
-
         switch (client.clientColor)
         {
 
@@ -92,14 +89,72 @@ public class Controller : MonoBehaviour
    
     }
 
-    IEnumerator jkj(string s)
+    IEnumerator jkj(string s, string tag)
     {
         Debug.Log("usao");
-        for (int i = 0; i < int.Parse(s); i++)
+
+        switch (tag)
         {
-            pawn.koraci++;
-            yield return new WaitForSeconds(12f * Time.deltaTime);
+            case "BLUE":
+                
+                    for (int i = 0; i < int.Parse(s); i++)
+                    {
+                        if (pawn.koraci == 52)
+                        {
+                            pawn.koraci = 0;
+                        }
+                        if (pawn.koraci == 13)
+                        {
+                            pawn.koraci = 69;
+                        }
+                        pawn.koraci++;
+                        yield return new WaitForSeconds(12f * Time.deltaTime);
+                    }
+                break;
+            case "RED":
+                for (int i = 0; i < int.Parse(s); i++)
+                {
+                    
+                    pawn.koraci++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                }
+                break;
+            case "YELLOW":
+                for (int i = 0; i < int.Parse(s); i++)
+                {
+                    if (pawn.koraci == 52)
+                    {
+                        pawn.koraci = 0;
+                    }
+                    if (pawn.koraci ==26)
+                    {
+                        pawn.koraci = 89;
+                    }
+                    pawn.koraci++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                }
+                break;
+            case "GREEN":
+                for (int i = 0; i < int.Parse(s); i++)
+                {
+                    if (pawn.koraci == 52)
+                    {
+                        pawn.koraci = 0;
+                    }
+                    if (pawn.koraci == 39)
+                    {
+                        pawn.koraci = 79;
+                    }
+                    pawn.koraci++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                }
+                break;
+            default: break;
+
+
         }
+
+        
     }
 
     
@@ -115,20 +170,19 @@ public class Controller : MonoBehaviour
         if(client.readData.StartsWith("$"))
         {
             string readData = client.readData.Substring(1);
-            Debug.Log(readData);
             string[] split =readData.Split('|');
-            Debug.Log(split[0]);
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
-            Debug.Log(pawn.koraci);
+            Debug.Log(pawn.tag);
+
 
             if (pawn != null)
             {
-                Debug.Log(pawn.koraci);
+               
                 if (split[1].Equals("out"))
                     pawn._out = true;
                 else
                 {
-                    StartCoroutine(jkj(split[1]));
+                    StartCoroutine(jkj(split[1], pawn.tag));
                     
 
                     // pawn.index = int.Parse(split[1]);

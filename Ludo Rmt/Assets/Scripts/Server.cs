@@ -164,8 +164,8 @@ public class Server : MonoBehaviour
     {
         if (data.Equals("Played"))
         {
-            Debug.Log("Treba da posalje " + (++move % 4));
-            Send("Play", clientsList.ElementAt(move%4));
+            //Debug.Log("Treba da posalje " + (++move % 4));
+            Send("Play", clientsList.ElementAt(++move%4));
         }
 
         if (data.StartsWith("$"))

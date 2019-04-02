@@ -67,7 +67,7 @@ public class PawnBlue : MonoBehaviour
         Debug.Log(position.index);
     }
 
-    private IEnumerator Move()
+    private void Move()
     {
        
         randomDiceSide1 = dc.randomDiceSide1;
@@ -88,9 +88,10 @@ public class PawnBlue : MonoBehaviour
             {
                // position.index = position.koraci + randomDiceSide1 + 1;
                 boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
+                Debug.Log(position.koraci);
 
 
-                for (int i = 0; i < randomDiceSide1 + 1; i++)
+               /* for (int i = 0; i < randomDiceSide1 + 1; i++)
                 {
                     
                     if (position.koraci == 52)
@@ -106,6 +107,7 @@ public class PawnBlue : MonoBehaviour
                     position.koraci++;
                    yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
+                */
                 
 
                 if(position.koraci == 75)
