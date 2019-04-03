@@ -70,8 +70,10 @@ public class DiceGreen : MonoBehaviour
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
         {
-            click = true;
+            click = false;
             boardC.client.Send("Played");
+            boardC.client.isMyMove = false;
+            boardC.isMyMove = false;
 
         }
     }
