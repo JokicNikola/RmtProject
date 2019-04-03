@@ -29,6 +29,8 @@ public class Controller : MonoBehaviour
     public int outGreen;
     private int rand;
 
+    public int napolju;
+
     public Client client;
 
 
@@ -86,7 +88,8 @@ public class Controller : MonoBehaviour
         outYellow = 0;
         outRed = 0;
         outGreen = 0;
-   
+
+        napolju = 0;
     }
 
     IEnumerator jkj(string s, string tag)

@@ -69,14 +69,14 @@ public class Dice : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
-        randomDiceSide1 = Random.Range(5, 6);
+        randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
-        if((randomDiceSide1 + 1)!=6 && boardC.outBlue == 0)
+        if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
         {
             click = true;
-            
-           
+            boardC.client.Send("Played");
+
         }
 
     }

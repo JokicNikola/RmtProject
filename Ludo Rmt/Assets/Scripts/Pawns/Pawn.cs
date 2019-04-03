@@ -69,6 +69,7 @@ public class Pawn : MonoBehaviour
         {
             position._out = true;
             boardC.outRed++;
+            boardC.napolju++;
             dc.click = false;
             boardC.client.Send("$" + this.name + "|out");
         }

@@ -68,10 +68,10 @@ public class DiceRed : MonoBehaviour
         randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
-        if ((randomDiceSide1 + 1) != 6 && boardC.outRed == 0)
+        if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
         {
             click = true;
-           
+            boardC.client.Send("Played");
            
         }
     }
