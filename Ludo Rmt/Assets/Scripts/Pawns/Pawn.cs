@@ -80,12 +80,12 @@ public class Pawn : MonoBehaviour
             {
                 position.index = position.koraci + randomDiceSide1 + 1;
                 boardC.client.Send("$" + this.name + "|"+ (randomDiceSide1+1));
-
+                dc.click = false;
                 //for (int i = 0; i < randomDiceSide1 + 1; i++)
-               // {
+                // {
                 //    position.koraci++;
-               //     yield return new WaitForSeconds(12f * Time.deltaTime);
-               // }
+                //     yield return new WaitForSeconds(12f * Time.deltaTime);
+                // }
 
                 if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {

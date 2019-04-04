@@ -83,24 +83,24 @@ public class PawnYellow : MonoBehaviour
             {
                 position.index = position.koraci + randomDiceSide1 + 1;
                 boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
+                dc.click = false;
+                /* for (int i = 0; i < randomDiceSide1 + 1; i++)
+                 {
 
-               /* for (int i = 0; i < randomDiceSide1 + 1; i++)
-                {
-                    
-                    if (position.koraci == 52)
-                    {
-                        position.koraci = 0;
-                        position.index = 0;
-                    }
-                    if (position.koraci == 26)
-                    {
-                        position.koraci = 89;
-                        position.index = 89;
-                    }
-                    position.koraci++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
-                */
+                     if (position.koraci == 52)
+                     {
+                         position.koraci = 0;
+                         position.index = 0;
+                     }
+                     if (position.koraci == 26)
+                     {
+                         position.koraci = 89;
+                         position.index = 89;
+                     }
+                     position.koraci++;
+                     yield return new WaitForSeconds(12f * Time.deltaTime);
+                 }
+                 */
                 if (position.koraci == 95)
                 {
                     boardC.outYellow--;

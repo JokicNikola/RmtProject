@@ -22,6 +22,8 @@ public class Controller : MonoBehaviour
     public int endYellow;
     public int endRed;
 
+    private GameObject board;
+    private Controller boardC;
 
     public int outBlue;
     public int outYellow;
@@ -41,6 +43,7 @@ public class Controller : MonoBehaviour
         isMyMove = false;
         readData = "";
         client = FindObjectOfType<Client>();
+        boardC = GameObject.Find("board").GetComponent<Controller>();
         //client.Send(client.clientColor+" ovo je iz table!!!");
 
         switch (client.clientColor)
@@ -187,6 +190,11 @@ public class Controller : MonoBehaviour
                 {
                     StartCoroutine(jkj(split[1], pawn.tag));
                     
+                    if(int.Parse(split[1]) != 6)
+                    {
+                        boardC.client.Send("Played");
+                        isMyMove = false;
+                    }
 
                     // pawn.index = int.Parse(split[1]);
                     /*   for(int i=0;i< int.Parse(split[1]); i++)

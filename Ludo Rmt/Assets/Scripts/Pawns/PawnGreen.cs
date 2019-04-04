@@ -80,24 +80,24 @@ public class PawnGreen : MonoBehaviour
             {
                 position.index = position.koraci + randomDiceSide1 + 1;
                 boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
+                dc.click = false;
+                /*  for (int i = 0; i < randomDiceSide1 + 1; i++)
+                  {
 
-              /*  for (int i = 0; i < randomDiceSide1 + 1; i++)
-                {
-                    
-                    if (position.koraci == 52)
-                    {
-                        position.koraci = 0;
-                        position.index = 0;
-                    }
-                    if (position.koraci == 39)
-                    {
-                        position.koraci = 79;
-                        position.index = 79;
-                    }
-                    position.koraci++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
-                */
+                      if (position.koraci == 52)
+                      {
+                          position.koraci = 0;
+                          position.index = 0;
+                      }
+                      if (position.koraci == 39)
+                      {
+                          position.koraci = 79;
+                          position.index = 79;
+                      }
+                      position.koraci++;
+                      yield return new WaitForSeconds(12f * Time.deltaTime);
+                  }
+                  */
                 if (position.koraci == 85)
                 {
                     boardC.outGreen--;

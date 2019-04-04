@@ -12,6 +12,15 @@ public class DiceRed : MonoBehaviour
     public int randomDiceSide1 = 0;
     public bool click;
 
+    private GameObject myPawn1;
+    private Pawn pawn1;
+    private GameObject myPawn2;
+    private Pawn pawn2;
+    private GameObject myPawn3;
+    private Pawn pawn3;
+    private GameObject myPawn4;
+    private Pawn pawn4;
+
     private Controller boardC;
 
     private Dice nextDc;
@@ -23,6 +32,15 @@ public class DiceRed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myPawn1 = GameObject.Find("pawn");
+        pawn1 = myPawn1.GetComponent<Pawn>();
+        myPawn2 = GameObject.Find("pawn (1)");
+        pawn2 = myPawn1.GetComponent<Pawn>();
+        myPawn3 = GameObject.Find("pawn (2)");
+        pawn3 = myPawn1.GetComponent<Pawn>();
+        myPawn4 = GameObject.Find("pawn (3)");
+        pawn4 = myPawn1.GetComponent<Pawn>();
+
         click = false;
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
@@ -65,7 +83,7 @@ public class DiceRed : MonoBehaviour
 
       
 
-        randomDiceSide1 = Random.Range(0, 6);
+        randomDiceSide1 = Random.Range(0, 5);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
@@ -75,6 +93,22 @@ public class DiceRed : MonoBehaviour
             boardC.client.isMyMove = false;
             boardC.isMyMove = false;
 
+        }
+        if (randomDiceSide1 + 1 + pawn1.position.koraci > 75)
+        {
+            if (randomDiceSide1 + 1 + pawn2.position.koraci > 75)
+            {
+                if (randomDiceSide1 + 1 + pawn3.position.koraci > 75)
+                {
+                    if (randomDiceSide1 + 1 + pawn4.position.koraci > 75)
+                    {
+                        click = false;
+                        boardC.client.Send("Played");
+                        boardC.client.isMyMove = false;
+                        boardC.isMyMove = false;
+                    }
+                }
+            }
         }
     }
 

@@ -12,6 +12,15 @@ public class DiceGreen : MonoBehaviour
     public int randomDiceSide1 = 0;
     public bool click;
 
+    private GameObject myPawn1;
+    private PawnGreen pawn1;
+    private GameObject myPawn2;
+    private PawnGreen pawn2;
+    private GameObject myPawn3;
+    private PawnGreen pawn3;
+    private GameObject myPawn4;
+    private PawnGreen pawn4;
+
     private GameObject board;
     private Controller boardC;
 
@@ -24,6 +33,14 @@ public class DiceGreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        myPawn1 = GameObject.Find("pawn (8)");
+        pawn1 = myPawn1.GetComponent<PawnGreen>();
+        myPawn2 = GameObject.Find("pawn (13)");
+        pawn2 = myPawn1.GetComponent<PawnGreen>();
+        myPawn3 = GameObject.Find("pawn (14)");
+        pawn3 = myPawn1.GetComponent<PawnGreen>();
+        myPawn4 = GameObject.Find("pawn (15)");
+        pawn4 = myPawn1.GetComponent<PawnGreen>();
         //click = true;
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
@@ -75,6 +92,22 @@ public class DiceGreen : MonoBehaviour
             boardC.client.isMyMove = false;
             boardC.isMyMove = false;
 
+        }
+        if (randomDiceSide1 + 1 + pawn1.position.koraci > 75)
+        {
+            if (randomDiceSide1 + 1 + pawn2.position.koraci > 75)
+            {
+                if (randomDiceSide1 + 1 + pawn3.position.koraci > 75)
+                {
+                    if (randomDiceSide1 + 1 + pawn4.position.koraci > 75)
+                    {
+                        click = false;
+                        boardC.client.Send("Played");
+                        boardC.client.isMyMove = false;
+                        boardC.isMyMove = false;
+                    }
+                }
+            }
         }
     }
 

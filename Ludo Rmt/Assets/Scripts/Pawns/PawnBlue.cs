@@ -16,7 +16,7 @@ public class PawnBlue : MonoBehaviour
     
     private Controller boardC;
 
-    int randomDiceSide1 = 0;
+    int randomDiceSide1 = -1;
     int index = 15;
     
     
@@ -90,28 +90,28 @@ public class PawnBlue : MonoBehaviour
                // position.index = position.koraci + randomDiceSide1 + 1;
                 boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
                 Debug.Log(position.koraci);
+                dc.click = false;
+
+                /* for (int i = 0; i < randomDiceSide1 + 1; i++)
+                 {
+
+                     if (position.koraci == 52)
+                     {
+                         position.koraci = 0;
+                         position.index = 0;
+                     }
+                     if (position.koraci == 13)
+                     {
+                         position.koraci = 69;
+                         position.index = 69;
+                     }
+                     position.koraci++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
+                 }
+                 */
 
 
-               /* for (int i = 0; i < randomDiceSide1 + 1; i++)
-                {
-                    
-                    if (position.koraci == 52)
-                    {
-                        position.koraci = 0;
-                        position.index = 0;
-                    }
-                    if (position.koraci == 13)
-                    {
-                        position.koraci = 69;
-                        position.index = 69;
-                    }
-                    position.koraci++;
-                   yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
-                */
-                
-
-                if(position.koraci == 75)
+                if (position.koraci == 75)
                 {
                     boardC.outBlue--;
                     boardC.endBlue++;
@@ -120,8 +120,7 @@ public class PawnBlue : MonoBehaviour
                 if((randomDiceSide1 + 1) == 6 || randomDiceSide1==-1)
                 {
                     dc.click = false;
-
-                }else {
+                } else {
 
                     dc.click = false;
                     boardC.client.Send("Played");
@@ -131,7 +130,7 @@ public class PawnBlue : MonoBehaviour
                 }
                
             }
-            else
+            /*else
             {
                 dc.click = false;
                 boardC.client.Send("Played");
@@ -139,7 +138,7 @@ public class PawnBlue : MonoBehaviour
                 boardC.isMyMove = false;
 
                 //dc.rend.sprite = dc.diceSides[5];
-            }
+            }*/
         }
         //dc.rend.sprite = dc.diceSides[5];
 
