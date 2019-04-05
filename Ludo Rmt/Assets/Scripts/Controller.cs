@@ -22,8 +22,7 @@ public class Controller : MonoBehaviour
     public int endYellow;
     public int endRed;
 
-    private GameObject board;
-    private Controller boardC;
+  
 
     public int outBlue;
     public int outYellow;
@@ -43,7 +42,7 @@ public class Controller : MonoBehaviour
         isMyMove = false;
         readData = "";
         client = FindObjectOfType<Client>();
-        boardC = GameObject.Find("board").GetComponent<Controller>();
+        
         //client.Send(client.clientColor+" ovo je iz table!!!");
 
         switch (client.clientColor)
@@ -192,7 +191,7 @@ public class Controller : MonoBehaviour
                     
                     if(int.Parse(split[1]) != 6)
                     {
-                        boardC.client.Send("Played");
+                        client.Send("Played");
                         isMyMove = false;
                     }
 

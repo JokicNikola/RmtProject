@@ -12,13 +12,13 @@ public class DiceRed : MonoBehaviour
     public int randomDiceSide1 = 0;
     public bool click;
 
-    private GameObject myPawn1;
+
     private Pawn pawn1;
-    private GameObject myPawn2;
+
     private Pawn pawn2;
-    private GameObject myPawn3;
+
     private Pawn pawn3;
-    private GameObject myPawn4;
+
     private Pawn pawn4;
 
     private Controller boardC;
@@ -32,14 +32,11 @@ public class DiceRed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myPawn1 = GameObject.Find("pawn");
-        pawn1 = myPawn1.GetComponent<Pawn>();
-        myPawn2 = GameObject.Find("pawn (1)");
-        pawn2 = myPawn1.GetComponent<Pawn>();
-        myPawn3 = GameObject.Find("pawn (2)");
-        pawn3 = myPawn1.GetComponent<Pawn>();
-        myPawn4 = GameObject.Find("pawn (3)");
-        pawn4 = myPawn1.GetComponent<Pawn>();
+       
+        pawn1 = GameObject.Find("pawn").GetComponent<Pawn>();
+        pawn2 = GameObject.Find("pawn (1)").GetComponent<Pawn>();
+        pawn3 = GameObject.Find("pawn (2)").GetComponent<Pawn>();
+        pawn4 = GameObject.Find("pawn (3)").GetComponent<Pawn>();
 
         click = false;
         rend = GetComponent<SpriteRenderer>();

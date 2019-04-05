@@ -12,13 +12,10 @@ public class Dice : MonoBehaviour
     public int randomDiceSide1 = 0;
     public bool click;
 
-    private GameObject myPawn1;
+
     private PawnBlue pawn1;
-    private GameObject myPawn2;
     private PawnBlue pawn2;
-    private GameObject myPawn3;
     private PawnBlue pawn3;
-    private GameObject myPawn4;
     private PawnBlue pawn4;
 
 
@@ -36,14 +33,11 @@ public class Dice : MonoBehaviour
 
     private void Start () {
 
-        myPawn1 = GameObject.Find("pawn (4)");
-        pawn1 = myPawn1.GetComponent<PawnBlue>();
-        myPawn2 = GameObject.Find("pawn (5)");
-        pawn2 = myPawn1.GetComponent<PawnBlue>();
-        myPawn3 = GameObject.Find("pawn (6)");
-        pawn3 = myPawn1.GetComponent<PawnBlue>();
-        myPawn4 = GameObject.Find("pawn (7)");
-        pawn4 = myPawn1.GetComponent<PawnBlue>();
+     
+        pawn1 = GameObject.Find("pawn (4)").GetComponent<PawnBlue>();
+        pawn2 = GameObject.Find("pawn (5)").GetComponent<PawnBlue>();
+        pawn3 = GameObject.Find("pawn (6)").GetComponent<PawnBlue>();
+        pawn4 = GameObject.Find("pawn (7)").GetComponent<PawnBlue>();
 
         rend = GetComponent<SpriteRenderer>();
         diceSides = Resources.LoadAll<Sprite>("DiceSides/");
