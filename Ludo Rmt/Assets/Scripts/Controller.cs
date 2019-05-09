@@ -187,6 +187,7 @@ public class Controller : MonoBehaviour
                     pawn._out = true;
                 else
                 {
+                    
                     StartCoroutine(jkj(split[1], pawn.tag));
                     
                     if(int.Parse(split[1]) != 6)

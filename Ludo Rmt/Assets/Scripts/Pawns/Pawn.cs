@@ -106,12 +106,10 @@ public class Pawn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (boardC.isMyMove && position.index == collision.GetComponent<Position>().index && collision.gameObject.tag != "RED")
-        {
-            UnityEngine.Debug.Log("Trigerovao se! crveni");
+        Debug.Log(this.tag + ":" + position.index);
+        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
-
-            collision.transform.position = collision.GetComponent<Position>().onStart;
+        collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
 
             if(collision.gameObject.tag == "BLUE")
@@ -126,7 +124,7 @@ public class Pawn : MonoBehaviour
             {
                 boardC.outYellow--;
             }
-        }
+        
     }
     
 }

@@ -95,7 +95,6 @@ public class PawnBlue : MonoBehaviour
                
                 dc.click = false;
 
-
                 if (position.koraci == 75)
                 {
                     boardC.outBlue--;
@@ -125,11 +124,11 @@ public class PawnBlue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (boardC.isMyMove && position.index==collision.GetComponent<Position>().index && collision.gameObject.tag != "BLUE")
-        {
 
-            UnityEngine.Debug.Log("Trigerovao se! plavi");
+        Debug.Log(this.tag + ":" + position.index);
+        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+
+        UnityEngine.Debug.Log("Trigerovao se! plavi");
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
 
@@ -145,6 +144,6 @@ public class PawnBlue : MonoBehaviour
             {
                 boardC.outYellow--;
             }
-        }
+        
     }
 }
