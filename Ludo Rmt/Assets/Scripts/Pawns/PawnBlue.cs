@@ -16,14 +16,17 @@ public class PawnBlue : MonoBehaviour
     
     private Controller boardC;
 
-    int randomDiceSide1 = -1;
-    int index = 15;
+    private int randomDiceSide1;
+    private int index;
     
     
 
     // Start is called before the first frame update
     void Start()
     {
+        index = 15;
+        randomDiceSide1 = -1;
+
         dice = GameObject.Find("Blue Dice");
         dc = dice.GetComponent<Dice>();
 
@@ -87,28 +90,10 @@ public class PawnBlue : MonoBehaviour
             
             if ((position.koraci + randomDiceSide1 + 1) < 76 && position._out)
             {
-               // position.index = position.koraci + randomDiceSide1 + 1;
+            
                 boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
-                Debug.Log(position.koraci);
+               
                 dc.click = false;
-
-                /* for (int i = 0; i < randomDiceSide1 + 1; i++)
-                 {
-
-                     if (position.koraci == 52)
-                     {
-                         position.koraci = 0;
-                         position.index = 0;
-                     }
-                     if (position.koraci == 13)
-                     {
-                         position.koraci = 69;
-                         position.index = 69;
-                     }
-                     position.koraci++;
-                    yield return new WaitForSeconds(12f * Time.deltaTime);
-                 }
-                 */
 
 
                 if (position.koraci == 75)
@@ -123,6 +108,8 @@ public class PawnBlue : MonoBehaviour
                 } else {
 
                     dc.click = false;
+                    
+                    System.Threading.Thread.Sleep(100);
                     boardC.client.Send("Played");
                     boardC.client.isMyMove = false;
                     boardC.isMyMove = false;
@@ -130,17 +117,9 @@ public class PawnBlue : MonoBehaviour
                 }
                
             }
-            /*else
-            {
-                dc.click = false;
-                boardC.client.Send("Played");
-                boardC.client.isMyMove = false;
-                boardC.isMyMove = false;
-
-                //dc.rend.sprite = dc.diceSides[5];
-            }*/
+            
         }
-        //dc.rend.sprite = dc.diceSides[5];
+        
 
     }
 

@@ -96,7 +96,7 @@ public class Controller : MonoBehaviour
 
     IEnumerator jkj(string s, string tag)
     {
-        Debug.Log("usao");
+        //Debug.Log("usao");
 
         switch (tag)
         {
@@ -177,7 +177,7 @@ public class Controller : MonoBehaviour
             string readData = client.readData.Substring(1);
             string[] split =readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
-            Debug.Log(pawn.tag);
+           // Debug.Log(pawn.tag);
 
 
             if (pawn != null)
@@ -191,8 +191,8 @@ public class Controller : MonoBehaviour
                     
                     if(int.Parse(split[1]) != 6)
                     {
-                        client.Send("Played");
-                        isMyMove = false;
+                        //client.Send("Played");
+                        //isMyMove = false;
                     }
 
                     // pawn.index = int.Parse(split[1]);

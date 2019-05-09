@@ -8,14 +8,13 @@ public class PawnGreen : MonoBehaviour
     private GameObject nextDice;
     private GameObject check;
     
-
     private DiceGreen dc;
     private DiceRed nextDc;
 
     private Controller boardC;
 
-    int randomDiceSide1 = 0;
-    int index = 41;
+    private int randomDiceSide1;
+    private int index;
 
     public Position position;
 
@@ -23,6 +22,9 @@ public class PawnGreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        index = 41;
+        randomDiceSide1 = 0;
+
         dice = GameObject.Find("Green Dice");
         nextDice = GameObject.Find("Red Dice");
 
@@ -81,23 +83,7 @@ public class PawnGreen : MonoBehaviour
                 position.index = position.koraci + randomDiceSide1 + 1;
                 boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
                 dc.click = false;
-                /*  for (int i = 0; i < randomDiceSide1 + 1; i++)
-                  {
-
-                      if (position.koraci == 52)
-                      {
-                          position.koraci = 0;
-                          position.index = 0;
-                      }
-                      if (position.koraci == 39)
-                      {
-                          position.koraci = 79;
-                          position.index = 79;
-                      }
-                      position.koraci++;
-                      yield return new WaitForSeconds(12f * Time.deltaTime);
-                  }
-                  */
+               
                 if (position.koraci == 85)
                 {
                     boardC.outGreen--;
@@ -112,22 +98,15 @@ public class PawnGreen : MonoBehaviour
                 else
                 {
                     dc.click = false;
+                    System.Threading.Thread.Sleep(100);
+                    
                     boardC.client.Send("Played");
                     boardC.client.isMyMove = false;
                     boardC.isMyMove = false;
 
                 }
-            }else
-            {
-                dc.click = false;
-                boardC.client.Send("Played");
-                boardC.client.isMyMove = false;
-                boardC.isMyMove = false;
-
-            }
+            }    
         }
-        //dc.rend.sprite = dc.diceSides[5];
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
