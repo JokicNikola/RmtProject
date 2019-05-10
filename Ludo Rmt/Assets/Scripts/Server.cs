@@ -164,14 +164,47 @@ public class Server : MonoBehaviour
     {
         if (data.Equals("Played"))
         {
-            //Debug.Log("Treba da posalje " + (++move % 4));
-            Send("Play", clientsList.ElementAt(++move%4));
+            switch (++move % 4)
+            {
+                case 0: Send("Play-Red", clientsList.ElementAt(move % 4));
+                    break;
+                case 1: Send("Play-Blue", clientsList.ElementAt(move % 4));
+                    break;
+                case 2: Send("Play-Yellow", clientsList.ElementAt(move % 4));
+                    break;
+                case 3: Send("Play-Green", clientsList.ElementAt(move % 4));
+                    break;
+            }
+           
         }
 
         if (data.StartsWith("$"))
         {
 
-            BroadCast(data, clientsList);
+
+            //BroadCast(data, clientsList);
+
+            if (data.Contains("Played"))
+            {
+                //System.Threading.Thread.Sleep(100);
+                data = data.Substring(0,data.LastIndexOf('|')+1);
+                switch (++move % 4)
+                {
+                    case 0:
+                        BroadCast(data+"Play-Red", clientsList);
+                        break;
+                    case 1:
+                        BroadCast(data+"Play-Blue", clientsList);
+                        break;
+                    case 2:
+                        BroadCast(data+"Play-Yellow", clientsList);
+                        break;
+                    case 3:
+                        BroadCast(data+"Play-Green", clientsList);
+                        break;
+                }
+
+            }else BroadCast(data, clientsList);
 
         }
     }

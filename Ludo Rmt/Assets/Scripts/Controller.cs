@@ -7,9 +7,12 @@ public class Controller : MonoBehaviour
 
 
     public bool isMyMove;
+  
+
     public string readData;
     private Position pawn;
 
+    
 
     private DiceYellow yellow;
     private DiceRed red;
@@ -40,6 +43,7 @@ public class Controller : MonoBehaviour
     {
         rand = Random.Range(0, 4);
         isMyMove = false;
+      
         readData = "";
         client = FindObjectOfType<Client>();
         
@@ -53,11 +57,15 @@ public class Controller : MonoBehaviour
                 collide = GameObject.Find("Red Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 isMyMove = true;
+
+
                 break;
             case "Blue":
                 blue = GameObject.Find("Blue Dice").GetComponent<Dice>();
                 collide = GameObject.Find("Blue Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
+                
+
                 break;
             case "Green":
                 green = GameObject.Find("Green Dice").GetComponent<DiceGreen>();
@@ -94,15 +102,24 @@ public class Controller : MonoBehaviour
         napolju = 0;
     }
 
-    IEnumerator jkj(string s, string tag)
+    IEnumerator move(string s, string tag)
     {
-        //Debug.Log("usao");
+        
+
+        pawn.index += int.Parse(s);
+
+        if (pawn.index + int.Parse(s) > 52)
+            pawn.index = pawn.index - 52;
 
         switch (tag)
         {
+            
+
             case "BLUE":
+
                 
-                    for (int i = 0; i < int.Parse(s); i++)
+
+                for (int i = 0; i < int.Parse(s); i++)
                     {
                         if (pawn.koraci == 52)
                         {
@@ -167,7 +184,7 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (client.isMyMove)
+        if (client.isMyMove) 
             isMyMove = true;
 
         
@@ -175,6 +192,9 @@ public class Controller : MonoBehaviour
         if(client.readData.StartsWith("$"))
         {
             string readData = client.readData.Substring(1);
+            if(readData.Contains("-"))
+                readData = readData.Substring(0, readData.IndexOf('-'));
+           // Debug.Log("Kontroler " + readData);
             string[] split =readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
            // Debug.Log(pawn.tag);
@@ -188,21 +208,9 @@ public class Controller : MonoBehaviour
                 else
                 {
                     
-                    StartCoroutine(jkj(split[1], pawn.tag));
-                    
-                    if(int.Parse(split[1]) != 6)
-                    {
-                        //client.Send("Played");
-                        //isMyMove = false;
-                    }
+                    StartCoroutine(move(split[1], pawn.tag));
 
-                    // pawn.index = int.Parse(split[1]);
-                    /*   for(int i=0;i< int.Parse(split[1]); i++)
-                       {
-                           pawn.koraci++;
-                           new WaitForSeconds(12f * Time.deltaTime);
-                       }
-                       */
+                   
                 }
 
                 client.readData = "";

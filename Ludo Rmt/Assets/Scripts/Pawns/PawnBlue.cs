@@ -91,7 +91,7 @@ public class PawnBlue : MonoBehaviour
             if ((position.koraci + randomDiceSide1 + 1) < 76 && position._out)
             {
             
-                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
+                
                
                 dc.click = false;
 
@@ -103,13 +103,13 @@ public class PawnBlue : MonoBehaviour
 
                 if((randomDiceSide1 + 1) == 6 || randomDiceSide1==-1)
                 {
-                    dc.click = false;
+                 
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1));
                 } else {
 
-                    dc.click = false;
-                    
-                    System.Threading.Thread.Sleep(100);
-                    boardC.client.Send("Played");
+                   
+                                     
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1)+"|Played");
                     boardC.client.isMyMove = false;
                     boardC.isMyMove = false;
 
@@ -125,10 +125,14 @@ public class PawnBlue : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(this.tag + ":" + position.index);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+        if (this.tag != collision.tag && position.index==collision.GetComponent<Position>().index &&  
+            (boardC.client.whosMove.Equals("Blue") || (boardC.client.whosMove.Equals("Yellow") && boardC.client.previousMove.Equals("Blue"))))
+        {
 
-        UnityEngine.Debug.Log("Trigerovao se! plavi");
+            Debug.Log(this.tag + ":" + position.index);
+            Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+
+            UnityEngine.Debug.Log("Trigerovao se! plavi");
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
 
@@ -144,6 +148,6 @@ public class PawnBlue : MonoBehaviour
             {
                 boardC.outYellow--;
             }
-        
+        }
     }
 }

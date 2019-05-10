@@ -82,10 +82,10 @@ public class PawnYellow : MonoBehaviour
 
             if ((position.koraci + randomDiceSide1 + 1) < 96 && position._out)
             {
-                position.index = position.koraci + randomDiceSide1 + 1;
-                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
+
                 dc.click = false;
-               
+
+
                 if (position.koraci == 95)
                 {
                     boardC.outYellow--;
@@ -94,16 +94,15 @@ public class PawnYellow : MonoBehaviour
 
                 if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {
-                    dc.click = false;
+                   
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1));
 
                 }
                 else
                 {
-                   
-                    dc.click = false;
-                    Debug.Log("Cekam!");
-                    System.Threading.Thread.Sleep(100);
-                    boardC.client.Send("Played");
+          
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1)+"|Played");
+               
                     boardC.client.isMyMove = false;
                     boardC.isMyMove = false;
 
@@ -116,8 +115,12 @@ public class PawnYellow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(this.tag + ":" + position.index);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
+            (boardC.client.whosMove.Equals("Yellow") || (boardC.client.whosMove.Equals("Green") && boardC.client.previousMove.Equals("Yellow"))))
+        {
+
+            Debug.Log(this.tag + ":" + position.index);
+            Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
@@ -134,7 +137,7 @@ public class PawnYellow : MonoBehaviour
             {
                 boardC.outRed--;
             }
-        
+        }
     }
 
     

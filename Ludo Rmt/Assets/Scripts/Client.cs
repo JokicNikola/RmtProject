@@ -12,6 +12,9 @@ public class Client : MonoBehaviour
     public bool isMyMove;
     public String readData;
 
+    public String whosMove;
+    public String previousMove;
+
     private TcpClient socket;
     public NetworkStream stream;
     public StreamWriter writer;
@@ -59,7 +62,7 @@ public class Client : MonoBehaviour
                
                 if (data != null)
                 {
-                    Debug.Log(data);
+                    //Debug.Log(data);
                     OnIncomingData(data);
                 }
                 
@@ -82,18 +85,33 @@ public class Client : MonoBehaviour
     }
     public void OnIncomingData(string data)
     {
-      // Debug.Log(data);
-       // Send("Radi li?");
+       Debug.Log(clientColor+": "+ data);
+       
         if (data.Equals("Start"))
            changeScene(data);
 
         if (data.StartsWith("#"))
             nameSet(data.Substring(1));
 
-        if (data.Equals("Play"))
+        if (data.Contains("Play"))
         {
-            isMyMove = true;
-            return;
+            whosMove = data.Substring(data.IndexOf('-')+1);
+            
+            //Debug.Log("Sada igra " + whosMove);
+            if(whosMove.Equals(clientColor))
+                isMyMove = true;
+
+            switch (whosMove)
+            {
+                case "Red": previousMove = "Green"; break;
+                case "Blue": previousMove = "Red"; break;
+                case "Yellow": previousMove = "Blue"; break;
+                case "Green": previousMove = "Yellow"; break;
+            }
+
+           
+            
+            
         }
 
         readData = data;

@@ -80,22 +80,26 @@ public class Pawn : MonoBehaviour
 
             if ((position.koraci + randomDiceSide1 + 1) < 59 && position._out)
             {
-                position.index = position.koraci + randomDiceSide1 + 1;
-                boardC.client.Send("$" + this.name + "|"+ (randomDiceSide1+1));
+
                 dc.click = false;
-              
+
+
 
                 if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {
-                    dc.click = false;
+                   
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1));
+                    Debug.Log("Usao u IF");
 
                 }
                 else
                 {
-                    dc.click = false;
-                    System.Threading.Thread.Sleep(100);
-                    
-                    boardC.client.Send("Played");
+                  
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1)+"|Played");
+
+                    // System.Threading.Thread.Sleep(1000);
+
+                    Debug.Log("Cekam!");
                     boardC.client.isMyMove = false;
                     boardC.isMyMove = false;
 
@@ -104,15 +108,21 @@ public class Pawn : MonoBehaviour
         } 
     }
 
+   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(this.tag + ":" + position.index);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
-        collision.transform.position = collision.GetComponent<Position>().onStart;
+        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
+            (boardC.client.whosMove.Equals("Red") || (boardC.client.whosMove.Equals("Blue") && boardC.client.previousMove.Equals("Red"))))
+        {
+            Debug.Log(this.tag + ":" + position.index);
+            Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+
+            collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
 
-            if(collision.gameObject.tag == "BLUE")
+            if (collision.gameObject.tag == "BLUE")
             {
                 boardC.outBlue--;
             }
@@ -124,7 +134,7 @@ public class Pawn : MonoBehaviour
             {
                 boardC.outYellow--;
             }
-        
+        }
     }
     
 }

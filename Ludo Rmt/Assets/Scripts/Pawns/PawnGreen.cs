@@ -80,8 +80,8 @@ public class PawnGreen : MonoBehaviour
 
             if ((position.koraci + randomDiceSide1 + 1) < 86 && position._out)
             {
-                position.index = position.koraci + randomDiceSide1 + 1;
-                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1+1));
+                
+                
                 dc.click = false;
                
                 if (position.koraci == 85)
@@ -92,15 +92,15 @@ public class PawnGreen : MonoBehaviour
 
                 if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
                 {
-                    dc.click = false;
+                 
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1));
 
                 }
                 else
                 {
-                    dc.click = false;
-                    System.Threading.Thread.Sleep(100);
                     
-                    boardC.client.Send("Played");
+
+                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1) + "|Played");
                     boardC.client.isMyMove = false;
                     boardC.isMyMove = false;
 
@@ -112,10 +112,14 @@ public class PawnGreen : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(this.tag + ":" + position.index);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
+            (boardC.client.whosMove.Equals("Green") || (boardC.client.whosMove.Equals("Red") && boardC.client.previousMove.Equals("Green"))))
+        {
 
-        collision.transform.position = collision.GetComponent<Position>().onStart;
+            Debug.Log(this.tag + ":" + position.index);
+            Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+
+            collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
 
             if (collision.gameObject.tag == "BLUE")
@@ -130,6 +134,6 @@ public class PawnGreen : MonoBehaviour
             {
                 boardC.outYellow--;
             }
-        
+        }
     }
 }
