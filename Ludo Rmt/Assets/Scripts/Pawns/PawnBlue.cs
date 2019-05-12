@@ -124,15 +124,17 @@ public class PawnBlue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(this.tag + ":" + position.index+"->"+boardC.client.whosMove);
+        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index+"->" + boardC.client.whosMove);
 
         if (this.tag != collision.tag && position.index==collision.GetComponent<Position>().index &&  
-            (boardC.client.whosMove.Equals("Blue") || (boardC.client.whosMove.Equals("Yellow") && boardC.client.previousMove.Equals("Blue"))))
+            (boardC.client.whosMove.Equals("Yellow") || randomDiceSide1 == 5))
         {
 
-            Debug.Log(this.tag + ":" + position.index);
-            Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+           // Debug.Log(this.tag + ":" + position.index);
+           // Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
-            UnityEngine.Debug.Log("Trigerovao se! plavi");
+           // UnityEngine.Debug.Log("Trigerovao se! plavi");
             collision.transform.position = collision.GetComponent<Position>().onStart;
             collision.GetComponent<Position>()._out = false;
 

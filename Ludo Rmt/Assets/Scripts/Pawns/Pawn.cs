@@ -113,8 +113,11 @@ public class Pawn : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
+        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.whosMove);
+        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.whosMove);
+
         if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
-            (boardC.client.whosMove.Equals("Red") || (boardC.client.whosMove.Equals("Blue") && boardC.client.previousMove.Equals("Red"))))
+            (boardC.client.whosMove.Equals("Blue") || randomDiceSide1 == 5))
         {
             Debug.Log(this.tag + ":" + position.index);
             Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);

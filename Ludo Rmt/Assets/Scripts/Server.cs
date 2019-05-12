@@ -166,13 +166,17 @@ public class Server : MonoBehaviour
         {
             switch (++move % 4)
             {
-                case 0: Send("Play-Red", clientsList.ElementAt(move % 4));
+                case 0:
+                    BroadCast("Play-Red", clientsList);
                     break;
-                case 1: Send("Play-Blue", clientsList.ElementAt(move % 4));
+                case 1:
+                    BroadCast("Play-Blue", clientsList);
                     break;
-                case 2: Send("Play-Yellow", clientsList.ElementAt(move % 4));
+                case 2:
+                    BroadCast("Play-Yellow", clientsList);
                     break;
-                case 3: Send("Play-Green", clientsList.ElementAt(move % 4));
+                case 3:
+                    BroadCast("Play-Green", clientsList);
                     break;
             }
            

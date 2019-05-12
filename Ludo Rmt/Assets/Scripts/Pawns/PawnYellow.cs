@@ -115,8 +115,11 @@ public class PawnYellow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
+        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.whosMove);
+        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.whosMove);
+
         if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
-            (boardC.client.whosMove.Equals("Yellow") || (boardC.client.whosMove.Equals("Green") && boardC.client.previousMove.Equals("Yellow"))))
+            (boardC.client.whosMove.Equals("Green") || randomDiceSide1 == 5))
         {
 
             Debug.Log(this.tag + ":" + position.index);
