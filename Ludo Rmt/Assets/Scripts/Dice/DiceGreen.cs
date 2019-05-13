@@ -93,21 +93,13 @@ public class DiceGreen : MonoBehaviour
             boardC.isMyMove = false;
 
         }
-        if (randomDiceSide1 + 1 + pawn1.position.koraci > 75)
+        if ((randomDiceSide1 + 1 + pawn1.position.index > 85) && (randomDiceSide1 + 1 + pawn2.position.index > 85)
+            && (randomDiceSide1 + 1 + pawn3.position.index > 85) && (randomDiceSide1 + 1 + pawn4.position.index > 85))
         {
-            if (randomDiceSide1 + 1 + pawn2.position.koraci > 75)
-            {
-                if (randomDiceSide1 + 1 + pawn3.position.koraci > 75)
-                {
-                    if (randomDiceSide1 + 1 + pawn4.position.koraci > 75)
-                    {
-                        click = false;
-                        boardC.client.Send("Played");
-                        boardC.client.isMyMove = false;
-                        boardC.isMyMove = false;
-                    }
-                }
-            }
+            click = false;
+            boardC.client.Send("Played");
+            boardC.client.isMyMove = false;
+            boardC.isMyMove = false;
         }
     }
 
