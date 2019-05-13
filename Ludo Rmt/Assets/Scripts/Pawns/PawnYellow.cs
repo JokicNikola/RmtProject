@@ -124,9 +124,9 @@ public class PawnYellow : MonoBehaviour
 
             Debug.Log(this.tag + ":" + position.index);
             Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
-
-            collision.transform.position = collision.GetComponent<Position>().onStart;
-            collision.GetComponent<Position>()._out = false;
+            boardC.client.Send("%" + collision.name);
+            //collision.transform.position = collision.GetComponent<Position>().onStart;
+            //collision.GetComponent<Position>()._out = false;
 
             if (collision.gameObject.tag == "BLUE")
             {

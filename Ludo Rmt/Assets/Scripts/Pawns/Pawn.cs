@@ -8,8 +8,8 @@ public class Pawn : MonoBehaviour
     private GameObject dice;
     private GameObject nextDice;
     private GameObject check;
-   
 
+    
 
     private DiceRed dc;
     private Dice nextDc;
@@ -24,6 +24,7 @@ public class Pawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         index = 2;
         randomDiceSide1 = 0;
 
@@ -119,25 +120,31 @@ public class Pawn : MonoBehaviour
         if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
             (boardC.client.whosMove.Equals("Blue") || randomDiceSide1 == 5))
         {
-            Debug.Log(this.tag + ":" + position.index);
-            Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
+            
+                boardC.client.Send("%"+collision.name);
+            
+            
+                Debug.Log(this.tag + ":" + position.index);
+                Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
-            collision.transform.position = collision.GetComponent<Position>().onStart;
-            collision.GetComponent<Position>()._out = false;
+                //collision.transform.position = collision.GetComponent<Position>().onStart;
+                //collision.GetComponent<Position>()._out = false;
 
-            if (collision.gameObject.tag == "BLUE")
-            {
-                boardC.outBlue--;
-            }
-            if (collision.gameObject.tag == "GREEN")
-            {
-                boardC.outGreen--;
-            }
-            if (collision.gameObject.tag == "YELLOW")
-            {
-                boardC.outYellow--;
-            }
+                if (collision.gameObject.tag == "BLUE")
+                {
+                    boardC.outBlue--;
+                }
+                if (collision.gameObject.tag == "GREEN")
+                {
+                    boardC.outGreen--;
+                }
+                if (collision.gameObject.tag == "YELLOW")
+                {
+                    boardC.outYellow--;
+                }
+            
         }
+        
     }
     
 }

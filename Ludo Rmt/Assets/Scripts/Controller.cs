@@ -9,9 +9,9 @@ public class Controller : MonoBehaviour
     public bool isMyMove;
   
 
-    public string readData;
+    
     private Position pawn;
-
+    private GameObject pawn1;
     
 
     private DiceYellow yellow;
@@ -44,7 +44,7 @@ public class Controller : MonoBehaviour
         rand = Random.Range(0, 4);
         isMyMove = false;
       
-        readData = "";
+        
         client = FindObjectOfType<Client>();
         
         //client.Send(client.clientColor+" ovo je iz table!!!");
@@ -187,9 +187,18 @@ public class Controller : MonoBehaviour
         if (client.isMyMove) 
             isMyMove = true;
 
-        
+        if (client.readData.StartsWith("%"))
+        {
+            string pawnName = client.readData.Substring(1);           
+            pawn1 = GameObject.Find(pawnName);
+            pawn = pawn1.GetComponent<Position>();
+            pawn1.transform.position = pawn.onStart;
+            pawn._out = false;
+            client.readData = "";
 
-        if(client.readData.StartsWith("$"))
+        }
+
+        if (client.readData.StartsWith("$"))
         {
             string readData = client.readData.Substring(1);
             if(readData.Contains("-"))

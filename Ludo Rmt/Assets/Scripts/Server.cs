@@ -182,6 +182,11 @@ public class Server : MonoBehaviour
            
         }
 
+        if (data.StartsWith("%"))
+        {
+            BroadCast(data, clientsList);
+        }
+
         if (data.StartsWith("$"))
         {
 

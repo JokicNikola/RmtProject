@@ -118,12 +118,12 @@ public class PawnGreen : MonoBehaviour
         if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
             (boardC.client.whosMove.Equals("Red") || randomDiceSide1==5))
         {
-
+            boardC.client.Send("%" + collision.name);
             Debug.Log(this.tag + ":" + position.index);
             Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
-            collision.transform.position = collision.GetComponent<Position>().onStart;
-            collision.GetComponent<Position>()._out = false;
+            //collision.transform.position = collision.GetComponent<Position>().onStart;
+            //collision.GetComponent<Position>()._out = false;
 
             if (collision.gameObject.tag == "BLUE")
             {

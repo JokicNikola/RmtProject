@@ -14,6 +14,7 @@ public class Client : MonoBehaviour
 
     public String whosMove;
     public String previousMove;
+    
 
     private TcpClient socket;
     public NetworkStream stream;
@@ -25,6 +26,7 @@ public class Client : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         isMyMove = false;
         readData = "";
+        
     }
 
     public bool ConnectToServer(string host, int port)
@@ -107,12 +109,9 @@ public class Client : MonoBehaviour
                 case "Blue": previousMove = "Red"; break;
                 case "Yellow": previousMove = "Blue"; break;
                 case "Green": previousMove = "Yellow"; break;
-            }
-
-           
-            
-            
+            }   
         }
+        
 
         readData = data;
         

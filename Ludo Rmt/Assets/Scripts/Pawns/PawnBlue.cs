@@ -130,13 +130,13 @@ public class PawnBlue : MonoBehaviour
         if (this.tag != collision.tag && position.index==collision.GetComponent<Position>().index &&  
             (boardC.client.whosMove.Equals("Yellow") || randomDiceSide1 == 5))
         {
+            boardC.client.Send("%" + collision.name);
+            // Debug.Log(this.tag + ":" + position.index);
+            // Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
 
-           // Debug.Log(this.tag + ":" + position.index);
-           // Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
-
-           // UnityEngine.Debug.Log("Trigerovao se! plavi");
-            collision.transform.position = collision.GetComponent<Position>().onStart;
-            collision.GetComponent<Position>()._out = false;
+            // UnityEngine.Debug.Log("Trigerovao se! plavi");
+            //collision.transform.position = collision.GetComponent<Position>().onStart;
+            //collision.GetComponent<Position>()._out = false;
 
             if (collision.gameObject.tag == "RED")
             {
