@@ -45,16 +45,21 @@ public class Pawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-              if (position._out)
-            {
-                check = GameObject.Find("Waypoint (" + position.koraci + ")");
-                transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
-            }
-            else position.koraci = index;
+        if (position._out)
+        {
+            check = GameObject.Find("Waypoint (" + position.koraci + ")");
+            transform.position = Vector3.MoveTowards(transform.position, check.transform.position, 3f * Time.deltaTime);
+        }
+        else
+        {
+            position.koraci = index;
+            position.index = index;
+        }
     }
 
     private void OnMouseDown()
     {
+        Debug.Log(this.name+":"+this.position.index);
         if (dc.click && boardC.isMyMove)
         {
             StartCoroutine("Move");
@@ -117,32 +122,17 @@ public class Pawn : MonoBehaviour
         Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.whosMove);
         Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.whosMove);
 
-        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&
-            (boardC.client.whosMove.Equals("Blue") || randomDiceSide1 == 5))
+        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.whosMove.Equals("Red"))
         {
-            
-                boardC.client.Send("%"+collision.name);
-            
-            
-                Debug.Log(this.tag + ":" + position.index);
-                Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index);
-
+                if(randomDiceSide1==5)
+                     boardC.client.Send("%"+collision.name);
+                
                 //collision.transform.position = collision.GetComponent<Position>().onStart;
-                //collision.GetComponent<Position>()._out = false;
-
-                if (collision.gameObject.tag == "BLUE")
-                {
-                    boardC.outBlue--;
-                }
-                if (collision.gameObject.tag == "GREEN")
-                {
-                    boardC.outGreen--;
-                }
-                if (collision.gameObject.tag == "YELLOW")
-                {
-                    boardC.outYellow--;
-                }
+                //collision.GetComponent<Position>()._out = false;        
             
+        }else if(this.tag != collision.tag && position.index == collision.GetComponent<Position>().index &&boardC.client.whosMove.Equals("Blue"))
+        {
+            boardC.client.Send("%" + collision.name);
         }
         
     }

@@ -203,10 +203,10 @@ public class Controller : MonoBehaviour
             string readData = client.readData.Substring(1);
             if(readData.Contains("-"))
                 readData = readData.Substring(0, readData.IndexOf('-'));
-           // Debug.Log("Kontroler " + readData);
+           
             string[] split =readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
-           // Debug.Log(pawn.tag);
+           
 
 
             if (pawn != null)
@@ -215,20 +215,13 @@ public class Controller : MonoBehaviour
                 if (split[1].Equals("out"))
                     pawn._out = true;
                 else
-                {
-                    
+                {   
                     StartCoroutine(move(split[1], pawn.tag));
-
-                   
                 }
 
                 client.readData = "";
 
             }
-
-
-        }
-
-        
+        }       
     }
 }
