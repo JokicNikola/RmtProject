@@ -72,7 +72,7 @@ public class Server : MonoBehaviour
                     
                     if (data != null)
                     {
-                        Debug.Log(data);
+                        Debug.Log("Server: "+data);
                         OnIncomingData(c, data);
                         
                     }

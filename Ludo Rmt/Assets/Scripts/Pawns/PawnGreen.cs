@@ -79,37 +79,17 @@ public class PawnGreen : MonoBehaviour
             boardC.napolju++;
             dc.click = false;
             boardC.client.Send("$" + this.name + "|out");
+            
         }
         else
         {
 
             if ((position.koraci + randomDiceSide1 + 1) < 86 && position._out)
             {
-                
-                
+                          
                 dc.click = false;
-               
-                if (position.koraci == 85)
-                {
-                    boardC.outGreen--;
-                    boardC.endGreen++;
-                }
-
-                if ((randomDiceSide1 + 1) == 6 || randomDiceSide1 == -1)
-                {
-                 
-                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1));
-
-                }
-                else
-                {
-                    
-
-                    boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1) + "|Played");
-                    boardC.client.isMyMove = false;
-                    boardC.isMyMove = false;
-
-                }
+                boardC.client.Send("$" + this.name + "|" + (randomDiceSide1 + 1));
+                
             }    
         }
     }
@@ -117,21 +97,18 @@ public class PawnGreen : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.whosMove);
+        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.whosMove+"->"+randomDiceSide1);
         Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.whosMove);
 
-        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.whosMove.Equals("Green"))
+        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.isMyMove)
         {
-            if (randomDiceSide1 == 5)
+        
                 boardC.client.Send("%" + collision.name);
 
             //collision.transform.position = collision.GetComponent<Position>().onStart;
             //collision.GetComponent<Position>()._out = false;        
 
         }
-        else if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.whosMove.Equals("Red"))
-        {
-            boardC.client.Send("%" + collision.name);
-        }
+        
     }
 }

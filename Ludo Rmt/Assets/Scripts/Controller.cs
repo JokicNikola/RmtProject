@@ -5,15 +5,12 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
 
-
     public bool isMyMove;
-  
+    public bool rolledOnce;
 
-    
     private Position pawn;
     private GameObject pawn1;
     
-
     private DiceYellow yellow;
     private DiceRed red;
     private DiceGreen green;
@@ -24,8 +21,6 @@ public class Controller : MonoBehaviour
     public int endGreen;
     public int endYellow;
     public int endRed;
-
-  
 
     public int outBlue;
     public int outYellow;
@@ -57,38 +52,30 @@ public class Controller : MonoBehaviour
                 collide = GameObject.Find("Red Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 isMyMove = true;
-
-
                 break;
+
             case "Blue":
                 blue = GameObject.Find("Blue Dice").GetComponent<Dice>();
                 collide = GameObject.Find("Blue Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
-                
-
                 break;
+
             case "Green":
                 green = GameObject.Find("Green Dice").GetComponent<DiceGreen>();
                 collide = GameObject.Find("Green Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 break;
+
             case "Yellow":
                 yellow = GameObject.Find("Yellow Dice").GetComponent<DiceYellow>();
                 collide = GameObject.Find("Yellow Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 break;
+
             default: break;
 
         }
 
-        //Debug.Log("board"+client.clientColor);
-
-        
-        //Destroy(yellow);
-        //yellow = GameObject.Find("Side6 (1)").GetComponent<BoxCollider2D>();
-        //yellow.enabled = false;
-        
-        
         endBlue=0;
         endGreen=0;
         endYellow=0;
@@ -102,24 +89,20 @@ public class Controller : MonoBehaviour
         napolju = 0;
     }
 
-    IEnumerator move(string s, string tag)
+    IEnumerator move(string number, string tag)
     {
         
 
-        pawn.index += int.Parse(s);
+        pawn.index += int.Parse(number);
 
-        if (pawn.index + int.Parse(s) > 52)
+        if (pawn.index > 52)
             pawn.index = pawn.index - 52;
 
         switch (tag)
         {
             
-
             case "BLUE":
-
-                
-
-                for (int i = 0; i < int.Parse(s); i++)
+                for (int i = 0; i < int.Parse(number); i++)
                     {
                         if (pawn.koraci == 52)
                         {
@@ -131,18 +114,20 @@ public class Controller : MonoBehaviour
                         }
                         pawn.koraci++;
                         yield return new WaitForSeconds(12f * Time.deltaTime);
-                    }
+                    };
+                
                 break;
             case "RED":
-                for (int i = 0; i < int.Parse(s); i++)
+                for (int i = 0; i < int.Parse(number); i++)
                 {
                     
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
+                };
+              
                 break;
             case "YELLOW":
-                for (int i = 0; i < int.Parse(s); i++)
+                for (int i = 0; i < int.Parse(number); i++)
                 {
                     if (pawn.koraci == 52)
                     {
@@ -154,10 +139,11 @@ public class Controller : MonoBehaviour
                     }
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
+                };
+                
                 break;
             case "GREEN":
-                for (int i = 0; i < int.Parse(s); i++)
+                for (int i = 0; i < int.Parse(number); i++)
                 {
                     if (pawn.koraci == 52)
                     {
@@ -169,14 +155,31 @@ public class Controller : MonoBehaviour
                     }
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
-                }
+                };
+                
                 break;
             default: break;
-
-
         }
 
-        
+        yield return new WaitForSeconds(58f * Time.deltaTime);
+        Debug.Log(client.clientColor+": Usao sam opet u korutinu");
+
+        if (isMyMove)
+        {
+            if (int.Parse(number) != 6)
+            {
+                Debug.Log(client.clientColor + " je poslao Played");
+                client.isMyMove = false;
+                isMyMove = false;
+                yield return new WaitForSeconds(58f * Time.deltaTime);
+                client.Send("Played");
+                rolledOnce = false;
+                
+                
+            }
+        }
+
+        StopAllCoroutines();
     }
 
     
@@ -207,16 +210,16 @@ public class Controller : MonoBehaviour
             string[] split =readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
            
-
-
             if (pawn != null)
             {
                
                 if (split[1].Equals("out"))
                     pawn._out = true;
                 else
-                {   
+                {
+                    Debug.Log(client.clientColor + ": Ulazim opet u korutinu");
                     StartCoroutine(move(split[1], pawn.tag));
+
                 }
 
                 client.readData = "";
