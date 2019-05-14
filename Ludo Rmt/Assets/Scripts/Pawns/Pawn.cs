@@ -76,7 +76,6 @@ public class Pawn : MonoBehaviour
         if (!position._out && (randomDiceSide1 + 1) == 6)
         {
             position._out = true;
-            boardC.outRed++;
             boardC.napolju++;
             dc.click = false;
             boardC.client.Send("$" + this.name + "|out");

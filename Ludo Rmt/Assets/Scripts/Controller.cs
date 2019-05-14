@@ -17,15 +17,7 @@ public class Controller : MonoBehaviour
     private Dice blue;
     private BoxCollider2D collide;
 
-    public int endBlue;
-    public int endGreen;
-    public int endYellow;
-    public int endRed;
-
-    public int outBlue;
-    public int outYellow;
-    public int outRed;
-    public int outGreen;
+    public int unutra;
     private int rand;
 
     public int napolju;
@@ -75,18 +67,9 @@ public class Controller : MonoBehaviour
             default: break;
 
         }
-
-        endBlue=0;
-        endGreen=0;
-        endYellow=0;
-        endRed=0;
-
-        outBlue = 0;
-        outYellow = 0;
-        outRed = 0;
-        outGreen = 0;
-
         napolju = 0;
+        unutra = 0;
+
     }
 
     IEnumerator move(string number, string tag)
@@ -114,7 +97,12 @@ public class Controller : MonoBehaviour
                         }
                         pawn.koraci++;
                         yield return new WaitForSeconds(12f * Time.deltaTime);
-                    };
+                        
+                    }
+                if (pawn.index == 75)
+                {
+                    unutra++;
+                };
                 
                 break;
             case "RED":
@@ -123,6 +111,10 @@ public class Controller : MonoBehaviour
                     
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
+                }
+                if (pawn.index == 58)
+                {
+                    unutra++;
                 };
               
                 break;
@@ -139,6 +131,10 @@ public class Controller : MonoBehaviour
                     }
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
+                }
+                if (pawn.index == 95)
+                {
+                    unutra++;
                 };
                 
                 break;
@@ -155,6 +151,10 @@ public class Controller : MonoBehaviour
                     }
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
+                }
+                if (pawn.index == 85)
+                {
+                    unutra++;
                 };
                 
                 break;
@@ -172,13 +172,14 @@ public class Controller : MonoBehaviour
                 client.isMyMove = false;
                 isMyMove = false;
                 yield return new WaitForSeconds(58f * Time.deltaTime);
-                client.Send("Played");
-                
-                
-                
+                client.Send("Played");          
             }
         }
-
+        if(unutra == 4)
+        {
+            client.Send("END!");
+        }
+        
         StopAllCoroutines();
     }
 
@@ -197,6 +198,11 @@ public class Controller : MonoBehaviour
             pawn = pawn1.GetComponent<Position>();
             pawn1.transform.position = pawn.onStart;
             pawn._out = false;
+            if(pawn1.tag == client.clientColor)
+            {
+                napolju--;
+            }
+            
             client.readData = "";
 
         }
