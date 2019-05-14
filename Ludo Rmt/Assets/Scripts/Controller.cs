@@ -175,11 +175,6 @@ public class Controller : MonoBehaviour
                 client.Send("Played");          
             }
         }
-        if(unutra == 4)
-        {
-            client.Send("END!");
-        }
-        
         StopAllCoroutines();
     }
 
@@ -190,6 +185,11 @@ public class Controller : MonoBehaviour
     {
         if (client.isMyMove) 
             isMyMove = true;
+
+        if (unutra == 4)
+        {
+            client.Send("END!");
+        }
 
         if (client.readData.StartsWith("%"))
         {
