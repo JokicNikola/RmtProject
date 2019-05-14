@@ -6,7 +6,7 @@ public class Controller : MonoBehaviour
 {
 
     public bool isMyMove;
-    public bool rolledOnce;
+    
 
     private Position pawn;
     private GameObject pawn1;
@@ -161,8 +161,8 @@ public class Controller : MonoBehaviour
             default: break;
         }
 
-        yield return new WaitForSeconds(58f * Time.deltaTime);
-        Debug.Log(client.clientColor+": Usao sam opet u korutinu");
+       // yield return new WaitForSeconds(58f * Time.deltaTime);
+       // Debug.Log(client.clientColor+": Usao sam opet u korutinu");
 
         if (isMyMove)
         {
@@ -173,7 +173,7 @@ public class Controller : MonoBehaviour
                 isMyMove = false;
                 yield return new WaitForSeconds(58f * Time.deltaTime);
                 client.Send("Played");
-                rolledOnce = false;
+                
                 
                 
             }
@@ -217,7 +217,7 @@ public class Controller : MonoBehaviour
                     pawn._out = true;
                 else
                 {
-                    Debug.Log(client.clientColor + ": Ulazim opet u korutinu");
+                    
                     StartCoroutine(move(split[1], pawn.tag));
 
                 }
