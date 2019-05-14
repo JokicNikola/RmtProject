@@ -93,8 +93,8 @@ public class DiceGreen : MonoBehaviour
             boardC.isMyMove = false;
 
         }
-        if ((randomDiceSide1 + 1 + pawn1.position.index > 85) && (randomDiceSide1 + 1 + pawn2.position.index > 85)
-            && (randomDiceSide1 + 1 + pawn3.position.index > 85) && (randomDiceSide1 + 1 + pawn4.position.index > 85))
+        if ((randomDiceSide1 + 1 + pawn1.position.koraci > 85) && (randomDiceSide1 + 1 + pawn2.position.koraci > 85)
+            && (randomDiceSide1 + 1 + pawn3.position.koraci > 85) && (randomDiceSide1 + 1 + pawn4.position.koraci > 85))
         {
             click = false;
             boardC.client.Send("Played");
