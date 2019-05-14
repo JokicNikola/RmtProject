@@ -82,7 +82,7 @@ public class Dice : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
-        randomDiceSide1 = Random.Range(3, 6);
+        randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
@@ -102,8 +102,8 @@ public class Dice : MonoBehaviour
             boardC.isMyMove = false;
         }*/
 
-        if ((randomDiceSide1 + 1 + pawn1.position.index > 75) && (randomDiceSide1 + 1 + pawn2.position.index > 75)
-            && (randomDiceSide1 + 1 + pawn3.position.index > 75) && (randomDiceSide1 + 1 + pawn4.position.index > 75))
+        if (((randomDiceSide1 + 1 + pawn1.position.index > 75) || !pawn1.position._out) && ((randomDiceSide1 + 1 + pawn2.position.index > 75) || !pawn2.position._out)
+            && ((randomDiceSide1 + 1 + pawn3.position.index > 75) || !pawn3.position._out) && ((randomDiceSide1 + 1 + pawn4.position.index > 75) || !pawn4.position._out))
         {
             click = false;
             boardC.client.Send("Played");

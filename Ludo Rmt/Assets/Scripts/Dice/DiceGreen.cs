@@ -82,7 +82,7 @@ public class DiceGreen : MonoBehaviour
 
         }
 
-        randomDiceSide1 = Random.Range(4, 6);
+        randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
@@ -93,8 +93,8 @@ public class DiceGreen : MonoBehaviour
             boardC.isMyMove = false;
 
         }
-        if ((randomDiceSide1 + 1 + pawn1.position.koraci > 85) && (randomDiceSide1 + 1 + pawn2.position.koraci > 85)
-            && (randomDiceSide1 + 1 + pawn3.position.koraci > 85) && (randomDiceSide1 + 1 + pawn4.position.koraci > 85))
+        if (((randomDiceSide1 + 1 + pawn1.position.koraci > 85) || !pawn1.position._out) && ((randomDiceSide1 + 1 + pawn2.position.koraci > 85) || !pawn2.position._out)
+            && ((randomDiceSide1 + 1 + pawn3.position.koraci > 85) || !pawn3.position._out) && ((randomDiceSide1 + 1 + pawn4.position.koraci > 85) || !pawn4.position._out))
         {
             click = false;
             boardC.client.Send("Played");

@@ -102,6 +102,7 @@ public class Controller : MonoBehaviour
                 if (pawn.index == 75)
                 {
                     unutra++;
+                    napolju--;
                 };
                 
                 break;
@@ -115,6 +116,7 @@ public class Controller : MonoBehaviour
                 if (pawn.index == 58)
                 {
                     unutra++;
+                    napolju--;
                 };
               
                 break;
@@ -135,6 +137,7 @@ public class Controller : MonoBehaviour
                 if (pawn.index == 95)
                 {
                     unutra++;
+                    napolju--;
                 };
                 
                 break;
@@ -155,6 +158,7 @@ public class Controller : MonoBehaviour
                 if (pawn.index == 85)
                 {
                     unutra++;
+                    napolju--;
                 };
                 
                 break;
