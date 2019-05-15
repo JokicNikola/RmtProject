@@ -87,14 +87,7 @@ public class DiceYellow : MonoBehaviour
             boardC.isMyMove = false;
 
         }
-        if (((randomDiceSide1 + 1 + pawn1.position.index > 95) || !pawn1.position._out) && ((randomDiceSide1 + 1 + pawn2.position.index > 95) || !pawn2.position._out)
-            && ((randomDiceSide1 + 1 + pawn3.position.index > 95) || !pawn3.position._out) && ((randomDiceSide1 + 1 + pawn4.position.index > 95) || !pawn4.position._out))
-        {
-            click = false;
-            boardC.client.Send("Played");
-            boardC.client.isMyMove = false;
-            boardC.isMyMove = false;
-        }
+        
     }
 
    

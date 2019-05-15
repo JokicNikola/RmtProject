@@ -57,7 +57,7 @@ public class PawnGreen : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Debug.Log(this.name + ":" + this.position.index);
+        Debug.Log(this.name + ":" + this.position.index + this.tag);
         if (dc.click && boardC.isMyMove)
         {
             StartCoroutine("Move");
@@ -96,10 +96,10 @@ public class PawnGreen : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.whosMove+"->"+randomDiceSide1);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.whosMove);
+        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.isMyMove);
+        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.isMyMove);
 
-        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.isMyMove)
+        if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.whosMove.Equals(this.tag) && boardC.client.isMyMove)
         {
         
                 boardC.client.Send("%" + collision.name);

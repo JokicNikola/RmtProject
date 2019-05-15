@@ -84,7 +84,7 @@ public class Controller : MonoBehaviour
         switch (tag)
         {
             
-            case "BLUE":
+            case "Blue":
                 for (int i = 0; i < int.Parse(number); i++)
                     {
                         if (pawn.koraci == 52)
@@ -106,7 +106,7 @@ public class Controller : MonoBehaviour
                 };
                 
                 break;
-            case "RED":
+            case "Red":
                 for (int i = 0; i < int.Parse(number); i++)
                 {
                     
@@ -120,7 +120,7 @@ public class Controller : MonoBehaviour
                 };
               
                 break;
-            case "YELLOW":
+            case "Yellow":
                 for (int i = 0; i < int.Parse(number); i++)
                 {
                     if (pawn.koraci == 52)
@@ -141,7 +141,7 @@ public class Controller : MonoBehaviour
                 };
                 
                 break;
-            case "GREEN":
+            case "Green":
                 for (int i = 0; i < int.Parse(number); i++)
                 {
                     if (pawn.koraci == 52)
@@ -202,6 +202,7 @@ public class Controller : MonoBehaviour
             pawn = pawn1.GetComponent<Position>();
             pawn1.transform.position = pawn.onStart;
             pawn._out = false;
+
             if(pawn1.tag == client.clientColor)
             {
                 napolju--;
@@ -219,6 +220,7 @@ public class Controller : MonoBehaviour
            
             string[] split =readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
+            Debug.Log("Ovo je tag" + pawn.tag);
            
             if (pawn != null)
             {
@@ -228,7 +230,7 @@ public class Controller : MonoBehaviour
                 else
                 {
                     
-                    StartCoroutine(move(split[1], pawn.tag));
+                    StartCoroutine(move(split[1], GameObject.Find(split[0]).tag));
 
                 }
 

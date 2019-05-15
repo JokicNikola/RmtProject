@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 19389657}
   m_Layer: 0
   m_Name: pawn (6)
-  m_TagString: BLUE
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -921,7 +921,7 @@ GameObject:
   - component: {fileID: 339584489}
   m_Layer: 0
   m_Name: pawn (9)
-  m_TagString: YELLOW
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1110,7 +1110,7 @@ GameObject:
   - component: {fileID: 378080474}
   m_Layer: 0
   m_Name: pawn (8)
-  m_TagString: GREEN
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1496,14 +1496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMyMove: 0
-  endBlue: 0
-  endGreen: 0
-  endYellow: 0
-  endRed: 0
-  outBlue: 0
-  outYellow: 0
-  outRed: 0
-  outGreen: 0
+  unutra: 0
   napolju: 0
   client: {fileID: 0}
 --- !u!1 &513182511
@@ -1684,7 +1677,7 @@ GameObject:
   - component: {fileID: 548552585}
   m_Layer: 0
   m_Name: pawn (3)
-  m_TagString: RED
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2113,7 +2106,7 @@ GameObject:
   - component: {fileID: 762864506}
   m_Layer: 0
   m_Name: pawn (7)
-  m_TagString: BLUE
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2550,7 +2543,7 @@ GameObject:
   - component: {fileID: 884635495}
   m_Layer: 0
   m_Name: pawn (12)
-  m_TagString: YELLOW
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2799,7 +2792,7 @@ GameObject:
   - component: {fileID: 934436278}
   m_Layer: 0
   m_Name: pawn (2)
-  m_TagString: RED
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3232,7 +3225,7 @@ GameObject:
   - component: {fileID: 1119725745}
   m_Layer: 0
   m_Name: pawn (13)
-  m_TagString: GREEN
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3391,7 +3384,7 @@ GameObject:
   - component: {fileID: 1124907410}
   m_Layer: 0
   m_Name: pawn
-  m_TagString: RED
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3550,7 +3543,7 @@ GameObject:
   - component: {fileID: 1159665451}
   m_Layer: 0
   m_Name: pawn (5)
-  m_TagString: BLUE
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4203,7 +4196,7 @@ GameObject:
   - component: {fileID: 1435208898}
   m_Layer: 0
   m_Name: pawn (11)
-  m_TagString: YELLOW
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4452,7 +4445,7 @@ GameObject:
   - component: {fileID: 1547081769}
   m_Layer: 0
   m_Name: pawn (10)
-  m_TagString: YELLOW
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4750,7 +4743,7 @@ GameObject:
   - component: {fileID: 1664256305}
   m_Layer: 0
   m_Name: pawn (1)
-  m_TagString: RED
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4969,7 +4962,7 @@ GameObject:
   - component: {fileID: 1732546005}
   m_Layer: 0
   m_Name: pawn (14)
-  m_TagString: GREEN
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5466,7 +5459,7 @@ GameObject:
   - component: {fileID: 1964862201}
   m_Layer: 0
   m_Name: pawn (15)
-  m_TagString: GREEN
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5835,7 +5828,7 @@ GameObject:
   - component: {fileID: 2109818164}
   m_Layer: 0
   m_Name: pawn (4)
-  m_TagString: BLUE
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
