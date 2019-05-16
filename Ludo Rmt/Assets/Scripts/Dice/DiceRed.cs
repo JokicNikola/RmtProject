@@ -81,7 +81,7 @@ public class DiceRed : MonoBehaviour
 
       
 
-        randomDiceSide1 = Random.Range(4, 6);
+        randomDiceSide1 = Random.Range(5, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
@@ -99,8 +99,9 @@ public class DiceRed : MonoBehaviour
             for (int i = 0; i < boardC.listaNapolju.Count; i++)
             {
                 Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
-                if ((pijun.index + randomDiceSide1 + 1) <= 58)
+                if ((pijun.koraci + randomDiceSide1 + 1) <= 58)
                 {
+                    Debug.Log("Ima bar jedan " + pijun.koraci);
                     canPlay = true;
                     break;
                 }

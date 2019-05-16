@@ -72,7 +72,7 @@ public class Server : MonoBehaviour
                     
                     if (data != null)
                     {
-                        Debug.Log("Server: "+data);
+                        //Debug.Log("Server: "+data);
                         OnIncomingData(c, data);
                         
                     }
@@ -94,7 +94,7 @@ public class Server : MonoBehaviour
     private void StartListening()
     {
         server.BeginAcceptTcpClient(AcceptTcpClient, server);
-        Debug.Log("Cekam konekciju");
+       // Debug.Log("Cekam konekciju");
     }
 
     private void AcceptTcpClient(IAsyncResult ar)
@@ -126,7 +126,7 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 4)
+        if (clientsList.Count == 1)
         {
             System.Threading.Thread.Sleep(500);
             BroadCast("Start", clientsList);

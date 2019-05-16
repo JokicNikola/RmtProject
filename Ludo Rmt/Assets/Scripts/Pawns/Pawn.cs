@@ -59,7 +59,7 @@ public class Pawn : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(this.name+":"+this.position.index+this.tag);
+       
         if (dc.click && boardC.isMyMove)
         {
             StartCoroutine("Move");
@@ -100,16 +100,13 @@ public class Pawn : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        Debug.Log(this.tag + ":" + position.index + "->" + boardC.client.isMyMove);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index + "->" + boardC.client.isMyMove);
+        
 
         if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.whosMove.Equals(this.tag) && boardC.client.isMyMove)
         {
               
             boardC.client.Send("%"+collision.name);
-                
-                //collision.transform.position = collision.GetComponent<Position>().onStart;
-                //collision.GetComponent<Position>()._out = false;        
+          
             
         }
         

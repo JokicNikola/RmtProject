@@ -102,7 +102,7 @@ public class Controller : MonoBehaviour
                         yield return new WaitForSeconds(12f * Time.deltaTime);
                         
                     }
-                if (pawn.index == 75)
+                if (pawn.koraci == 75)
                 {
                     unutra++;
                     napolju--;
@@ -116,7 +116,7 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.index == 58)
+                if (pawn.koraci == 58)
                 {
                     unutra++;
                     napolju--;
@@ -137,7 +137,7 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.index == 95)
+                if (pawn.koraci == 95)
                 {
                     unutra++;
                     napolju--;
@@ -158,7 +158,7 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.index == 85)
+                if (pawn.koraci == 85)
                 {
                     unutra++;
                     napolju--;
@@ -172,7 +172,7 @@ public class Controller : MonoBehaviour
 
         foreach (string s in listaNapolju)
         {
-            Debug.Log(s);
+            Debug.Log("Ovaj je u listi "+s);
         }
 
         // yield return new WaitForSeconds(58f * Time.deltaTime);
