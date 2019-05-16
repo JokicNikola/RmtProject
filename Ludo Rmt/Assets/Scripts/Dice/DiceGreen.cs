@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DiceGreen : MonoBehaviour
@@ -93,7 +94,28 @@ public class DiceGreen : MonoBehaviour
             boardC.isMyMove = false;
 
         }
-        
+
+        if (boardC.napolju != 0)
+        {
+            bool canPlay = false;
+            for (int i = 0; i < boardC.listaNapolju.Count; i++)
+            {
+                Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
+                if ((pijun.index + randomDiceSide1 + 1) <= 85)
+                {
+                    canPlay = true;
+                    break;
+                }
+            }
+            if (canPlay == false)
+            {
+                click = false;
+                boardC.client.Send("Played");
+                boardC.client.isMyMove = false;
+                boardC.isMyMove = false;
+            }
+        }
+
     }
 
    

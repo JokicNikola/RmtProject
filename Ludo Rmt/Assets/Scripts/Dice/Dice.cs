@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Dice : MonoBehaviour
@@ -28,12 +29,12 @@ public class Dice : MonoBehaviour
     private GameObject beforeDice;
     private DiceRed beforeDc;
 
-    
 
 
-    private void Start () {
 
-     
+    private void Start() {
+
+
         pawn1 = GameObject.Find("pawn (4)").GetComponent<PawnBlue>();
         pawn2 = GameObject.Find("pawn (5)").GetComponent<PawnBlue>();
         pawn3 = GameObject.Find("pawn (6)").GetComponent<PawnBlue>();
@@ -52,7 +53,7 @@ public class Dice : MonoBehaviour
         beforeDc = beforeDice.GetComponent<DiceRed>();
     }
 
-    
+
 
     private void OnMouseDown()
     {
@@ -92,6 +93,33 @@ public class Dice : MonoBehaviour
             boardC.client.isMyMove = false;
             boardC.isMyMove = false;
         }
+
+        if (boardC.napolju != 0)
+        {
+            bool canPlay = false;
+            for(int i = 0; i < boardC.listaNapolju.Count; i++)
+            {
+                Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
+                if((pijun.index + randomDiceSide1 + 1) <= 75)
+                {
+                    canPlay = true;
+                    break;
+                }              
+            }
+            if(canPlay == false)
+            {
+                click = false;
+                boardC.client.Send("Played");
+                boardC.client.isMyMove = false;
+                boardC.isMyMove = false;
+            }
+        }
+        
+        
+        
+            
+
+    
 
         /*if(((randomDiceSide1 + 1 + pawn1.position.koraci) > 95) && ((randomDiceSide1+1+pawn2.position.koraci) > 95)
             ((randomDiceSide1 + 1 + pawn3.position.koraci) > 95) && ((randomDiceSide1 + 1 + pawn4.position.koraci) > 95))

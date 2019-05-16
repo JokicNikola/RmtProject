@@ -23,7 +23,8 @@ public class Controller : MonoBehaviour
     public int napolju;
 
     public Client client;
-
+    public LinkedList<string> listaNapolju;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -69,8 +70,10 @@ public class Controller : MonoBehaviour
         }
         napolju = 0;
         unutra = 0;
+        listaNapolju = new LinkedList<string>();
+        
 
-    }
+}
 
     IEnumerator move(string number, string tag)
     {
@@ -163,10 +166,17 @@ public class Controller : MonoBehaviour
                 
                 break;
             default: break;
+
+              
         }
 
-       // yield return new WaitForSeconds(58f * Time.deltaTime);
-       // Debug.Log(client.clientColor+": Usao sam opet u korutinu");
+        foreach (string s in listaNapolju)
+        {
+            Debug.Log(s);
+        }
+
+        // yield return new WaitForSeconds(58f * Time.deltaTime);
+        // Debug.Log(client.clientColor+": Usao sam opet u korutinu");
 
         if (isMyMove)
         {
@@ -201,11 +211,13 @@ public class Controller : MonoBehaviour
             pawn1 = GameObject.Find(pawnName);
             pawn = pawn1.GetComponent<Position>();
             pawn1.transform.position = pawn.onStart;
+            
             pawn._out = false;
 
             if(pawn1.tag == client.clientColor)
             {
                 napolju--;
+                listaNapolju.Remove(pawnName);
             }
             
             client.readData = "";
@@ -226,7 +238,10 @@ public class Controller : MonoBehaviour
             {
                
                 if (split[1].Equals("out"))
-                    pawn._out = true;
+                {
+                    pawn._out = true;      
+                }
+                    
                 else
                 {
                     
