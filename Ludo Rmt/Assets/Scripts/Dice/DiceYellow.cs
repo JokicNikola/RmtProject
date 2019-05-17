@@ -70,6 +70,7 @@ public class DiceYellow : MonoBehaviour
     {
         randomDiceSide = 0;
         randomDiceSide1 = -1;
+
         for (int i = 0; i <= 20; i++)
         {
             randomDiceSide = Random.Range(0, 6);
@@ -77,6 +78,7 @@ public class DiceYellow : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
+
         randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
@@ -92,6 +94,7 @@ public class DiceYellow : MonoBehaviour
         if (boardC.napolju != 0)
         {
             bool canPlay = false;
+
             for (int i = 0; i < boardC.listaNapolju.Count; i++)
             {
                 Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
@@ -101,12 +104,19 @@ public class DiceYellow : MonoBehaviour
                     break;
                 }
             }
-            if (canPlay == false)
+
+            Debug.Log("canPlay: " + canPlay + " napolju+unutra: " + (boardC.napolju + boardC.unutra) + " kockica " + randomDiceSide1);
+
+            if (!canPlay)
             {
-                click = false;
-                boardC.client.Send("Played");
-                boardC.client.isMyMove = false;
-                boardC.isMyMove = false;
+                if (boardC.napolju + boardC.unutra == 4 || (boardC.napolju + boardC.unutra < 4 && randomDiceSide1 < 5))
+                {
+                    click = false;
+                    boardC.client.Send("Played");
+                    boardC.client.isMyMove = false;
+                    boardC.isMyMove = false;
+
+                }
             }
         }
 

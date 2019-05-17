@@ -97,6 +97,7 @@ public class Dice : MonoBehaviour
         if (boardC.napolju != 0)
         {
             bool canPlay = false;
+
             for(int i = 0; i < boardC.listaNapolju.Count; i++)
             {
                 Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
@@ -106,33 +107,20 @@ public class Dice : MonoBehaviour
                     break;
                 }              
             }
-            if(canPlay == false)
+
+            Debug.Log("canPlay: " + canPlay + " napolju+unutra: " + (boardC.napolju + boardC.unutra) + " kockica " + randomDiceSide1);
+
+            if (!canPlay)
             {
-                click = false;
-                boardC.client.Send("Played");
-                boardC.client.isMyMove = false;
-                boardC.isMyMove = false;
+                if (boardC.napolju + boardC.unutra == 4 || (boardC.napolju + boardC.unutra < 4 && randomDiceSide1 < 5))
+                {
+                    click = false;
+                    boardC.client.Send("Played");
+                    boardC.client.isMyMove = false;
+                    boardC.isMyMove = false;
+
+                }
             }
-        }
-        
-        
-        
-            
-
-    
-
-        /*if(((randomDiceSide1 + 1 + pawn1.position.koraci) > 95) && ((randomDiceSide1+1+pawn2.position.koraci) > 95)
-            ((randomDiceSide1 + 1 + pawn3.position.koraci) > 95) && ((randomDiceSide1 + 1 + pawn4.position.koraci) > 95))
-        {
-            click = false;
-            boardC.client.Send("Played");
-            boardC.client.isMyMove = false;
-            boardC.isMyMove = false;
-        }*/
-
-        
-
-    }
-
-   
+        }  
+    } 
 }

@@ -78,10 +78,8 @@ public class DiceRed : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
-
-      
-
-        randomDiceSide1 = Random.Range(5, 6);
+    
+        randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
@@ -96,26 +94,36 @@ public class DiceRed : MonoBehaviour
         if (boardC.napolju != 0)
         {
             bool canPlay = false;
+
             for (int i = 0; i < boardC.listaNapolju.Count; i++)
             {
                 Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
                 if ((pijun.koraci + randomDiceSide1 + 1) <= 58)
                 {
-                    Debug.Log("Ima bar jedan " + pijun.koraci);
+                    //Debug.Log("Moze " + pijun.koraci);
                     canPlay = true;
                     break;
+                    
                 }
             }
-            if (canPlay == false)
-            {
-                click = false;
-                boardC.client.Send("Played");
-                boardC.client.isMyMove = false;
-                boardC.isMyMove = false;
-            }
-        }
 
+            Debug.Log("canPlay: " + canPlay + " napolju+unutra: " + (boardC.napolju + boardC.unutra) + " kockica " + randomDiceSide1);
+
+            if (!canPlay )
+            {
+                if (boardC.napolju + boardC.unutra == 4 || (boardC.napolju + boardC.unutra <4 && randomDiceSide1<5))
+                {   
+                        click = false;
+                        boardC.client.Send("Played");
+                        boardC.client.isMyMove = false;
+                        boardC.isMyMove = false;
+                    
+                }
+            }      
+        }
     }
 
-    
 }
+
+    
+

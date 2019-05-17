@@ -18,8 +18,6 @@ public class Controller : MonoBehaviour
     private BoxCollider2D collide;
 
     public int unutra;
-    private int rand;
-
     public int napolju;
 
     public Client client;
@@ -29,13 +27,9 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rand = Random.Range(0, 4);
+       
         isMyMove = false;
-      
-        
         client = FindObjectOfType<Client>();
-        
-        //client.Send(client.clientColor+" ovo je iz table!!!");
 
         switch (client.clientColor)
         {
@@ -232,7 +226,7 @@ public class Controller : MonoBehaviour
            
             string[] split =readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
-            Debug.Log("Ovo je tag" + pawn.tag);
+            
            
             if (pawn != null)
             {
