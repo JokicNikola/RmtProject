@@ -96,7 +96,7 @@ public class Controller : MonoBehaviour
                         yield return new WaitForSeconds(12f * Time.deltaTime);
                         
                     }
-                if (pawn.koraci == 75)
+                if (pawn.koraci == 75 && pawn.tag == client.clientColor)
                 {
                     unutra++;
                     napolju--;
@@ -110,7 +110,7 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.koraci == 58)
+                if (pawn.koraci == 58 && pawn.tag == client.clientColor)
                 {
                     unutra++;
                     napolju--;
@@ -131,7 +131,8 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.koraci == 95)
+
+                if (pawn.koraci == 95 && pawn.tag == client.clientColor)
                 {
                     unutra++;
                     napolju--;
@@ -152,7 +153,7 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.koraci == 85)
+                if (pawn.koraci == 85 && pawn.tag==client.clientColor)
                 {
                     unutra++;
                     napolju--;
