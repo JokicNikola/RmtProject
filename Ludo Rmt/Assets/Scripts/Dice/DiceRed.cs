@@ -100,14 +100,12 @@ public class DiceRed : MonoBehaviour
                 Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
                 if ((pijun.koraci + randomDiceSide1 + 1) <= 58)
                 {
-                    //Debug.Log("Moze " + pijun.koraci);
                     canPlay = true;
-                    break;
-                    
+                    break;   
                 }
             }
 
-            Debug.Log("canPlay: " + canPlay + " napolju+unutra: " + (boardC.napolju + boardC.unutra) + " kockica " + randomDiceSide1);
+            Debug.Log("canPlay: " + canPlay + " napolju :" + boardC.napolju + "unutra: " + boardC.unutra + " kockica " + randomDiceSide1);
 
             if (!canPlay )
             {

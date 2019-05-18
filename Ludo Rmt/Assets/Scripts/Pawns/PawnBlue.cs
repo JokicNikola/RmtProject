@@ -71,7 +71,7 @@ public class PawnBlue : MonoBehaviour
             
         }
         else Debug.Log("Nije bacena");
-        Debug.Log(this.name + ":" + this.position.index + this.tag);
+        Debug.Log(this.name + ":" + this.position.koraci + this.tag);
     }
 
     private void Move()

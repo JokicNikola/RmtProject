@@ -98,14 +98,14 @@ public class DiceYellow : MonoBehaviour
             for (int i = 0; i < boardC.listaNapolju.Count; i++)
             {
                 Position pijun = GameObject.Find(boardC.listaNapolju.ElementAt(i)).GetComponent<Position>();
-                if ((pijun.index + randomDiceSide1 + 1) <= 95)
+                if ((pijun.koraci + randomDiceSide1 + 1) <= 95)
                 {
                     canPlay = true;
                     break;
                 }
             }
 
-            Debug.Log("canPlay: " + canPlay + " napolju+unutra: " + (boardC.napolju + boardC.unutra) + " kockica " + randomDiceSide1);
+            Debug.Log("canPlay: " + canPlay + " napolju :" + boardC.napolju + "unutra: " + boardC.unutra + " kockica " + randomDiceSide1);
 
             if (!canPlay)
             {

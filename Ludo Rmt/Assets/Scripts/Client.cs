@@ -87,7 +87,7 @@ public class Client : MonoBehaviour
     }
     public void OnIncomingData(string data)
     {
-       Debug.Log(clientColor+": "+ data);
+      // Debug.Log(clientColor+": "+ data);
        
         if (data.Equals("Start"))
            changeScene(data);

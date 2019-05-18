@@ -57,7 +57,7 @@ public class PawnGreen : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Debug.Log(this.name + ":" + this.position.index + this.tag);
+        Debug.Log(this.name + ":" + this.position.koraci + this.tag);
         if (dc.click && boardC.isMyMove)
         {
             StartCoroutine("Move");
