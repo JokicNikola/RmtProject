@@ -187,9 +187,10 @@ public class Server : MonoBehaviour
             BroadCast(data, clientsList);
         }
 
-        if (data.StartsWith("END!"))
+        if (data.StartsWith("END"))
         {
-
+            string[] income = data.Split('|');
+            BroadCast("GO|" + income[1], clientsList);
         }
 
         if (data.StartsWith("$"))

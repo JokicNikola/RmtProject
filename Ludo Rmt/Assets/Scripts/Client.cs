@@ -111,6 +111,11 @@ public class Client : MonoBehaviour
                 case "Green": previousMove = "Yellow"; break;
             }   
         }
+
+        if (data.StartsWith("GO"))
+        {
+            SceneManager.LoadScene("end");
+        }
         
 
         readData = data;

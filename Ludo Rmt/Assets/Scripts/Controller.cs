@@ -197,7 +197,7 @@ public class Controller : MonoBehaviour
 
         if (unutra == 4)
         {
-            client.Send("END!");
+            client.Send("END|" + client.clientColor);
         }
 
         if (client.readData.StartsWith("%"))

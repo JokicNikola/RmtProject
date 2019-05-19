@@ -83,7 +83,7 @@ public class Dice : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
-        randomDiceSide1 = Random.Range(1, 6);
+        randomDiceSide1 = Random.Range(0, 5);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
