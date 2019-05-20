@@ -128,7 +128,7 @@ public class Server : MonoBehaviour
 
         if (clientsList.Count == 4)
         {
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
         }else
             StartListening();
@@ -164,7 +164,7 @@ public class Server : MonoBehaviour
     {
         if (data.Equals("Played"))
         {
-            switch (++move % 4)
+            switch (++move%4)
             {
                 case 0:
                     BroadCast("Play-Red", clientsList);
@@ -182,7 +182,7 @@ public class Server : MonoBehaviour
            
         }
 
-        if (data.StartsWith("%"))
+        if (data.StartsWith("%") || data.StartsWith("$"))
         {
             BroadCast(data, clientsList);
         }
@@ -193,35 +193,7 @@ public class Server : MonoBehaviour
             BroadCast("GO|" + income[1], clientsList);
         }
 
-        if (data.StartsWith("$"))
-        {
-
-
-            //BroadCast(data, clientsList);
-
-            if (data.Contains("Played"))
-            {
-                //System.Threading.Thread.Sleep(100);
-                data = data.Substring(0,data.LastIndexOf('|')+1);
-                switch (++move % 4)
-                {
-                    case 0:
-                        BroadCast(data+"Play-Red", clientsList);
-                        break;
-                    case 1:
-                        BroadCast(data+"Play-Blue", clientsList);
-                        break;
-                    case 2:
-                        BroadCast(data+"Play-Yellow", clientsList);
-                        break;
-                    case 3:
-                        BroadCast(data+"Play-Green", clientsList);
-                        break;
-                }
-
-            }else BroadCast(data, clientsList);
-
-        }
+      
     }
 
     private void BroadCast(string data, List<ServerClient> scl)

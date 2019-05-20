@@ -64,7 +64,7 @@ public class Client : MonoBehaviour
                
                 if (data != null)
                 {
-                    //Debug.Log(data);
+                    Debug.Log(data);
                     OnIncomingData(data);
                 }
                 
@@ -115,6 +115,7 @@ public class Client : MonoBehaviour
         if (data.StartsWith("GO"))
         {
             SceneManager.LoadScene("end");
+            readData = "";
         }
         
 
@@ -131,6 +132,7 @@ public class Client : MonoBehaviour
 
     public void changeScene(string data)
     {
+        CloseSocket();
         SceneManager.LoadScene("game");
         return;
     }
@@ -154,9 +156,4 @@ public class Client : MonoBehaviour
     }
 }
 
-public class GameClient
-{
-    public string name;
-    public bool isHost;
-    public string color;
-}
+
