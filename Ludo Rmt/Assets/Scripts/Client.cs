@@ -114,8 +114,9 @@ public class Client : MonoBehaviour
 
         if (data.StartsWith("GO"))
         {
+            CloseSocket();
             SceneManager.LoadScene("end");
-            readData = "";
+            
         }
         
 
@@ -132,7 +133,7 @@ public class Client : MonoBehaviour
 
     public void changeScene(string data)
     {
-        CloseSocket();
+        
         SceneManager.LoadScene("game");
         return;
     }
