@@ -167,7 +167,7 @@ public class Server : MonoBehaviour
 
         if (data.Equals("Roll")){
 
-            roll= UnityEngine.Random.Range(0, 6);
+            roll= UnityEngine.Random.Range(4, 6);
 
             Send("Roll|" + roll, clientsList.ElementAt(move % 4));
             return;
@@ -177,26 +177,29 @@ public class Server : MonoBehaviour
 
         if (data.Equals("Played"))
         {
-            switch (++move%4)
-            {
-                case 0:
-                    BroadCast("Play-Red", clientsList);
-                    break;
-                case 1:
-                    BroadCast("Play-Blue", clientsList);
-                    break;
-                case 2:
-                    BroadCast("Play-Yellow", clientsList);
-                    break;
-                case 3:
-                    BroadCast("Play-Green", clientsList);
-                    break;
-            }
+            changeMove();
             return;
            
         }
 
-        if (data.StartsWith("%") || data.StartsWith("$"))
+        if ( data.StartsWith("$"))
+        {
+            string check = data.Substring(data.IndexOf('|')+1);
+            
+
+            if(check.Equals("out")){
+                BroadCast(data, clientsList);
+                return;
+            }
+
+            if (int.Parse(check) == roll+1)
+                BroadCast(data, clientsList);
+            else changeMove();
+
+            return;
+        }
+
+        if (data.StartsWith("%"))
         {
             BroadCast(data, clientsList);
             return;
@@ -210,6 +213,25 @@ public class Server : MonoBehaviour
         }
 
       
+    }
+
+    private void changeMove() {
+
+        switch (++move % 4)
+        {
+            case 0:
+                BroadCast("Play-Red", clientsList);
+                break;
+            case 1:
+                BroadCast("Play-Blue", clientsList);
+                break;
+            case 2:
+                BroadCast("Play-Yellow", clientsList);
+                break;
+            case 3:
+                BroadCast("Play-Green", clientsList);
+                break;
+        }
     }
 
     private void BroadCast(string data, List<ServerClient> scl)
