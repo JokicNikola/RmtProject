@@ -75,6 +75,8 @@ public class DiceGreen : MonoBehaviour
         randomDiceSide = 0;
         randomDiceSide1 = -1;
 
+        boardC.client.Send("Roll");
+
         for (int i = 0; i <= 20; i++)
         {
             randomDiceSide = Random.Range(0, 6);
@@ -83,7 +85,7 @@ public class DiceGreen : MonoBehaviour
 
         }
 
-        randomDiceSide1 = Random.Range(0, 5);
+       // randomDiceSide1 = Random.Range(0, 6);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)

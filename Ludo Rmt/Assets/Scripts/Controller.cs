@@ -219,6 +219,38 @@ public class Controller : MonoBehaviour
 
         }
 
+        if (client.readData.StartsWith("Roll")) {
+
+            string number = client.readData.Substring(client.readData.IndexOf('|') + 1);
+
+            switch (client.clientColor)
+            {
+                case "Blue":
+
+                    blue.randomDiceSide1 = int.Parse(number);
+                    break;
+
+                case "Red":
+
+                    red.randomDiceSide1 = int.Parse(number);
+                    break;
+
+                case "Yellow":
+
+                    yellow.randomDiceSide1 = int.Parse(number);
+                    break;
+                case "Green":
+
+
+                    green.randomDiceSide1 = int.Parse(number);
+                    break;
+                default: break;
+
+            }
+
+
+            }
+
         if (client.readData.StartsWith("$"))
         {
             string readData = client.readData.Substring(1);

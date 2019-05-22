@@ -59,10 +59,8 @@ public class PawnBlue : MonoBehaviour
         }
 
 
+    }
 
-
-
-        }
     private void OnMouseDown()
     {
         if (dc.click && boardC.isMyMove)
@@ -108,17 +106,13 @@ public class PawnBlue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(this.tag + ":" + position.index+"->"+boardC.client.isMyMove);
-        Debug.Log(collision.tag + ":" + collision.GetComponent<Position>().index+"->" + boardC.client.isMyMove);
+       
 
         if (this.tag != collision.tag && position.index == collision.GetComponent<Position>().index && boardC.client.whosMove.Equals(this.tag) && boardC.client.isMyMove)
         {
-            
+     
                 boardC.client.Send("%" + collision.name);
-
-            //collision.transform.position = collision.GetComponent<Position>().onStart;
-            //collision.GetComponent<Position>()._out = false;        
-
+          
         }
         
     }

@@ -16,6 +16,7 @@ public class Server : MonoBehaviour
     private List<ServerClient> disconnectList;
 
     int move;
+    int roll;
 
     private TcpListener server;
     private bool serverStarted;
@@ -26,6 +27,7 @@ public class Server : MonoBehaviour
         clientsList = new List<ServerClient>();
         disconnectList = new List<ServerClient>();
         move = 0;
+        roll = 0;
 
         try
         {
@@ -72,7 +74,7 @@ public class Server : MonoBehaviour
                     
                     if (data != null)
                     {
-                        //Debug.Log("Server: "+data);
+                        Debug.Log("Server: "+data);
                         OnIncomingData(c, data);
                         
                     }
@@ -126,7 +128,7 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 4)
+        if (clientsList.Count == 1)
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
@@ -162,6 +164,17 @@ public class Server : MonoBehaviour
 
     private void OnIncomingData(ServerClient c, string data)
     {
+
+        if (data.Equals("Roll")){
+
+            roll= UnityEngine.Random.Range(0, 6);
+
+            Send("Roll|" + roll, clientsList.ElementAt(move % 4));
+            return;
+
+        }
+
+
         if (data.Equals("Played"))
         {
             switch (++move%4)
@@ -179,18 +192,21 @@ public class Server : MonoBehaviour
                     BroadCast("Play-Green", clientsList);
                     break;
             }
+            return;
            
         }
 
         if (data.StartsWith("%") || data.StartsWith("$"))
         {
             BroadCast(data, clientsList);
+            return;
         }
 
         if (data.StartsWith("END"))
         {
             string[] income = data.Split('|');
             BroadCast("GO|" + income[1], clientsList);
+            return;
         }
 
       
