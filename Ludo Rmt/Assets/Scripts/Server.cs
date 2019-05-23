@@ -229,6 +229,13 @@ public class Server : MonoBehaviour
                 return;
             }
 
+            if (check == "6")
+            {
+                if (b != null)
+                    StopCoroutine(b);
+                b = StartCoroutine(wait());
+            }
+
             if (int.Parse(check) == roll + 1)
                 BroadCast(data, clientsList);
             else changeMove();
