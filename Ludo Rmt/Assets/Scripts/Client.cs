@@ -12,6 +12,8 @@ public class Client : MonoBehaviour
     public bool isMyMove;
     public String readData;
 
+    public String winner;
+
     public String whosMove;
     public String previousMove;
     
@@ -115,7 +117,9 @@ public class Client : MonoBehaviour
 
         if (data.StartsWith("GO"))
         {
+            String[] income = data.Split('|');
             CloseSocket();
+            winner = income[1];
             SceneManager.LoadScene("end");
             
         }

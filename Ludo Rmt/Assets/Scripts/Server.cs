@@ -141,7 +141,7 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 1)
+        if (clientsList.Count == 2)
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
@@ -183,8 +183,8 @@ public class Server : MonoBehaviour
 
         
         BroadCast("StartRoll|" + colorDice, clientsList);
-        yield return new WaitForSeconds(1.5f);
-        roll = UnityEngine.Random.Range(4, 6);
+        yield return new WaitForSeconds(1.2f);
+        roll = UnityEngine.Random.Range(0, 6);
 
         BroadCast("Roll|" + roll + "|" + whosMove, clientsList);
     }
@@ -198,7 +198,6 @@ public class Server : MonoBehaviour
             string colorDice = data.Substring(data.IndexOf('|')+1);
 
             StartCoroutine(RollTheDice(colorDice));
-            
 
            
             return;
@@ -252,7 +251,7 @@ public class Server : MonoBehaviour
         if (data.StartsWith("END"))
         {
             string[] income = data.Split('|');
-            BroadCast("GO|" + income[1], clientsList);
+            BroadCast("GO|"+income[1], clientsList);
             return;
         }
 
@@ -278,7 +277,6 @@ public class Server : MonoBehaviour
         switch (++move % clientsList.Count())
         {
             case 0:
-
 
                 if (clientsList.ElementAt(0) == null)
                 {
@@ -323,6 +321,12 @@ public class Server : MonoBehaviour
         }
 
         BroadCast("Play-" + whosMove, clientsList);
+
+        if(b!=null)
+        {
+            StopCoroutine(b);
+        }
+
        b= StartCoroutine(Wait());
     }
 

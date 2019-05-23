@@ -50,6 +50,7 @@ public class Controller : MonoBehaviour
 
         isMyMove = false;
 
+
         client = FindObjectOfType<Client>();
 
         redTimer = GameObject.Find("RedTimer");
@@ -125,13 +126,13 @@ public class Controller : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        Debug.Log("usao u tajmer");
+        
         coroutineRuns = true;
        
-        for(int i = 0; i < 7; i++)
+        for(int i = 0; i < 8; i++)
         {
             render.sprite = timerSides[i];
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
         }
         coroutineRuns = false;
         
@@ -386,6 +387,7 @@ public class Controller : MonoBehaviour
                 case "Red":
                     redInd.SetActive(false);
                     redTimer.SetActive(false);
+                    red.click = false;
 
                     if (b != null && coroutineRuns)
                     {
@@ -397,6 +399,7 @@ public class Controller : MonoBehaviour
 
                     blueInd.SetActive(false);
                     blueTimer.SetActive(false);
+                    blue.click = false;
 
                     if (b != null && coroutineRuns)
                     {
@@ -405,7 +408,7 @@ public class Controller : MonoBehaviour
                     }
                     break;
                 case "Yellow":
-
+                    yellow.click = false;
                     yellowInd.SetActive(false);
                     yellowTimer.SetActive(false);
 
@@ -416,7 +419,7 @@ public class Controller : MonoBehaviour
                     }
                     break;
                 case "Green":
-
+                    green.click = false;
                     greenInd.SetActive(false);
                     greenTimer.SetActive(false);
 
@@ -430,7 +433,10 @@ public class Controller : MonoBehaviour
             isMyMove = false;
         }
 
-      
+        if(unutra == 4)
+        {
+            client.Send("END|" + client.clientColor);
+        }
 
         if (client.readData.StartsWith("%"))
         {
