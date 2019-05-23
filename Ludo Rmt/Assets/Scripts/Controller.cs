@@ -314,7 +314,7 @@ public class Controller : MonoBehaviour
 
                     greenInd.SetActive(false); break;
             }
-
+            isMyMove = false;
         }
 
       

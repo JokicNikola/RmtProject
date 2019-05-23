@@ -98,10 +98,11 @@ public class Client : MonoBehaviour
         if (data.Contains("Play"))
         {
             whosMove = data.Substring(data.IndexOf('-')+1);
-            
+
             //Debug.Log("Sada igra " + whosMove);
-            if(whosMove.Equals(clientColor))
+            if (whosMove.Equals(clientColor))
                 isMyMove = true;
+            else isMyMove = false;
 
             switch (whosMove)
             {

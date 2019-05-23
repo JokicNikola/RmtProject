@@ -143,6 +143,7 @@ public class Server : MonoBehaviour
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
+            StartCoroutine(wait());
         }
         else
             StartListening();
@@ -243,10 +244,16 @@ public class Server : MonoBehaviour
 
     }
 
+    private IEnumerator wait()
+    {
+        yield return new WaitForSeconds(20f);
+        changeMove();
+    }
+
     private void changeMove()
     {
 
-
+        
 
         switch (++move % clientsList.Count())
         {
@@ -296,6 +303,7 @@ public class Server : MonoBehaviour
         }
 
         BroadCast("Play-" + whosMove, clientsList);
+        StartCoroutine(wait());
     }
 
     private void BroadCast(string data, List<ServerClient> scl)
