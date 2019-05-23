@@ -208,10 +208,70 @@ public class Controller : MonoBehaviour
         StopAllCoroutines();
     }
 
+    private IEnumerator RollTheDice(string colorDice)
+    {
+        switch (colorDice)
+        {
+
+            case "Red":
+                for (int i = 0; i <= 20; i++)
+                {
+                    int randomDiceSide = Random.Range(0, 6);
+                    red.rend.sprite = red.diceSides[randomDiceSide];
+                    yield return new WaitForSeconds(0.05f);
+
+                }
+
+                break;
+
+            case "Blue":
+
+                for (int i = 0; i <= 20; i++)
+                {
+                    int randomDiceSide = Random.Range(0, 6);
+                    blue.rend.sprite = red.diceSides[randomDiceSide];
+                    yield return new WaitForSeconds(0.05f);
+
+                }
+
+                break;
+
+            case "Green":
+
+                for (int i = 0; i <= 20; i++)
+                {
+                    int randomDiceSide = Random.Range(0, 6);
+                    green.rend.sprite = red.diceSides[randomDiceSide];
+                    yield return new WaitForSeconds(0.05f);
+
+                }
+
+                break;
+
+            case "Yellow":
+
+                for (int i = 0; i <= 20; i++)
+                {
+                    int randomDiceSide = Random.Range(0, 6);
+                    yellow.rend.sprite = red.diceSides[randomDiceSide];
+                    yield return new WaitForSeconds(0.05f);
+
+                }
 
 
-    // Update is called once per frame
-    void Update()
+                break;
+
+            default:
+                break;
+        }
+
+        
+    }
+
+
+
+        // Update is called once per frame
+        void Update()
     {
         if (client.isMyMove)
         {
@@ -257,10 +317,7 @@ public class Controller : MonoBehaviour
 
         }
 
-        if (unutra == 4)
-        {
-            client.Send("END|" + client.clientColor);
-        }
+      
 
         if (client.readData.StartsWith("%"))
         {
@@ -279,6 +336,13 @@ public class Controller : MonoBehaviour
 
             client.readData = "";
 
+        }
+
+        if (client.readData.StartsWith("StartRoll")) {
+            string colorDice = client.readData.Substring(client.readData.IndexOf('|') + 1);
+            StartCoroutine(RollTheDice(colorDice));
+            
+            client.readData = "";
         }
 
         if (client.readData.StartsWith("Roll"))

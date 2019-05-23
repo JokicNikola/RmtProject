@@ -139,7 +139,7 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 2)
+        if (clientsList.Count == 4)
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
@@ -175,16 +175,28 @@ public class Server : MonoBehaviour
         }
     }
 
+    private IEnumerator RollTheDice(String colorDice) {
+
+        
+        BroadCast("StartRoll|" + colorDice, clientsList);
+        yield return new WaitForSeconds(1.5f);
+        roll = UnityEngine.Random.Range(4, 6);
+
+        BroadCast("Roll|" + roll + "|" + whosMove, clientsList);
+    }
+
     private void OnIncomingData(ServerClient c, string data)
     {
 
 
-        if (data.Equals("Roll"))
+        if (data.StartsWith("Roll"))
         {
+            string colorDice = data.Substring(data.IndexOf('|')+1);
 
-            roll = UnityEngine.Random.Range(4, 6);
+            StartCoroutine(RollTheDice(colorDice));
+            
 
-            BroadCast("Roll|" + roll + "|" + whosMove, clientsList);
+           
             return;
 
         }

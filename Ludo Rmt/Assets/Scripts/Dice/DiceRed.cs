@@ -9,7 +9,7 @@ public class DiceRed : MonoBehaviour
     public Sprite[] diceSides;
     public SpriteRenderer rend;
     
-    public int randomDiceSide;
+   
     public int randomDiceSide1 = 0;
     public bool click;
 
@@ -68,22 +68,13 @@ public class DiceRed : MonoBehaviour
 
     private IEnumerator RollTheDice()
     {
-        randomDiceSide = 0;
+        
         randomDiceSide1 = -1;
 
-        boardC.client.Send("Roll");
+        boardC.client.Send("Roll|Red");
 
-        for (int i = 0; i <= 20; i++)
-        {
-            randomDiceSide = Random.Range(0, 6);
-            rend.sprite = diceSides[randomDiceSide];
-            yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(2f);
 
-        }
-
-        // randomDiceSide1 = Random.Range(0, 6);
-        Debug.Log(randomDiceSide1);
-        rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
         {
