@@ -126,6 +126,7 @@ public class Controller : MonoBehaviour
     private IEnumerator timer()
     {
         Debug.Log("usao u tajmer");
+        coroutineRuns = true;
        
         for(int i = 0; i < 6; i++)
         {
@@ -133,6 +134,7 @@ public class Controller : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
         coroutineRuns = false;
+        
 
     }
 
@@ -141,7 +143,11 @@ public class Controller : MonoBehaviour
 
 
         pawn.index += int.Parse(number);
-        StopCoroutine(b);
+        if (coroutineRuns) {
+            StopCoroutine(b);
+            coroutineRuns = false;
+        }
+        
 
         if (isMyMove && int.Parse(number)==6)
         {
@@ -334,7 +340,7 @@ public class Controller : MonoBehaviour
                     if (!coroutineRuns)
                     {
                         b = StartCoroutine(timer());
-                        coroutineRuns = true;
+                        
                     }
                     break;
                 case "Blue":
@@ -345,7 +351,7 @@ public class Controller : MonoBehaviour
                     if (!coroutineRuns)
                     {
                         b = StartCoroutine(timer());
-                        coroutineRuns = true;
+                       
                     }
                     break;
                 case "Yellow":
@@ -356,7 +362,7 @@ public class Controller : MonoBehaviour
                     if (!coroutineRuns)
                     {
                         b = StartCoroutine(timer());
-                        coroutineRuns = true;
+                        
                     }
                     break;
 
@@ -368,7 +374,7 @@ public class Controller : MonoBehaviour
                     if (!coroutineRuns)
                     {
                         b = StartCoroutine(timer());
-                        coroutineRuns = true;
+                        
                     }
                     break;
             }
@@ -380,29 +386,45 @@ public class Controller : MonoBehaviour
                 case "Red":
                     redInd.SetActive(false);
                     redTimer.SetActive(false);
-                    if(b!=null)
+
+                    if (b != null && coroutineRuns)
+                    {
                         StopCoroutine(b);
+                        coroutineRuns = false;
+                    }
                     break;
                 case "Blue":
 
                     blueInd.SetActive(false);
                     blueTimer.SetActive(false);
-                    if (b != null)
+
+                    if (b != null && coroutineRuns)
+                    {
                         StopCoroutine(b);
+                        coroutineRuns = false;
+                    }
                     break;
                 case "Yellow":
 
                     yellowInd.SetActive(false);
                     yellowTimer.SetActive(false);
-                    if (b != null)
+
+                    if (b != null && coroutineRuns)
+                    {
                         StopCoroutine(b);
+                        coroutineRuns = false;
+                    }
                     break;
                 case "Green":
 
                     greenInd.SetActive(false);
                     greenTimer.SetActive(false);
-                    if (b != null)
+
+                    if (b != null && coroutineRuns)
+                    {
                         StopCoroutine(b);
+                        coroutineRuns = false;
+                    }
                     break;
             }
             isMyMove = false;
@@ -490,6 +512,11 @@ public class Controller : MonoBehaviour
                 if (split[1].Equals("out"))
                 {
                     pawn._out = true;
+                    if (b != null)
+                        StopCoroutine(b);
+                    if (isMyMove)
+                        b = StartCoroutine(timer());
+
                 }
 
                 else
