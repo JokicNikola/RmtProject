@@ -141,7 +141,7 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 4)
+        if (clientsList.Count == 2)
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
@@ -256,7 +256,7 @@ public class Server : MonoBehaviour
     {
 
         int broj = 0;
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 18; i++) {
             Debug.Log("Server " + ++broj);
             yield return new WaitForSeconds(1f);
         }

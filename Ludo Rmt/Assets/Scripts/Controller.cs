@@ -10,6 +10,18 @@ public class Controller : MonoBehaviour
     public GameObject yellowInd;
     public GameObject greenInd;
 
+    private bool coroutineRuns;
+
+    private GameObject redTimer;
+    private GameObject blueTimer;
+    private GameObject yellowTimer;
+    private GameObject greenTimer;
+
+    private Sprite[] timerSides;
+    private SpriteRenderer render;
+
+    private Coroutine b;
+
     public bool isMyMove;
 
 
@@ -33,8 +45,23 @@ public class Controller : MonoBehaviour
     void Start()
     {
 
+      
+        timerSides = Resources.LoadAll<Sprite>("TimerSides/");
+
         isMyMove = false;
+
         client = FindObjectOfType<Client>();
+
+        redTimer = GameObject.Find("RedTimer");
+        blueTimer = GameObject.Find("BlueTimer");
+        greenTimer = GameObject.Find("GreenTimer");
+        yellowTimer = GameObject.Find("YellowTimer");
+
+        redTimer.SetActive(false);
+        blueTimer.SetActive(false);
+        greenTimer.SetActive(false);
+        yellowTimer.SetActive(false);
+
         red = GameObject.Find("Red Dice").GetComponent<DiceRed>();
         blue = GameObject.Find("Blue Dice").GetComponent<Dice>();
         green = GameObject.Find("Green Dice").GetComponent<DiceGreen>();
@@ -42,8 +69,9 @@ public class Controller : MonoBehaviour
 
         redInd = GameObject.Find("redIndicator");
         blueInd = GameObject.Find("blueIndicator");
-        yellowInd = GameObject.Find("yellowIndicator");
         greenInd = GameObject.Find("greenIndicator");
+        yellowInd = GameObject.Find("yellowIndicator");
+
         redInd.SetActive(false);
         blueInd.SetActive(false);
         greenInd.SetActive(false);
@@ -59,24 +87,30 @@ public class Controller : MonoBehaviour
                 isMyMove = true;
                 client.isMyMove = true;
                 redInd.SetActive(true);
+                render = redTimer.GetComponent<SpriteRenderer>();
+                
+                
                 break;
 
             case "Blue":
 
                 collide = GameObject.Find("Blue Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
+                render = blueTimer.GetComponent<SpriteRenderer>();
                 break;
 
             case "Green":
 
                 collide = GameObject.Find("Green Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
+                render = greenTimer.GetComponent<SpriteRenderer>();
                 break;
 
             case "Yellow":
 
                 collide = GameObject.Find("Yellow Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
+                render = yellowTimer.GetComponent<SpriteRenderer>();
                 break;
 
             default: break;
@@ -89,14 +123,35 @@ public class Controller : MonoBehaviour
 
     }
 
+    private IEnumerator timer()
+    {
+        Debug.Log("usao u tajmer");
+       
+        for(int i = 0; i < 6; i++)
+        {
+            render.sprite = timerSides[i];
+            yield return new WaitForSeconds(3f);
+        }
+        coroutineRuns = false;
+
+    }
+
     IEnumerator move(string number, string tag)
     {
 
 
         pawn.index += int.Parse(number);
+        StopCoroutine(b);
+
+        if (isMyMove && int.Parse(number)==6)
+        {
+            b = StartCoroutine(timer());
+        }
 
         if (pawn.index > 52)
             pawn.index = pawn.index - 52;
+
+        
 
         switch (tag)
         {
@@ -185,27 +240,21 @@ public class Controller : MonoBehaviour
 
         }
 
-        foreach (string s in listaNapolju)
-        {
-            Debug.Log("Ovaj je u listi " + s);
-        }
-
-        // yield return new WaitForSeconds(58f * Time.deltaTime);
-        // Debug.Log(client.clientColor+": Usao sam opet u korutinu");
 
         if (isMyMove)
         {
             if (int.Parse(number) != 6)
             {
-                Debug.Log(client.clientColor + " je poslao Played");
+
                 client.isMyMove = false;
                 isMyMove = false;
                 yield return new WaitForSeconds(58f * Time.deltaTime);
-               // redInd.SetActive(false);
+
                 client.Send("Played");
+
             }
         }
-        StopAllCoroutines();
+        
     }
 
     private IEnumerator RollTheDice(string colorDice)
@@ -280,19 +329,48 @@ public class Controller : MonoBehaviour
             {
                 case "Red":
                     redInd.SetActive(true);
+                    redTimer.SetActive(true);
+
+                    if (!coroutineRuns)
+                    {
+                        b = StartCoroutine(timer());
+                        coroutineRuns = true;
+                    }
                     break;
                 case "Blue":
 
                     blueInd.SetActive(true);
+                    blueTimer.SetActive(true);
+
+                    if (!coroutineRuns)
+                    {
+                        b = StartCoroutine(timer());
+                        coroutineRuns = true;
+                    }
                     break;
                 case "Yellow":
 
                     yellowInd.SetActive(true);
+                    yellowTimer.SetActive(true);
+
+                    if (!coroutineRuns)
+                    {
+                        b = StartCoroutine(timer());
+                        coroutineRuns = true;
+                    }
                     break;
 
                 case "Green":
 
-                    greenInd.SetActive(true); break;
+                    greenInd.SetActive(true);
+                    greenTimer.SetActive(true);
+
+                    if (!coroutineRuns)
+                    {
+                        b = StartCoroutine(timer());
+                        coroutineRuns = true;
+                    }
+                    break;
             }
         }
         else
@@ -301,18 +379,31 @@ public class Controller : MonoBehaviour
             {
                 case "Red":
                     redInd.SetActive(false);
+                    redTimer.SetActive(false);
+                    if(b!=null)
+                        StopCoroutine(b);
                     break;
                 case "Blue":
 
                     blueInd.SetActive(false);
+                    blueTimer.SetActive(false);
+                    if (b != null)
+                        StopCoroutine(b);
                     break;
                 case "Yellow":
 
                     yellowInd.SetActive(false);
+                    yellowTimer.SetActive(false);
+                    if (b != null)
+                        StopCoroutine(b);
                     break;
                 case "Green":
 
-                    greenInd.SetActive(false); break;
+                    greenInd.SetActive(false);
+                    greenTimer.SetActive(false);
+                    if (b != null)
+                        StopCoroutine(b);
+                    break;
             }
             isMyMove = false;
         }
