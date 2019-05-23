@@ -18,6 +18,8 @@ public class Server : MonoBehaviour
     int move;
     int roll;
 
+    private Coroutine b;
+
     private String whosMove;
 
     private TcpListener server;
@@ -143,7 +145,8 @@ public class Server : MonoBehaviour
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
-            StartCoroutine(wait());
+            //b= StartCoroutine(wait());
+            //changeMove();
         }
         else
             StartListening();
@@ -205,6 +208,8 @@ public class Server : MonoBehaviour
 
         if (data.Equals("Played"))
         {
+            if(b!=null)
+                StopCoroutine(b);
             changeMove();
             return;
 
@@ -217,6 +222,9 @@ public class Server : MonoBehaviour
 
             if (check.Equals("out"))
             {
+                if (b != null)
+                    StopCoroutine(b);
+                b = StartCoroutine(wait());
                 BroadCast(data, clientsList);
                 return;
             }
@@ -243,10 +251,15 @@ public class Server : MonoBehaviour
 
 
     }
-
+    
     private IEnumerator wait()
     {
-        yield return new WaitForSeconds(20f);
+
+        int broj = 0;
+        for (int i = 0; i < 20; i++) {
+            Debug.Log("Server " + ++broj);
+            yield return new WaitForSeconds(1f);
+        }
         changeMove();
     }
 
@@ -303,7 +316,7 @@ public class Server : MonoBehaviour
         }
 
         BroadCast("Play-" + whosMove, clientsList);
-        StartCoroutine(wait());
+       b= StartCoroutine(wait());
     }
 
     private void BroadCast(string data, List<ServerClient> scl)
