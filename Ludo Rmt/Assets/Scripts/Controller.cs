@@ -5,12 +5,17 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
 
+    public GameObject redInd;
+    public GameObject blueInd;
+    public GameObject yellowInd;
+    public GameObject greenInd;
+
     public bool isMyMove;
-    
+
 
     private Position pawn;
     private GameObject pawn1;
-    
+
     private DiceYellow yellow;
     private DiceRed red;
     private DiceGreen green;
@@ -22,39 +27,54 @@ public class Controller : MonoBehaviour
 
     public Client client;
     public LinkedList<string> listaNapolju;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
         isMyMove = false;
         client = FindObjectOfType<Client>();
+        red = GameObject.Find("Red Dice").GetComponent<DiceRed>();
+        blue = GameObject.Find("Blue Dice").GetComponent<Dice>();
+        green = GameObject.Find("Green Dice").GetComponent<DiceGreen>();
+        yellow = GameObject.Find("Yellow Dice").GetComponent<DiceYellow>();
+
+        redInd = GameObject.Find("redIndicator");
+        blueInd = GameObject.Find("blueIndicator");
+        yellowInd = GameObject.Find("yellowIndicator");
+        greenInd = GameObject.Find("greenIndicator");
+        redInd.SetActive(false);
+        blueInd.SetActive(false);
+        greenInd.SetActive(false);
+        yellowInd.SetActive(false);
 
         switch (client.clientColor)
         {
 
             case "Red":
-                red = GameObject.Find("Red Dice").GetComponent<DiceRed>();
+
                 collide = GameObject.Find("Red Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 isMyMove = true;
+                client.isMyMove = true;
+                redInd.SetActive(true);
                 break;
 
             case "Blue":
-                blue = GameObject.Find("Blue Dice").GetComponent<Dice>();
+
                 collide = GameObject.Find("Blue Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 break;
 
             case "Green":
-                green = GameObject.Find("Green Dice").GetComponent<DiceGreen>();
+
                 collide = GameObject.Find("Green Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 break;
 
             case "Yellow":
-                yellow = GameObject.Find("Yellow Dice").GetComponent<DiceYellow>();
+
                 collide = GameObject.Find("Yellow Dice").GetComponent<BoxCollider2D>();
                 collide.enabled = true;
                 break;
@@ -65,13 +85,13 @@ public class Controller : MonoBehaviour
         napolju = 0;
         unutra = 0;
         listaNapolju = new LinkedList<string>();
-        
 
-}
+
+    }
 
     IEnumerator move(string number, string tag)
     {
-        
+
 
         pawn.index += int.Parse(number);
 
@@ -80,33 +100,33 @@ public class Controller : MonoBehaviour
 
         switch (tag)
         {
-            
+
             case "Blue":
                 for (int i = 0; i < int.Parse(number); i++)
+                {
+                    if (pawn.koraci == 52)
                     {
-                        if (pawn.koraci == 52)
-                        {
-                            pawn.koraci = 0;
-                        }
-                        if (pawn.koraci == 13)
-                        {
-                            pawn.koraci = 69;
-                        }
-                        pawn.koraci++;
-                        yield return new WaitForSeconds(12f * Time.deltaTime);
-                        
+                        pawn.koraci = 0;
                     }
+                    if (pawn.koraci == 13)
+                    {
+                        pawn.koraci = 69;
+                    }
+                    pawn.koraci++;
+                    yield return new WaitForSeconds(12f * Time.deltaTime);
+
+                }
                 if (pawn.koraci == 75 && pawn.tag == client.clientColor)
                 {
                     unutra++;
                     napolju--;
                 };
-                
+
                 break;
             case "Red":
                 for (int i = 0; i < int.Parse(number); i++)
                 {
-                    
+
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
@@ -115,7 +135,7 @@ public class Controller : MonoBehaviour
                     unutra++;
                     napolju--;
                 };
-              
+
                 break;
             case "Yellow":
                 for (int i = 0; i < int.Parse(number); i++)
@@ -124,7 +144,7 @@ public class Controller : MonoBehaviour
                     {
                         pawn.koraci = 0;
                     }
-                    if (pawn.koraci ==26)
+                    if (pawn.koraci == 26)
                     {
                         pawn.koraci = 89;
                     }
@@ -137,7 +157,7 @@ public class Controller : MonoBehaviour
                     unutra++;
                     napolju--;
                 };
-                
+
                 break;
             case "Green":
                 for (int i = 0; i < int.Parse(number); i++)
@@ -153,21 +173,21 @@ public class Controller : MonoBehaviour
                     pawn.koraci++;
                     yield return new WaitForSeconds(12f * Time.deltaTime);
                 }
-                if (pawn.koraci == 85 && pawn.tag==client.clientColor)
+                if (pawn.koraci == 85 && pawn.tag == client.clientColor)
                 {
                     unutra++;
                     napolju--;
                 };
-                
+
                 break;
             default: break;
 
-              
+
         }
 
         foreach (string s in listaNapolju)
         {
-            Debug.Log("Ovaj je u listi "+s);
+            Debug.Log("Ovaj je u listi " + s);
         }
 
         // yield return new WaitForSeconds(58f * Time.deltaTime);
@@ -181,19 +201,61 @@ public class Controller : MonoBehaviour
                 client.isMyMove = false;
                 isMyMove = false;
                 yield return new WaitForSeconds(58f * Time.deltaTime);
-                client.Send("Played");          
+               // redInd.SetActive(false);
+                client.Send("Played");
             }
         }
         StopAllCoroutines();
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        if (client.isMyMove) 
+        if (client.isMyMove)
+        {
             isMyMove = true;
+            switch (client.clientColor)
+            {
+                case "Red":
+                    redInd.SetActive(true);
+                    break;
+                case "Blue":
+
+                    blueInd.SetActive(true);
+                    break;
+                case "Yellow":
+
+                    yellowInd.SetActive(true);
+                    break;
+
+                case "Green":
+
+                    greenInd.SetActive(true); break;
+            }
+        }
+        else
+        {
+            switch (client.clientColor)
+            {
+                case "Red":
+                    redInd.SetActive(false);
+                    break;
+                case "Blue":
+
+                    blueInd.SetActive(false);
+                    break;
+                case "Yellow":
+
+                    yellowInd.SetActive(false);
+                    break;
+                case "Green":
+
+                    greenInd.SetActive(false); break;
+            }
+
+        }
 
         if (unutra == 4)
         {
@@ -202,76 +264,82 @@ public class Controller : MonoBehaviour
 
         if (client.readData.StartsWith("%"))
         {
-            string pawnName = client.readData.Substring(1);           
+            string pawnName = client.readData.Substring(1);
             pawn1 = GameObject.Find(pawnName);
             pawn = pawn1.GetComponent<Position>();
             pawn1.transform.position = pawn.onStart;
-            
+
             pawn._out = false;
 
-            if(pawn1.tag == client.clientColor)
+            if (pawn1.tag == client.clientColor)
             {
                 napolju--;
                 listaNapolju.Remove(pawnName);
             }
-            
+
             client.readData = "";
 
         }
 
-        if (client.readData.StartsWith("Roll")) {
+        if (client.readData.StartsWith("Roll"))
+        {
 
-            string number = client.readData.Substring(client.readData.IndexOf('|') + 1);
+            string[] data = client.readData.Split('|');
 
-            switch (client.clientColor)
+            switch (data[2])
             {
                 case "Blue":
 
-                    blue.randomDiceSide1 = int.Parse(number);
+                    blue.randomDiceSide1 = int.Parse(data[1]);
+                    blue.rend.sprite = blue.diceSides[int.Parse(data[1])];
                     break;
 
                 case "Red":
 
-                    red.randomDiceSide1 = int.Parse(number);
+                    red.randomDiceSide1 = int.Parse(data[1]);
+                    red.rend.sprite = red.diceSides[int.Parse(data[1])];
                     break;
 
                 case "Yellow":
 
-                    yellow.randomDiceSide1 = int.Parse(number);
+                    yellow.randomDiceSide1 = int.Parse(data[1]);
+                    yellow.rend.sprite = yellow.diceSides[int.Parse(data[1])];
                     break;
                 case "Green":
 
-
-                    green.randomDiceSide1 = int.Parse(number);
+                    green.randomDiceSide1 = int.Parse(data[1]);
+                    green.rend.sprite = green.diceSides[int.Parse(data[1])];
                     break;
                 default: break;
 
             }
 
+            client.readData = "";
 
-            }
+
+        }
 
         if (client.readData.StartsWith("$"))
         {
             string readData = client.readData.Substring(1);
-            if(readData.Contains("-"))
+            if (readData.Contains("-"))
                 readData = readData.Substring(0, readData.IndexOf('-'));
-           
-            string[] split =readData.Split('|');
+
+            string[] split = readData.Split('|');
             pawn = GameObject.Find(split[0]).GetComponent<Position>();
-            
-           
+
+
             if (pawn != null)
             {
-               
+
                 if (split[1].Equals("out"))
                 {
-                    pawn._out = true;      
+                    pawn._out = true;
                 }
-                    
+
                 else
                 {
-                    
+
                     StartCoroutine(move(split[1], GameObject.Find(split[0]).tag));
 
                 }
@@ -279,6 +347,6 @@ public class Controller : MonoBehaviour
                 client.readData = "";
 
             }
-        }       
+        }
     }
 }

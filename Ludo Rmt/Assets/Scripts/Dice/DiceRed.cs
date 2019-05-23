@@ -80,8 +80,9 @@ public class DiceRed : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
         }
-    
-       // randomDiceSide1 = Random.Range(0, 6);
+
+        // randomDiceSide1 = Random.Range(0, 6);
+        Debug.Log(randomDiceSide1);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
@@ -114,6 +115,7 @@ public class DiceRed : MonoBehaviour
                 if (boardC.napolju + boardC.unutra == 4 || (boardC.napolju + boardC.unutra <4 && randomDiceSide1<5))
                 {   
                         click = false;
+                        
                         boardC.client.Send("Played");
                         boardC.client.isMyMove = false;
                         boardC.isMyMove = false;

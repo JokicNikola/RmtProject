@@ -10,7 +10,7 @@ using System.Linq;
 public class Server : MonoBehaviour
 {
     public int port = 6321;
-    
+
 
     private List<ServerClient> clientsList;
     private List<ServerClient> disconnectList;
@@ -18,11 +18,14 @@ public class Server : MonoBehaviour
     int move;
     int roll;
 
+    private String whosMove;
+
     private TcpListener server;
     private bool serverStarted;
 
     public void Init()
     {
+        whosMove = "Red";
         DontDestroyOnLoad(gameObject);
         clientsList = new List<ServerClient>();
         disconnectList = new List<ServerClient>();
@@ -35,68 +38,76 @@ public class Server : MonoBehaviour
             server.Start();
 
             StartListening();
-            
+
 
             serverStarted = true;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             UnityEngine.Debug.Log(e.Message);
         }
     }
     private void Update()
     {
+
+       
         if (!serverStarted)
         {
             return;
         }
-    
 
-        foreach(ServerClient c in clientsList)
+
+        for (int i = 0; i < clientsList.Count(); i++)
         {
 
-            if (!IsConnected(c.tcp))
+            if (clientsList.ElementAt(i) != null)
             {
-                c.tcp.Close();
-                
-                disconnectList.Add(c);
-                continue;
-            }
-            else
-            {
-                NetworkStream s = c.tcp.GetStream();
- 
-                if (s.DataAvailable)
-                {
-                    StreamReader reader = new StreamReader(s, true);
-                    string data = reader.ReadLine();
-                    
-                    
-                    if (data != null)
-                    {
-                        Debug.Log("Server: "+data);
-                        OnIncomingData(c, data);
-                        
-                    }
-                   
-                    
-                }
 
+                if (!IsConnected(clientsList.ElementAt(i).tcp))
+                {
+                    clientsList.ElementAt(i).tcp.Close();
+                    clientsList[i] = null;
+
+
+                    disconnectList.Add(clientsList.ElementAt(i));
+                    continue;
+                }
+                else
+                {
+                    NetworkStream s = clientsList.ElementAt(i).tcp.GetStream();
+
+                    if (s.DataAvailable)
+                    {
+                        StreamReader reader = new StreamReader(s, true);
+                        string data = reader.ReadLine();
+
+
+                        if (data != null)
+                        {
+                            Debug.Log("Server: " + data);
+                            OnIncomingData(clientsList.ElementAt(i), data);
+
+                        }
+
+
+                    }
+
+                }
             }
         }
 
-        for(int i=0; i < disconnectList.Count; i++)
+        for (int i = 0; i < disconnectList.Count; i++)
         {
-            clientsList.Remove(disconnectList[i]);
-            Debug.Log("izbacio sam" + disconnectList.ElementAt(i).color);
-            disconnectList.RemoveAt(i);
-            
+            // clientsList.Remove(disconnectList[i]);
+            // Debug.Log("izbacio sam" + disconnectList.ElementAt(i).color);
+            // disconnectList.RemoveAt(i);
+
         }
     }
     private void StartListening()
     {
         server.BeginAcceptTcpClient(AcceptTcpClient, server);
-       // Debug.Log("Cekam konekciju");
+        // Debug.Log("Cekam konekciju");
     }
 
     private void AcceptTcpClient(IAsyncResult ar)
@@ -128,24 +139,26 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 1)
+        if (clientsList.Count == 2)
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
-        }else
+        }
+        else
             StartListening();
 
- 
-       
+
+
     }
     private bool IsConnected(TcpClient c)
     {
         try
         {
-            if(c!=null && c.Client!=null && c.Client.Connected)
+            if (c != null && c.Client != null && c.Client.Connected)
             {
 
-                if (c.Client.Poll(0, SelectMode.SelectRead)){
+                if (c.Client.Poll(0, SelectMode.SelectRead))
+                {
                     return !(c.Client.Receive(new byte[1], SocketFlags.Peek) == 0);
                 }
 
@@ -165,11 +178,13 @@ public class Server : MonoBehaviour
     private void OnIncomingData(ServerClient c, string data)
     {
 
-        if (data.Equals("Roll")){
 
-            roll= UnityEngine.Random.Range(4, 6);
+        if (data.Equals("Roll"))
+        {
 
-            Send("Roll|" + roll, clientsList.ElementAt(move % 4));
+            roll = UnityEngine.Random.Range(4, 6);
+
+            BroadCast("Roll|" + roll + "|" + whosMove, clientsList);
             return;
 
         }
@@ -179,20 +194,21 @@ public class Server : MonoBehaviour
         {
             changeMove();
             return;
-           
+
         }
 
-        if ( data.StartsWith("$"))
+        if (data.StartsWith("$"))
         {
-            string check = data.Substring(data.IndexOf('|')+1);
-            
+            string check = data.Substring(data.IndexOf('|') + 1);
 
-            if(check.Equals("out")){
+
+            if (check.Equals("out"))
+            {
                 BroadCast(data, clientsList);
                 return;
             }
 
-            if (int.Parse(check) == roll+1)
+            if (int.Parse(check) == roll + 1)
                 BroadCast(data, clientsList);
             else changeMove();
 
@@ -212,43 +228,84 @@ public class Server : MonoBehaviour
             return;
         }
 
-      
+
     }
 
-    private void changeMove() {
+    private void changeMove()
+    {
 
-        switch (++move % 4)
+
+
+        switch (++move % clientsList.Count())
         {
             case 0:
-                BroadCast("Play-Red", clientsList);
+
+
+                if (clientsList.ElementAt(0) == null)
+                {
+                    changeMove();
+                    return;
+                }
+                whosMove = clientsList.ElementAt(0).color;
                 break;
+
             case 1:
-                BroadCast("Play-Blue", clientsList);
+
+                if (clientsList.ElementAt(1) == null)
+                {
+                    changeMove();
+                    return;
+                }
+
+                whosMove = clientsList.ElementAt(1).color;
+
                 break;
+
             case 2:
-                BroadCast("Play-Yellow", clientsList);
+
+
+                if (clientsList.ElementAt(2) == null)
+                {
+                    changeMove();
+                    return;
+                }
+                whosMove = clientsList.ElementAt(2).color;
                 break;
+
             case 3:
-                BroadCast("Play-Green", clientsList);
+
+                if (clientsList.ElementAt(3) == null)
+                {
+                    changeMove();
+                    return;
+                }
+                whosMove = clientsList.ElementAt(3).color;
                 break;
         }
+
+        BroadCast("Play-" + whosMove, clientsList);
     }
 
     private void BroadCast(string data, List<ServerClient> scl)
     {
-        
+
         foreach (ServerClient sc in scl)
         {
-            
-            try {
-                StreamWriter wr = new StreamWriter(sc.tcp.GetStream());
-                wr.WriteLine(data);
-                wr.Flush();
-                
-            }
-            catch (Exception e)
+
+            if (sc != null)
             {
-                Debug.Log(e.Message);
+
+                try
+                {
+                    StreamWriter wr = new StreamWriter(sc.tcp.GetStream());
+                    wr.WriteLine(data);
+                    wr.Flush();
+
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.Message);
+                }
             }
         }
     }
@@ -258,7 +315,7 @@ public class Server : MonoBehaviour
         StreamWriter wr = new StreamWriter(sc.tcp.GetStream());
         wr.WriteLine(data);
         wr.Flush();
-       
+
         //Debug.Log("Poslato");
     }
 

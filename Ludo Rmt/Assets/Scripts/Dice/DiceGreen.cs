@@ -85,7 +85,8 @@ public class DiceGreen : MonoBehaviour
 
         }
 
-       // randomDiceSide1 = Random.Range(0, 6);
+        // randomDiceSide1 = Random.Range(0, 6);
+        Debug.Log(randomDiceSide1);
         rend.sprite = diceSides[randomDiceSide1];
 
         if ((randomDiceSide1 + 1) != 6 && boardC.napolju == 0)
