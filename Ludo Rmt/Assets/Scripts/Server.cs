@@ -141,7 +141,7 @@ public class Server : MonoBehaviour
 
         clientsList.Add(sc);
 
-        if (clientsList.Count == 2)
+        if (clientsList.Count == 1)
         {
             System.Threading.Thread.Sleep(200);
             BroadCast("Start", clientsList);
@@ -224,7 +224,7 @@ public class Server : MonoBehaviour
             {
                 if (b != null)
                     StopCoroutine(b);
-                b = StartCoroutine(wait());
+                b = StartCoroutine(Wait());
                 BroadCast(data, clientsList);
                 return;
             }
@@ -233,7 +233,7 @@ public class Server : MonoBehaviour
             {
                 if (b != null)
                     StopCoroutine(b);
-                b = StartCoroutine(wait());
+                b = StartCoroutine(Wait());
             }
 
             if (int.Parse(check) == roll + 1)
@@ -259,11 +259,11 @@ public class Server : MonoBehaviour
 
     }
     
-    private IEnumerator wait()
+    private IEnumerator Wait()
     {
 
         int broj = 0;
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 14; i++) {
             Debug.Log("Server " + ++broj);
             yield return new WaitForSeconds(1f);
         }
@@ -323,7 +323,7 @@ public class Server : MonoBehaviour
         }
 
         BroadCast("Play-" + whosMove, clientsList);
-       b= StartCoroutine(wait());
+       b= StartCoroutine(Wait());
     }
 
     private void BroadCast(string data, List<ServerClient> scl)

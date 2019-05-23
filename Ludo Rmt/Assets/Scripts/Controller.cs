@@ -123,15 +123,15 @@ public class Controller : MonoBehaviour
 
     }
 
-    private IEnumerator timer()
+    private IEnumerator Timer()
     {
         Debug.Log("usao u tajmer");
         coroutineRuns = true;
        
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 7; i++)
         {
             render.sprite = timerSides[i];
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
         coroutineRuns = false;
         
@@ -151,7 +151,7 @@ public class Controller : MonoBehaviour
 
         if (isMyMove && int.Parse(number)==6)
         {
-            b = StartCoroutine(timer());
+            b = StartCoroutine(Timer());
         }
 
         if (pawn.index > 52)
@@ -339,7 +339,7 @@ public class Controller : MonoBehaviour
 
                     if (!coroutineRuns)
                     {
-                        b = StartCoroutine(timer());
+                        b = StartCoroutine(Timer());
                         
                     }
                     break;
@@ -350,7 +350,7 @@ public class Controller : MonoBehaviour
 
                     if (!coroutineRuns)
                     {
-                        b = StartCoroutine(timer());
+                        b = StartCoroutine(Timer());
                        
                     }
                     break;
@@ -361,7 +361,7 @@ public class Controller : MonoBehaviour
 
                     if (!coroutineRuns)
                     {
-                        b = StartCoroutine(timer());
+                        b = StartCoroutine(Timer());
                         
                     }
                     break;
@@ -373,7 +373,7 @@ public class Controller : MonoBehaviour
 
                     if (!coroutineRuns)
                     {
-                        b = StartCoroutine(timer());
+                        b = StartCoroutine(Timer());
                         
                     }
                     break;
@@ -515,7 +515,7 @@ public class Controller : MonoBehaviour
                     if (b != null)
                         StopCoroutine(b);
                     if (isMyMove)
-                        b = StartCoroutine(timer());
+                        b = StartCoroutine(Timer());
 
                 }
 
