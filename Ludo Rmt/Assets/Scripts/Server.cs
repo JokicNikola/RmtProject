@@ -183,7 +183,7 @@ public class Server : MonoBehaviour
 
         
         BroadCast("StartRoll|" + colorDice, clientsList);
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.4f);
         roll = UnityEngine.Random.Range(0, 6);
 
         BroadCast("Roll|" + roll + "|" + whosMove, clientsList);

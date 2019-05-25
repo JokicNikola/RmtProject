@@ -132,7 +132,7 @@ public class Controller : MonoBehaviour
         for(int i = 0; i < 8; i++)
         {
             render.sprite = timerSides[i];
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.7f);
         }
         coroutineRuns = false;
         
